@@ -79,4 +79,19 @@ app.put("/user/:id", async (req, res) => {
   }
 });
 
+// DELETE API
+
+app.delete("/user-delete/:id", async (req, res) => {
+  try {
+    let { id } = req.params;
+    await userModel.findByIdAndDelete(id);
+    return res.status(200).json({
+      message: "user delete successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+});
 module.exports = app;
