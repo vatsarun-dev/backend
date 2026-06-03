@@ -48,4 +48,35 @@ app.get("/user-get", async (req, res) => {
     user,
   });
 });
+
+// PUT API
+
+app.put("/user/:id", async (req, res) => {
+  try {
+    let { id } = req.params;
+    let { name, email, mobile, password } = req.body;
+    let updateUser = await userModel.findByIdAndUpdate(
+      id,
+      {
+        name,
+        email,
+        mobile,
+        password,
+      },
+      {
+        new: true,
+      },
+    );
+
+    return res.status(200).json({
+      message: "user updated successfully",
+      updateUser,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+});
+
 module.exports = app;
