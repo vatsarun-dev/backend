@@ -36,7 +36,7 @@ let getAllController = async (req, res) => {
 
     return res.status(200).json({
       message: "list fetched successfully",
-      newList: list,
+      list: newList,
     });
   } catch (error) {
     return res.status(500).json({

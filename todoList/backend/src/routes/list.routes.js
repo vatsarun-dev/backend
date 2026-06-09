@@ -17,5 +17,5 @@ router.get("/", getAllController);
 router.put("/update/:id", updateListController);
 
 // DELETE API
-router.delete("delete/:id", deleteListController);
+router.delete("/delete/:id", deleteListController);
 module.exports = router;
