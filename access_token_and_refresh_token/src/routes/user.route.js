@@ -11,6 +11,7 @@ router.post("/login", loginController);
 router.get("/", authMiddleware, async (req, res) => {
   try {
     console.log("i am in home page");
+    res.send("i am in home page");
   } catch (error) {
     console.log("there is some error");
   }
