@@ -8,7 +8,26 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import Protected from "../Layout/Protected";
 import Public from "../Layout/Public";
+import axiosInstance from "../config/axiosInstance";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addUser } from "../features/authSlice";
 const AppRoute = () => {
+  const dispatch = useDispatch();
+
+  const getMeRefresh = async () => {
+    try {
+      const res = await axiosInstance.get("/user/me");
+      dispatch(addUser(res.data.user));
+    } catch (error) {
+      console.log(error.response?.data?.message || error.message);
+    }
+  };
+
+  useEffect(() => {
+    getMeRefresh();
+  }, []);
+
   let router = createBrowserRouter([
     {
       path: "/",
