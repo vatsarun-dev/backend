@@ -15,9 +15,9 @@ function Register({ setToggle }) {
   const navigate = useNavigate();
 
   const [details, setDetails] = useState({});
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    const res = axiosInstance.post("/user/register", data);
+    const res = await axiosInstance.post("/user/register", data);
     console.log(res);
   };
 
