@@ -2,7 +2,7 @@ const asyncHandler = require("../utils/asyncHandler");
 const { registerService, loginService } = require("../services/user.service");
 
 const registerController = asyncHandler(async (req, res) => {
-  const { accessToken, refreshToken, newUser } = registerService(req.body);
+  const { accessToken, refreshToken, newUser } = await registerService(req.body);
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
@@ -19,7 +19,7 @@ const registerController = asyncHandler(async (req, res) => {
 });
 
 const loginController = asyncHandler(async (req, res) => {
-  const { accessToken, refreshToken, isExisted } = loginService(req.body);
+  const { accessToken, refreshToken, isExisted } = await loginService(req.body);
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
