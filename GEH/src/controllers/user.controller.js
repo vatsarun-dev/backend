@@ -1,9 +1,10 @@
 const asyncHandler = require("../utils/asyncHandler");
 const ApiResponse = require("../utils/apiResponse");
 const registerService = require("../services/user.service");
+
 const registerController = asyncHandler(async (req, res) => {
   //
-  //
+
   let result = await registerService(req.body);
 
   return res
