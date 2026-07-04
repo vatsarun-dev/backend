@@ -22,7 +22,7 @@ const registerService = async (data) => {
   const refreshToken = generateRefreshToken(newUser._id);
 
   newUser.refreshToken = refreshToken;
-  await newUser.save();
+  await userModel.findByIdAndUpdate(newUser._id, { refreshToken });
 
   return { accessToken, refreshToken, newUser };
 };
@@ -44,7 +44,7 @@ const loginService = async (data) => {
   const refreshToken = generateRefreshToken(isExisted._id);
 
   isExisted.refreshToken = refreshToken;
-  await isExisted.save();
+  await userModel.findByIdAndUpdate(isExisted._id, { refreshToken });
 
   return { accessToken, refreshToken, isExisted };
 };

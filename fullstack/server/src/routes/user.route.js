@@ -12,6 +12,13 @@ router.get("/me", accessTokenMiddleware, async (req, res) => {
     user: req.user,
   });
 });
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("accessToken");
+  res.status(200).json({
+    message: "User logout",
+  });
+});
 router.post("/register", registerController);
 router.post("/login", loginController);
 module.exports = router;
