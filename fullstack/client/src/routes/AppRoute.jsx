@@ -18,6 +18,7 @@ const AppRoute = () => {
   const getMeRefresh = async () => {
     try {
       const res = await axiosInstance.get("/user/me");
+      console.log(res);
       dispatch(addUser(res.data.user));
     } catch (error) {
       console.log(error.response?.data?.message || error.message);

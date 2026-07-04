@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { useState } from "react";
 import axiosInstance from "../config/axiosInstance";
 import { useNavigate } from "react-router";
-
+import { useDispatch } from "react-redux";
 function Register({ setToggle }) {
   const {
     register,
@@ -14,10 +14,13 @@ function Register({ setToggle }) {
 
   const navigate = useNavigate();
 
+  let dispatch = useDispatch();
   const [details, setDetails] = useState({});
   const onSubmit = async (data) => {
     console.log(data);
     const res = await axiosInstance.post("/user/register", data);
+    dispatch(addUser(res.data.user));
+
     console.log(res);
   };
 

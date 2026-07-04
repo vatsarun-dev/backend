@@ -12,7 +12,11 @@ export let userSlice = createSlice({
       state.user = action.payload;
       state.isAuthenticated = true;
     },
+    removeUser: (state) => {
+      state.user = null;
+      state.isAuthenticated = false;
+    },
   },
 });
 
-export let { addUser } = userSlice.actions;
+export let { addUser, removeUser } = userSlice.actions;
