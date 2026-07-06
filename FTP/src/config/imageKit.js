@@ -1,4 +1,3 @@
-require("dotenv").config();
 const Imagekit = require("imagekit");
 
 // to use imagekit we have to create a instance of Imagekit class and set three key
