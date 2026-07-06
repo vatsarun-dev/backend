@@ -37,6 +37,7 @@ routes.post("/file", uploads.array("image"), async (req, res) => {
       }),
     );
     console.log(uploadedFiles);
+    return res.send("successfully uploaded");
   } catch (error) {
     return res.status(500).json({ message: error.message, error });
   }
