@@ -6,8 +6,9 @@ const fileUploaded = new Imagekit({
 });
 
 const sendFile = async (file, fileName) => {
-  const option = () => {
-    (file, fileName, (folder = "FTP-Integration"));
+  const option = {
+    file,
+    fileName,
   };
 
   return await fileUploaded.upload(option);
