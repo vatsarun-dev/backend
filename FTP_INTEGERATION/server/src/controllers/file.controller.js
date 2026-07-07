@@ -1,5 +1,5 @@
 const asyncHandler = require("../utils/asyncHandler");
-const fileService = require("../services/file.service");
+const { fileService, multiFileService } = require("../services/file.service");
 
 const fileController = asyncHandler(async (req, res) => {
   const file = req.file;
@@ -12,4 +12,15 @@ const fileController = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = fileController;
+const multiFileController = asyncHandler(async (req, res) => {
+  const files = req.files;
+
+  const result = await multiFileService(files);
+
+  return res.status(200).json({
+    message: "File uploaded successfully",
+    newFile: result,
+  });
+});
+
+module.exports = { fileController, multiFileController };

@@ -15,4 +15,19 @@ const fileService = async (data) => {
   return newFile;
 };
 
-module.exports = fileService;
+const multiFileService = async (data) => {
+  if (!data) throw new ApiError(404, "file does not found");
+  const uploadedFiles = await Promise.all(
+    data.map(async (elem) => {
+      return await sendFile(elem.buffer, elem.originalname);
+    }),
+  );
+  const newFiles = await FileModel.create({
+    name: "Images",
+    image: uploadedFiles.map((elem) => elem.url),
+  });
+
+  return newFiles;
+};
+
+module.exports = { fileService, multiFileService };
