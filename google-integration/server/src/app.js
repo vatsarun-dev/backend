@@ -4,7 +4,15 @@ var GoogleStrategy = require("passport-google-oauth20").Strategy;
 const authMiddleware = require("./middlewares/auth.middleware");
 const routes = require("./routes/auth.route");
 const userModel = require("./models/user.model");
+const cors = require("cors");
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 // WE HAVE TO INITIALIZE THE PASSPORT BEFORE USING THEM TO COMBINE THE PASSPORT WITH THE EXPRESS
@@ -23,19 +31,20 @@ passport.use(
       const email = profile.emails[0].value;
 
       const isExisted = await userModel.findOne({ email });
+      console.log("this is the profile -> ", profile);
       if (isExisted) return cb(null, profile);
+
       const newUser = await userModel.create({
         name,
         email,
-        provider: "google",
+        provider: profile.provider,
         provider_id: profile.id,
       });
-
+      console.log(newUser);
       return newUser;
     },
   ),
 );
-
 app.use("/api/auth", routes);
 app.use("/", (req, res) => {
   res.send("nhi hua login ");

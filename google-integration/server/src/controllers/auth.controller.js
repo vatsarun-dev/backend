@@ -1,4 +1,5 @@
 const asyncHandler = require("../utils/asyncHandler");
+const jwt = require("jsonwebtoken");
 const authController = asyncHandler((req, res) => {
   const token = jwt.sign({ id: req.user._id }, process.env.JWT_TOKEN, {
     expiresIn: "15m",
