@@ -11,9 +11,10 @@ routes.get(
     session: false,
   }),
 );
+
 routes.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/", session: false }),
-  auhController,
+  authController,
 );
 module.exports = routes;
