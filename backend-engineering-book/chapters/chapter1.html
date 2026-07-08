@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Chapter 1 - Backend Introduction</title>
+
+    <link rel="stylesheet" href="../style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="content">
+      <section class="cover">
+        <div class="glass">
+          <h4>Backend Engineering Handbook</h4>
+
+          <h1>Chapter 1</h1>
+
+          <h2>Backend Introduction</h2>
+
+          <p>Everything Starts From Here 🚀</p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>1.1 What is Backend?</h1>
+
+          <p>
+            Backend is the part of an application that works behind the scenes.
+            It receives requests from users, processes data, communicates with
+            the database, performs business logic and finally sends a response
+            back to the client.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>Backend = Server + Business Logic + Database + APIs.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>1.2 Frontend vs Backend</h1>
+
+          <table>
+            <tr>
+              <th>Frontend</th>
+
+              <th>Backend</th>
+            </tr>
+
+            <tr>
+              <td>User Interface</td>
+
+              <td>Business Logic</td>
+            </tr>
+
+            <tr>
+              <td>HTML CSS JavaScript</td>
+
+              <td>Node.js Express</td>
+            </tr>
+
+            <tr>
+              <td>Runs in Browser</td>
+
+              <td>Runs on Server</td>
+            </tr>
+
+            <tr>
+              <td>Visible to User</td>
+
+              <td>Hidden from User</td>
+            </tr>
+
+            <tr>
+              <td>Calls APIs</td>
+
+              <td>Creates APIs</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>1.3 Real Life Example</h1>
+
+          <p>Imagine Swiggy.</p>
+
+          <ul>
+            <li>User opens App.</li>
+
+            <li>Selects Food.</li>
+
+            <li>Clicks Order.</li>
+
+            <li>Frontend sends API request.</li>
+
+            <li>Backend verifies user.</li>
+
+            <li>Backend checks restaurant.</li>
+
+            <li>Backend calculates bill.</li>
+
+            <li>Backend stores order in database.</li>
+
+            <li>Backend returns success response.</li>
+          </ul>
+
+          <div class="tip">
+            <h3>💡 Remember</h3>
+
+            <p>
+              User never directly talks to the database. Everything goes through
+              Backend.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>1.4 Responsibilities of Backend</h1>
+
+          <div class="cards">
+            <div class="card">
+              <h3>Authentication</h3>
+
+              <p>Login, Register, JWT, Sessions</p>
+            </div>
+
+            <div class="card">
+              <h3>Database</h3>
+
+              <p>Store & Retrieve Data</p>
+            </div>
+
+            <div class="card">
+              <h3>Business Logic</h3>
+
+              <p>Application Rules</p>
+            </div>
+
+            <div class="card">
+              <h3>Security</h3>
+
+              <p>Password Hashing, Validation</p>
+            </div>
+
+            <div class="card">
+              <h3>File Upload</h3>
+
+              <p>Images, Videos, PDFs</p>
+            </div>
+
+            <div class="card">
+              <h3>Email</h3>
+
+              <p>OTP, Verification, Reset Password</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>1.5 Backend Architecture</h1>
+
+          <pre><code>
+
+Client
+
+   │
+
+HTTP Request
+
+   │
+
+   ▼
+
+Express Route
+
+   │
+
+   ▼
+
+Middleware
+
+   │
+
+   ▼
+
+Controller
+
+   │
+
+   ▼
+
+Service
+
+   │
+
+   ▼
+
+Model
+
+   │
+
+   ▼
+
+MongoDB
+
+   │
+
+   ▼
+
+JSON Response
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>1.6 Backend Technologies</h1>
+
+          <table>
+            <tr>
+              <th>Technology</th>
+
+              <th>Purpose</th>
+            </tr>
+
+            <tr>
+              <td>Node.js</td>
+
+              <td>JavaScript Runtime</td>
+            </tr>
+
+            <tr>
+              <td>Express.js</td>
+
+              <td>Backend Framework</td>
+            </tr>
+
+            <tr>
+              <td>MongoDB</td>
+
+              <td>Database</td>
+            </tr>
+
+            <tr>
+              <td>Mongoose</td>
+
+              <td>ODM</td>
+            </tr>
+
+            <tr>
+              <td>JWT</td>
+
+              <td>Authentication</td>
+            </tr>
+
+            <tr>
+              <td>bcrypt</td>
+
+              <td>Password Hashing</td>
+            </tr>
+
+            <tr>
+              <td>Redis</td>
+
+              <td>Caching</td>
+            </tr>
+
+            <tr>
+              <td>Cloudinary</td>
+
+              <td>File Storage</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>1.7 Client-Server Communication</h1>
+
+          <pre><code>
+
+Browser
+
+↓
+
+HTTP Request
+
+↓
+
+Backend API
+
+↓
+
+Database
+
+↓
+
+Backend
+
+↓
+
+JSON Response
+
+↓
+
+Browser
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>1.8 Why Learn Backend?</h1>
+
+          <div class="cards">
+            <div class="card">
+              <h3>🌍 Build APIs</h3>
+            </div>
+
+            <div class="card">
+              <h3>💼 Placement Ready</h3>
+            </div>
+
+            <div class="card">
+              <h3>🚀 Freelancing</h3>
+            </div>
+
+            <div class="card">
+              <h3>🏆 Hackathons</h3>
+            </div>
+
+            <div class="card">
+              <h3>📈 High Salary</h3>
+            </div>
+
+            <div class="card">
+              <h3>🧑‍💻 Full Stack Development</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>1.9 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Thinking Backend = Database only.</li>
+
+              <li>❌ Putting all code in one file.</li>
+
+              <li>❌ Not validating user input.</li>
+
+              <li>❌ Saving plain passwords.</li>
+
+              <li>❌ Hardcoding secrets.</li>
+
+              <li>❌ Returning sensitive data.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>1.10 Interview Questions</h1>
+
+          <div class="interview">
+            <p><strong>Q.</strong> What is Backend?</p>
+
+            <p>
+              Backend is the server-side of an application responsible for
+              handling business logic, authentication, APIs and database
+              operations.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><strong>Q.</strong> Difference between Frontend and Backend?</p>
+
+            <p>
+              Frontend focuses on UI while Backend manages data, logic and
+              server-side operations.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><strong>Q.</strong> Can a website work without Backend?</p>
+
+            <p>
+              Yes, if it is a static website. Dynamic applications require a
+              backend.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>Chapter Summary</h1>
+
+          <div class="note">
+            <ul>
+              <li>✅ Backend handles business logic.</li>
+
+              <li>✅ Backend communicates with databases.</li>
+
+              <li>✅ Backend creates APIs.</li>
+
+              <li>✅ Backend authenticates users.</li>
+
+              <li>✅ Backend secures application data.</li>
+
+              <li>✅ Backend returns JSON responses.</li>
+            </ul>
+          </div>
+
+          <a class="btn" href="chapter2.html"> Next Chapter → </a>
+        </div>
+      </section>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

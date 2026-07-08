@@ -3,6 +3,7 @@ const passport = require("passport");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
 const authMiddleware = require("./middlewares/auth.middleware");
 const routes = require("./routes/auth.route");
+const userModel = require("./models/user.model");
 const app = express();
 
 app.use(express.json());
@@ -17,8 +18,20 @@ passport.use(
       clientSecret: process.env.clientSecret,
       callbackURL: process.env.callBackUrl,
     },
-    (accessToken, refreshToken, profile, cb) => {
-      return cb(null, profile);
+    async (accessToken, refreshToken, profile, cb) => {
+      const name = profile.name.givenName;
+      const email = profile.emails[0].value;
+
+      const isExisted = await userModel.findOne({ email });
+      if (isExisted) return cb(null, profile);
+      const newUser = await userModel.create({
+        name,
+        email,
+        provider: "google",
+        provider_id: profile.id,
+      });
+
+      return newUser;
     },
   ),
 );

@@ -1,0 +1,4977 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Chapter 1 - Backend Introduction</title>
+
+    <link rel="stylesheet" href="../style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="content">
+      <section>
+        <div class="chapter">
+          <h1>2.1 How the Internet Works</h1>
+
+          <p>
+            The Internet is a global network of millions of computers connected
+            together. These computers communicate using standard protocols
+            (rules) to exchange information. Whenever you open a website, your
+            browser sends a request through the internet to a server. The server
+            processes the request and sends the required data back to your
+            browser.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              Internet = A worldwide network that connects computers and allows
+              them to exchange data.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="chapter">
+          <h1>2.2 Client and Server</h1>
+
+          <p>
+            A Client is the device or application that requests information. A
+            Server is a computer that receives requests, processes them, and
+            returns a response.
+          </p>
+
+          <table>
+            <tr>
+              <th>Client</th>
+
+              <th>Server</th>
+            </tr>
+
+            <tr>
+              <td>Browser</td>
+
+              <td>Backend Application</td>
+            </tr>
+
+            <tr>
+              <td>Sends Request</td>
+
+              <td>Processes Request</td>
+            </tr>
+
+            <tr>
+              <td>Displays Data</td>
+
+              <td>Returns Data</td>
+            </tr>
+          </table>
+
+          <div class="tip">
+            <h3>💡 Example</h3>
+
+            <p>Chrome → Client Express.js → Server</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="chapter">
+          <h1>2.3 Request Response Cycle</h1>
+
+          <p>
+            Whenever a user performs an action on a website, a Request-Response
+            cycle starts.
+          </p>
+
+          <pre><code>
+
+User
+
+↓
+
+Browser
+
+↓
+
+HTTP Request
+
+↓
+
+Server
+
+↓
+
+Database
+
+↓
+
+Server
+
+↓
+
+HTTP Response
+
+↓
+
+Browser
+
+↓
+
+User
+
+</code></pre>
+
+          <div class="note">
+            <h3>📌 Remember</h3>
+
+            <p>Every API call follows this cycle.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="chapter">
+          <h1>2.4 What Happens When You Visit Google?</h1>
+
+          <p>Suppose you type:</p>
+
+          <pre><code>
+
+https://www.google.com
+
+</code></pre>
+
+          <p>The browser performs these steps:</p>
+
+          <ol>
+            <li>Checks browser cache.</li>
+
+            <li>Finds the IP Address using DNS.</li>
+
+            <li>Connects to Google's server.</li>
+
+            <li>Sends an HTTPS request.</li>
+
+            <li>Google processes the request.</li>
+
+            <li>Google sends an HTML response.</li>
+
+            <li>The browser renders the webpage.</li>
+          </ol>
+
+          <div class="tip">
+            <h3>💡 Shortcut Flow</h3>
+
+            <pre><code>
+
+URL
+
+↓
+
+DNS
+
+↓
+
+Server
+
+↓
+
+Response
+
+↓
+
+Browser
+
+</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="chapter">
+          <h1>2.5 Client Server Architecture</h1>
+
+          <pre><code>
+
+Frontend (React)
+
+↓
+
+API Request
+
+↓
+
+Express Server
+
+↓
+
+MongoDB
+
+↓
+
+Express
+
+↓
+
+JSON Response
+
+↓
+
+Frontend
+
+</code></pre>
+
+          <p>
+            The frontend never talks directly to the database. All communication
+            happens through the backend server.
+          </p>
+
+          <div class="warning">
+            <h3>⚠ Common Mistake</h3>
+
+            <p>
+              Never expose your database directly to users. Always use APIs.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.6 IP Address, Domain Name, DNS & URL Anatomy</h1>
+
+          <p>
+            Before a browser can communicate with a server, it must know
+            <b>where the server is located</b>. This is done using an
+            <b>IP Address</b>. Since remembering IP addresses is difficult, we
+            use <b>Domain Names</b>, and <b>DNS</b> translates them into IP
+            addresses.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.6.1 What is an IP Address?</h1>
+
+          <p>
+            An <b>IP (Internet Protocol) Address</b> is the unique numerical
+            address assigned to every device connected to the internet. It works
+            like a <b>home address</b>. Without an address, data cannot reach
+            the correct destination.
+          </p>
+
+          <div class="note">
+            <h3>📌 Example</h3>
+
+            <pre><code>
+
+Google IP:
+142.250.183.110
+
+</code></pre>
+          </div>
+
+          <table>
+            <tr>
+              <th>Type</th>
+              <th>Example</th>
+            </tr>
+
+            <tr>
+              <td>IPv4</td>
+              <td>192.168.1.1</td>
+            </tr>
+
+            <tr>
+              <td>IPv6</td>
+              <td>2405:201:6001::1</td>
+            </tr>
+          </table>
+
+          <div class="tip">
+            <h3>💡 Remember</h3>
+
+            <p>Computers communicate using IP addresses, not domain names.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.6.2 What is a Domain Name?</h1>
+
+          <p>
+            A <b>Domain Name</b> is the human-readable name of a website.
+            Instead of remembering an IP address, we simply type the domain
+            name.
+          </p>
+
+          <table>
+            <tr>
+              <th>Domain</th>
+              <th>IP Address</th>
+            </tr>
+
+            <tr>
+              <td>google.com</td>
+              <td>142.xxx.xxx.xxx</td>
+            </tr>
+
+            <tr>
+              <td>github.com</td>
+              <td>140.xxx.xxx.xxx</td>
+            </tr>
+
+            <tr>
+              <td>youtube.com</td>
+              <td>142.xxx.xxx.xxx</td>
+            </tr>
+          </table>
+
+          <div class="note">
+            <h3>📌 Real Life Example</h3>
+
+            <p>
+              Your friend's name is easier to remember than their phone number.
+              Similarly, Domain Name = Person's Name IP Address = Phone Number
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.6.3 What is DNS?</h1>
+
+          <p>
+            DNS stands for <b>Domain Name System</b>. Its job is to convert a
+            domain name into an IP address.
+          </p>
+
+          <pre><code>
+
+google.com
+
+↓
+
+DNS Server
+
+↓
+
+142.250.xxx.xxx
+
+↓
+
+Google Server
+
+</code></pre>
+
+          <p>
+            Without DNS, you would have to remember the IP address of every
+            website.
+          </p>
+
+          <div class="tip">
+            <h3>💡 Think of DNS as the Internet's Phonebook.</h3>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.6.4 DNS Lookup Process</h1>
+
+          <pre><code>
+
+User
+
+↓
+
+www.google.com
+
+↓
+
+Browser Cache
+
+↓
+
+Operating System Cache
+
+↓
+
+ISP DNS Server
+
+↓
+
+Root DNS
+
+↓
+
+TLD Server (.com)
+
+↓
+
+Authoritative DNS
+
+↓
+
+IP Address
+
+↓
+
+Google Server
+
+</code></pre>
+
+          <p>
+            After getting the IP address, the browser connects to the server and
+            sends the HTTP/HTTPS request.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.6.5 What is a URL?</h1>
+
+          <p>
+            URL stands for <b>Uniform Resource Locator</b>. It is the complete
+            address of a resource available on the internet.
+          </p>
+
+          <pre><code>
+
+https://www.example.com:443/users/profile?id=10
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.6.6 URL Anatomy</h1>
+
+          <table>
+            <tr>
+              <th>Part</th>
+              <th>Meaning</th>
+            </tr>
+
+            <tr>
+              <td>https</td>
+              <td>Protocol</td>
+            </tr>
+
+            <tr>
+              <td>www.example.com</td>
+              <td>Domain Name</td>
+            </tr>
+
+            <tr>
+              <td>443</td>
+              <td>Port Number</td>
+            </tr>
+
+            <tr>
+              <td>/users/profile</td>
+              <td>Path</td>
+            </tr>
+
+            <tr>
+              <td>?id=10</td>
+              <td>Query Parameter</td>
+            </tr>
+          </table>
+
+          <pre><code>
+
+https://www.example.com:443/users/profile?id=10
+
+│
+
+├── https → Protocol
+
+├── www.example.com → Domain
+
+├── 443 → Port
+
+├── /users/profile → Path
+
+└── ?id=10 → Query Parameter
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.6.7 Complete Flow</h1>
+
+          <pre><code>
+
+User enters URL
+
+↓
+
+DNS converts Domain → IP
+
+↓
+
+Browser connects to Server
+
+↓
+
+HTTP Request
+
+↓
+
+Server processes request
+
+↓
+
+HTTP Response
+
+↓
+
+Browser displays webpage
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.6.8 Interview Questions</h1>
+
+          <div class="interview">
+            <p><b>Q.</b> What is an IP Address?</p>
+
+            <p>
+              An IP Address is a unique numerical identifier assigned to every
+              device connected to a network.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Why do we need DNS?</p>
+
+            <p>
+              DNS converts easy-to-remember domain names into IP addresses so
+              browsers can locate servers.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> What is the difference between a Domain Name and an IP
+              Address?
+            </p>
+
+            <p>
+              A Domain Name is a human-readable website name, while an IP
+              Address is the actual numerical address used for communication.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What is a URL?</p>
+
+            <p>
+              A URL is the complete address of a resource on the internet,
+              including the protocol, domain, path, and optional query
+              parameters.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.7 HTTP & HTTPS Fundamentals</h1>
+
+          <p>
+            Whenever a browser communicates with a server, they need a set of
+            rules to exchange data. These rules are called <b>HTTP</b>. HTTP is
+            the foundation of communication on the Web.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              HTTP (HyperText Transfer Protocol) is a communication protocol
+              used to transfer data between a client and a server.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.7.1 What is HTTP?</h1>
+
+          <p>
+            HTTP is a request-response protocol. The client sends an HTTP
+            Request and the server returns an HTTP Response.
+          </p>
+
+          <pre><code>
+
+Browser
+
+↓
+
+HTTP Request
+
+↓
+
+Server
+
+↓
+
+HTTP Response
+
+↓
+
+Browser
+
+</code></pre>
+
+          <p>Every time you:</p>
+
+          <ul>
+            <li>Open a website</li>
+
+            <li>Login</li>
+
+            <li>Register</li>
+
+            <li>Search something</li>
+
+            <li>Like a post</li>
+
+            <li>Upload an image</li>
+          </ul>
+
+          <p>An HTTP request is sent to the backend.</p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.7.2 How HTTP Works</h1>
+
+          <pre><code>
+
+User
+
+↓
+
+Types URL
+
+↓
+
+Browser
+
+↓
+
+HTTP Request
+
+↓
+
+Backend Server
+
+↓
+
+Database
+
+↓
+
+Backend
+
+↓
+
+HTTP Response
+
+↓
+
+Browser
+
+↓
+
+User
+
+</code></pre>
+
+          <p>
+            The browser waits for the server to process the request before
+            displaying the response.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.7.3 What is HTTPS?</h1>
+
+          <p>
+            HTTPS stands for <b>HyperText Transfer Protocol Secure</b>. It is
+            simply HTTP with encryption. HTTPS protects data while it travels
+            between the client and the server.
+          </p>
+
+          <div class="tip">
+            <h3>💡 Remember</h3>
+
+            <p>HTTP + SSL/TLS Encryption = HTTPS</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.7.4 Why HTTPS is Needed</h1>
+
+          <p>
+            Imagine you are logging into your bank account. If the website uses
+            HTTP, your username and password travel in plain text and can be
+            intercepted by attackers. With HTTPS, the data is encrypted before
+            being sent.
+          </p>
+
+          <pre><code>
+
+Without HTTPS
+
+Username
+
+Password
+
+↓
+
+Anyone can read
+
+</code></pre>
+
+          <br />
+
+          <pre><code>
+
+With HTTPS
+
+Username
+
+Password
+
+↓
+
+Encrypted
+
+↓
+
+Only Server can decrypt
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.7.5 HTTP vs HTTPS</h1>
+
+          <table>
+            <tr>
+              <th>HTTP</th>
+
+              <th>HTTPS</th>
+            </tr>
+
+            <tr>
+              <td>Not Secure</td>
+
+              <td>Secure</td>
+            </tr>
+
+            <tr>
+              <td>No Encryption</td>
+
+              <td>Uses SSL/TLS Encryption</td>
+            </tr>
+
+            <tr>
+              <td>Port 80</td>
+
+              <td>Port 443</td>
+            </tr>
+
+            <tr>
+              <td>Data Can Be Read</td>
+
+              <td>Data is Encrypted</td>
+            </tr>
+
+            <tr>
+              <td>Less Safe</td>
+
+              <td>Highly Recommended</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.7.6 HTTP Request & Response</h1>
+
+          <p>Communication always happens in two parts.</p>
+
+          <div class="cards">
+            <div class="card">
+              <h3>Request</h3>
+
+              <p>
+                Sent by the Client. Contains method, URL, headers and optional
+                body.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Response</h3>
+
+              <p>
+                Sent by the Server. Contains status code, headers and response
+                data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.7.7 Real Example</h1>
+
+          <p>Suppose a user logs into an application.</p>
+
+          <pre><code>
+
+POST /login
+
+</code></pre>
+
+          <p>Browser sends:</p>
+
+          <pre><code>
+
+Email
+
+Password
+
+</code></pre>
+
+          <p>Backend checks credentials and returns:</p>
+
+          <pre><code>
+
+Status : 200 OK
+
+JWT Token
+
+User Details
+
+</code></pre>
+
+          <p>If credentials are wrong:</p>
+
+          <pre><code>
+
+Status : 401 Unauthorized
+
+Invalid Email or Password
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.7.8 Complete HTTP Flow</h1>
+
+          <pre><code>
+
+Client
+
+↓
+
+HTTP Request
+
+↓
+
+Express Server
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Database
+
+↓
+
+Response
+
+↓
+
+Client
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.7.9 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Thinking HTTP stores data permanently.</li>
+
+              <li>❌ Using HTTP instead of HTTPS in production.</li>
+
+              <li>❌ Sending sensitive information over HTTP.</li>
+
+              <li>❌ Assuming HTTP automatically encrypts data.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.7.10 Interview Questions</h1>
+
+          <div class="interview">
+            <p><b>Q.</b> What is HTTP?</p>
+
+            <p>
+              HTTP is a protocol used for communication between a client and a
+              server.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What is HTTPS?</p>
+
+            <p>
+              HTTPS is the secure version of HTTP that encrypts data using
+              SSL/TLS.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Why is HTTPS preferred?</p>
+
+            <p>
+              Because it protects sensitive information such as passwords,
+              tokens and payment details by encrypting data during transmission.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Which ports are used by HTTP and HTTPS?</p>
+
+            <p>HTTP uses Port 80, while HTTPS uses Port 443.</p>
+          </div>
+        </div>
+      </section>
+      <!-- ================================= -->
+      <section>
+        <div class="chapter">
+          <h1>2.8 HTTP Methods (GET, POST, PUT, PATCH, DELETE)</h1>
+
+          <p>
+            An HTTP Method tells the server
+            <b>what action the client wants to perform</b> on a resource. Think
+            of it as a command given by the client.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              HTTP Methods define the type of operation to perform on a
+              resource, such as fetching, creating, updating, or deleting data.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.1 Why Do We Need HTTP Methods?</h1>
+
+          <p>
+            Imagine every request looked the same. The server would never know
+            whether the client wants to:
+          </p>
+
+          <ul>
+            <li>Read Data</li>
+
+            <li>Create Data</li>
+
+            <li>Update Data</li>
+
+            <li>Delete Data</li>
+          </ul>
+
+          <p>
+            HTTP Methods solve this problem by clearly specifying the required
+            action.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.2 GET Method</h1>
+
+          <p>
+            <b>GET</b> is used to retrieve data from the server. It should never
+            modify data.
+          </p>
+
+          <pre><code>
+
+GET /users
+
+</code></pre>
+
+          <p>Example:</p>
+
+          <pre><code>
+
+Client
+
+↓
+
+GET /users
+
+↓
+
+Server
+
+↓
+
+Returns All Users
+
+</code></pre>
+
+          <div class="tip">
+            <h3>💡 Use GET For</h3>
+
+            <ul>
+              <li>Fetching Users</li>
+
+              <li>Getting Products</li>
+
+              <li>Viewing Profile</li>
+
+              <li>Reading Blog Posts</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.3 POST Method</h1>
+
+          <p><b>POST</b> is used to create new data on the server.</p>
+
+          <pre><code>
+
+POST /users
+
+</code></pre>
+
+          <p>Example Request Body:</p>
+
+          <pre><code>
+
+{
+  "name":"Arun",
+  "email":"arun@gmail.com"
+}
+
+</code></pre>
+
+          <p>The server saves the new user in the database.</p>
+
+          <div class="tip">
+            <h3>💡 Use POST For</h3>
+
+            <ul>
+              <li>User Registration</li>
+
+              <li>Login</li>
+
+              <li>Create Product</li>
+
+              <li>Create Order</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.4 PUT Method</h1>
+
+          <p>
+            <b>PUT</b> is used to replace an entire resource. All fields should
+            be sent because the existing data is replaced.
+          </p>
+
+          <pre><code>
+
+PUT /users/10
+
+</code></pre>
+
+          <p>Example:</p>
+
+          <pre><code>
+
+Before
+
+{
+ name:"Arun",
+ age:20
+}
+
+↓
+
+PUT
+
+↓
+
+{
+ name:"Rahul",
+ age:22
+}
+
+</code></pre>
+
+          <div class="warning">
+            <h3>⚠ Remember</h3>
+
+            <p>PUT replaces the complete resource.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.5 PATCH Method</h1>
+
+          <p>
+            <b>PATCH</b> is used to update only the required fields. Unlike PUT,
+            it does not replace the entire resource.
+          </p>
+
+          <pre><code>
+
+PATCH /users/10
+
+</code></pre>
+
+          <p>Example:</p>
+
+          <pre><code>
+
+Before
+
+{
+ name:"Arun",
+ age:20
+}
+
+↓
+
+PATCH
+
+↓
+
+{
+ age:21
+}
+
+</code></pre>
+
+          <p>
+            Only the <b>age</b> changes. The remaining fields stay unchanged.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.6 DELETE Method</h1>
+
+          <p><b>DELETE</b> removes an existing resource from the database.</p>
+
+          <pre><code>
+
+DELETE /users/10
+
+</code></pre>
+
+          <p>Example:</p>
+
+          <pre><code>
+
+Client
+
+↓
+
+DELETE /users/10
+
+↓
+
+Server
+
+↓
+
+User Deleted
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.7 Summary Table</h1>
+
+          <table>
+            <tr>
+              <th>Method</th>
+
+              <th>Purpose</th>
+
+              <th>CRUD</th>
+            </tr>
+
+            <tr>
+              <td>GET</td>
+
+              <td>Fetch Data</td>
+
+              <td>Read</td>
+            </tr>
+
+            <tr>
+              <td>POST</td>
+
+              <td>Create Data</td>
+
+              <td>Create</td>
+            </tr>
+
+            <tr>
+              <td>PUT</td>
+
+              <td>Replace Entire Data</td>
+
+              <td>Update</td>
+            </tr>
+
+            <tr>
+              <td>PATCH</td>
+
+              <td>Update Specific Fields</td>
+
+              <td>Update</td>
+            </tr>
+
+            <tr>
+              <td>DELETE</td>
+
+              <td>Delete Data</td>
+
+              <td>Delete</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.8 CRUD Mapping</h1>
+
+          <pre><code>
+
+Create  → POST
+
+Read    → GET
+
+Update  → PUT / PATCH
+
+Delete  → DELETE
+
+</code></pre>
+
+          <div class="note">
+            <h3>📌 Interview Tip</h3>
+
+            <p>
+              Whenever someone asks about CRUD operations in REST APIs,
+              immediately map them to these HTTP methods.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.9 Real World REST API Examples</h1>
+
+          <table>
+            <tr>
+              <th>API</th>
+
+              <th>Method</th>
+            </tr>
+
+            <tr>
+              <td>GET /products</td>
+
+              <td>Get All Products</td>
+            </tr>
+
+            <tr>
+              <td>GET /products/5</td>
+
+              <td>Get Single Product</td>
+            </tr>
+
+            <tr>
+              <td>POST /products</td>
+
+              <td>Create Product</td>
+            </tr>
+
+            <tr>
+              <td>PUT /products/5</td>
+
+              <td>Replace Product</td>
+            </tr>
+
+            <tr>
+              <td>PATCH /products/5</td>
+
+              <td>Update Product Price</td>
+            </tr>
+
+            <tr>
+              <td>DELETE /products/5</td>
+
+              <td>Delete Product</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.10 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Using GET to create or update data.</li>
+
+              <li>❌ Using POST for every API.</li>
+
+              <li>❌ Confusing PUT with PATCH.</li>
+
+              <li>❌ Sending sensitive data in GET query parameters.</li>
+
+              <li>❌ Ignoring REST conventions.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.8.11 Interview Questions</h1>
+
+          <div class="interview">
+            <p><b>Q.</b> What is the difference between GET and POST?</p>
+
+            <p>
+              GET retrieves data without modifying it, while POST creates new
+              data on the server.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What is the difference between PUT and PATCH?</p>
+
+            <p>
+              PUT replaces the entire resource, whereas PATCH updates only the
+              specified fields.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Which HTTP method is used to delete a resource?</p>
+
+            <p>DELETE method.</p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Which HTTP methods are commonly used in CRUD operations?
+            </p>
+
+            <p>
+              POST (Create), GET (Read), PUT/PATCH (Update), DELETE (Delete).
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9 HTTP Request, Response, Headers & Body</h1>
+
+          <p>
+            Whenever a client communicates with a server, two things always
+            happen:
+          </p>
+
+          <ul>
+            <li><b>Request</b> → Sent by the Client.</li>
+
+            <li><b>Response</b> → Sent by the Server.</li>
+          </ul>
+
+          <p>
+            This Request-Response model is the foundation of every REST API.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              A client sends an HTTP Request to the server, and the server
+              processes it and returns an HTTP Response.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9.1 HTTP Request</h1>
+
+          <p>
+            An HTTP Request contains everything the server needs to process the
+            client's request.
+          </p>
+
+          <pre><code>
+
+Client
+
+↓
+
+HTTP Request
+
+↓
+
+Server
+
+</code></pre>
+
+          <p>A Request mainly contains:</p>
+
+          <ul>
+            <li>Method</li>
+
+            <li>URL</li>
+
+            <li>Headers</li>
+
+            <li>Body (Optional)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9.2 Structure of an HTTP Request</h1>
+
+          <pre><code>
+
+POST /login HTTP/1.1
+
+Host: localhost:8000
+
+Content-Type: application/json
+
+Authorization: Bearer JWT_TOKEN
+
+{
+   "email":"arun@gmail.com",
+   "password":"123456"
+}
+
+</code></pre>
+
+          <table>
+            <tr>
+              <th>Part</th>
+
+              <th>Purpose</th>
+            </tr>
+
+            <tr>
+              <td>Method</td>
+
+              <td>Action to perform</td>
+            </tr>
+
+            <tr>
+              <td>URL</td>
+
+              <td>API Endpoint</td>
+            </tr>
+
+            <tr>
+              <td>Headers</td>
+
+              <td>Extra Information</td>
+            </tr>
+
+            <tr>
+              <td>Body</td>
+
+              <td>Actual Data</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9.3 Request Headers</h1>
+
+          <p>
+            Headers contain metadata (extra information) about the request. They
+            help the server understand how to process the request.
+          </p>
+
+          <table>
+            <tr>
+              <th>Header</th>
+
+              <th>Purpose</th>
+            </tr>
+
+            <tr>
+              <td>Content-Type</td>
+
+              <td>Type of data being sent</td>
+            </tr>
+
+            <tr>
+              <td>Authorization</td>
+
+              <td>JWT or Access Token</td>
+            </tr>
+
+            <tr>
+              <td>Cookie</td>
+
+              <td>Stores Cookies</td>
+            </tr>
+
+            <tr>
+              <td>User-Agent</td>
+
+              <td>Browser Information</td>
+            </tr>
+
+            <tr>
+              <td>Accept</td>
+
+              <td>Expected Response Type</td>
+            </tr>
+          </table>
+
+          <div class="tip">
+            <h3>💡 Example</h3>
+
+            <pre><code>
+
+Content-Type: application/json
+
+Authorization: Bearer eyJhbGci...
+
+</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9.4 Request Body</h1>
+
+          <p>
+            The Body contains the actual data sent by the client. It is mainly
+            used with:
+          </p>
+
+          <ul>
+            <li>POST</li>
+
+            <li>PUT</li>
+
+            <li>PATCH</li>
+          </ul>
+
+          <pre><code>
+
+POST /register
+
+{
+   "name":"Arun",
+   "email":"arun@gmail.com",
+   "password":"123456"
+}
+
+</code></pre>
+
+          <div class="warning">
+            <h3>⚠ Remember</h3>
+
+            <p>GET requests generally do not have a request body.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9.5 HTTP Response</h1>
+
+          <p>
+            After processing the request, the server sends a Response back to
+            the client.
+          </p>
+
+          <pre><code>
+
+Client
+
+↓
+
+Request
+
+↓
+
+Server
+
+↓
+
+Response
+
+↓
+
+Client
+
+</code></pre>
+
+          <p>A Response mainly contains:</p>
+
+          <ul>
+            <li>Status Code</li>
+
+            <li>Headers</li>
+
+            <li>Body</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9.6 Structure of an HTTP Response</h1>
+
+          <pre><code>
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+   "success":true,
+   "message":"Login Successful",
+   "token":"JWT_TOKEN"
+}
+
+</code></pre>
+
+          <table>
+            <tr>
+              <th>Part</th>
+
+              <th>Purpose</th>
+            </tr>
+
+            <tr>
+              <td>Status Code</td>
+
+              <td>Request Result</td>
+            </tr>
+
+            <tr>
+              <td>Headers</td>
+
+              <td>Extra Information</td>
+            </tr>
+
+            <tr>
+              <td>Body</td>
+
+              <td>Returned Data</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9.7 Complete Request Response Flow</h1>
+
+          <pre><code>
+
+Frontend
+
+↓
+
+POST /login
+
+↓
+
+Express Route
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Database
+
+↓
+
+Generate JWT
+
+↓
+
+Response
+
+↓
+
+Frontend
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9.8 Real Example (Login API)</h1>
+
+          <p>
+            <b>Request</b>
+          </p>
+
+          <pre><code>
+
+POST /login
+
+{
+   "email":"arun@gmail.com",
+   "password":"123456"
+}
+
+</code></pre>
+
+          <p>
+            <b>Response</b>
+          </p>
+
+          <pre><code>
+
+Status : 200 OK
+
+{
+   "success":true,
+   "user":{
+      "name":"Arun"
+   },
+   "accessToken":"eyJhbGc..."
+}
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9.9 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Sending sensitive data in URL query parameters.</li>
+
+              <li>
+                ❌ Forgetting the
+                <code>Content-Type: application/json</code> header.
+              </li>
+
+              <li>❌ Sending a request body with GET requests.</li>
+
+              <li>
+                ❌ Storing JWT inside the request body instead of the
+                Authorization header or cookies.
+              </li>
+
+              <li>❌ Ignoring response status codes.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.9.10 Interview Questions</h1>
+
+          <div class="interview">
+            <p><b>Q.</b> What is an HTTP Request?</p>
+
+            <p>
+              An HTTP Request is a message sent by the client to the server
+              asking it to perform an action.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What does an HTTP Request contain?</p>
+
+            <p>Method, URL, Headers, and an optional Body.</p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What is the purpose of Request Headers?</p>
+
+            <p>
+              Headers provide metadata such as content type, authentication
+              tokens, cookies, and browser information.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What does an HTTP Response contain?</p>
+
+            <p>Status Code, Headers, and the Response Body.</p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Which HTTP methods usually contain a Request Body?</p>
+
+            <p>POST, PUT, and PATCH.</p>
+          </div>
+        </div>
+      </section>
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10 HTTP Status Codes</h1>
+
+          <p>
+            Whenever a client sends an HTTP request, the server responds with a
+            <b>Status Code</b>. A Status Code tells the client whether the
+            request was successful or if something went wrong.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              An HTTP Status Code is a 3-digit number returned by the server to
+              indicate the result of an HTTP request.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.1 Why Do We Need Status Codes?</h1>
+
+          <p>
+            Imagine logging into an application. If the backend simply returns
+            data without telling whether the request succeeded or failed, the
+            frontend cannot understand what happened. Status codes solve this
+            problem.
+          </p>
+
+          <pre><code>
+
+Frontend
+
+↓
+
+Login Request
+
+↓
+
+Backend
+
+↓
+
+200 OK
+
+or
+
+401 Unauthorized
+
+or
+
+500 Internal Server Error
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.2 Categories of Status Codes</h1>
+
+          <table>
+            <tr>
+              <th>Range</th>
+
+              <th>Meaning</th>
+            </tr>
+
+            <tr>
+              <td>1xx</td>
+
+              <td>Informational</td>
+            </tr>
+
+            <tr>
+              <td>2xx</td>
+
+              <td>Success</td>
+            </tr>
+
+            <tr>
+              <td>3xx</td>
+
+              <td>Redirection</td>
+            </tr>
+
+            <tr>
+              <td>4xx</td>
+
+              <td>Client Error</td>
+            </tr>
+
+            <tr>
+              <td>5xx</td>
+
+              <td>Server Error</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.3 1xx - Informational</h1>
+
+          <p>
+            These status codes indicate that the request has been received and
+            the process is continuing. They are rarely used in normal backend
+            development.
+          </p>
+
+          <table>
+            <tr>
+              <th>Code</th>
+
+              <th>Meaning</th>
+            </tr>
+
+            <tr>
+              <td>100</td>
+
+              <td>Continue</td>
+            </tr>
+
+            <tr>
+              <td>101</td>
+
+              <td>Switching Protocols</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.4 2xx - Success</h1>
+
+          <p>
+            These codes indicate that the request was processed successfully.
+          </p>
+
+          <table>
+            <tr>
+              <th>Code</th>
+
+              <th>Meaning</th>
+
+              <th>When Used</th>
+            </tr>
+
+            <tr>
+              <td>200</td>
+
+              <td>OK</td>
+
+              <td>Request Successful</td>
+            </tr>
+
+            <tr>
+              <td>201</td>
+
+              <td>Created</td>
+
+              <td>New Resource Created</td>
+            </tr>
+
+            <tr>
+              <td>204</td>
+
+              <td>No Content</td>
+
+              <td>Success but No Data Returned</td>
+            </tr>
+          </table>
+
+          <div class="tip">
+            <h3>💡 Examples</h3>
+
+            <pre><code>
+
+GET /users
+
+↓
+
+200 OK
+
+</code></pre>
+
+            <pre><code>
+
+POST /register
+
+↓
+
+201 Created
+
+</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.5 3xx - Redirection</h1>
+
+          <p>
+            These codes tell the browser that the requested resource has moved
+            to another location.
+          </p>
+
+          <table>
+            <tr>
+              <th>Code</th>
+
+              <th>Meaning</th>
+            </tr>
+
+            <tr>
+              <td>301</td>
+
+              <td>Moved Permanently</td>
+            </tr>
+
+            <tr>
+              <td>302</td>
+
+              <td>Found (Temporary Redirect)</td>
+            </tr>
+
+            <tr>
+              <td>304</td>
+
+              <td>Not Modified</td>
+            </tr>
+          </table>
+
+          <p>These are mostly handled automatically by browsers.</p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.6 4xx - Client Errors</h1>
+
+          <p>These errors occur because the client made a mistake.</p>
+
+          <table>
+            <tr>
+              <th>Code</th>
+
+              <th>Meaning</th>
+
+              <th>Example</th>
+            </tr>
+
+            <tr>
+              <td>400</td>
+
+              <td>Bad Request</td>
+
+              <td>Invalid Input</td>
+            </tr>
+
+            <tr>
+              <td>401</td>
+
+              <td>Unauthorized</td>
+
+              <td>JWT Missing / Invalid</td>
+            </tr>
+
+            <tr>
+              <td>403</td>
+
+              <td>Forbidden</td>
+
+              <td>No Permission</td>
+            </tr>
+
+            <tr>
+              <td>404</td>
+
+              <td>Not Found</td>
+
+              <td>Route Doesn't Exist</td>
+            </tr>
+
+            <tr>
+              <td>409</td>
+
+              <td>Conflict</td>
+
+              <td>Email Already Exists</td>
+            </tr>
+          </table>
+
+          <div class="tip">
+            <h3>💡 Example</h3>
+
+            <pre><code>
+
+POST /login
+
+Wrong Password
+
+↓
+
+401 Unauthorized
+
+</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.7 5xx - Server Errors</h1>
+
+          <p>These errors occur when something goes wrong on the server.</p>
+
+          <table>
+            <tr>
+              <th>Code</th>
+
+              <th>Meaning</th>
+            </tr>
+
+            <tr>
+              <td>500</td>
+
+              <td>Internal Server Error</td>
+            </tr>
+
+            <tr>
+              <td>502</td>
+
+              <td>Bad Gateway</td>
+            </tr>
+
+            <tr>
+              <td>503</td>
+
+              <td>Service Unavailable</td>
+            </tr>
+
+            <tr>
+              <td>504</td>
+
+              <td>Gateway Timeout</td>
+            </tr>
+          </table>
+
+          <div class="warning">
+            <h3>⚠ Remember</h3>
+
+            <p>
+              5xx errors usually indicate bugs, server crashes, or
+              infrastructure issues.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.8 Common Status Codes Used in MERN</h1>
+
+          <table>
+            <tr>
+              <th>Status Code</th>
+
+              <th>Purpose</th>
+            </tr>
+
+            <tr>
+              <td>200</td>
+
+              <td>Success</td>
+            </tr>
+
+            <tr>
+              <td>201</td>
+
+              <td>Created Successfully</td>
+            </tr>
+
+            <tr>
+              <td>204</td>
+
+              <td>Deleted Successfully</td>
+            </tr>
+
+            <tr>
+              <td>400</td>
+
+              <td>Validation Error</td>
+            </tr>
+
+            <tr>
+              <td>401</td>
+
+              <td>Authentication Failed</td>
+            </tr>
+
+            <tr>
+              <td>403</td>
+
+              <td>Permission Denied</td>
+            </tr>
+
+            <tr>
+              <td>404</td>
+
+              <td>Resource Not Found</td>
+            </tr>
+
+            <tr>
+              <td>409</td>
+
+              <td>Duplicate Resource</td>
+            </tr>
+
+            <tr>
+              <td>500</td>
+
+              <td>Server Error</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.9 Best Practices</h1>
+
+          <div class="tip">
+            <ul>
+              <li>✅ Use 200 for successful GET requests.</li>
+
+              <li>✅ Use 201 after creating a new resource.</li>
+
+              <li>✅ Use 400 for invalid user input.</li>
+
+              <li>✅ Use 401 when authentication fails.</li>
+
+              <li>
+                ✅ Use 403 when the user is authenticated but not authorized.
+              </li>
+
+              <li>✅ Use 404 if the requested resource does not exist.</li>
+
+              <li>✅ Use 500 only for unexpected server-side errors.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.10 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Returning 200 for every response.</li>
+
+              <li>❌ Using 500 for validation errors.</li>
+
+              <li>❌ Confusing 401 with 403.</li>
+
+              <li>❌ Returning incorrect status codes in APIs.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.10.11 Interview Questions</h1>
+
+          <div class="interview">
+            <p><b>Q.</b> What are HTTP Status Codes?</p>
+
+            <p>
+              HTTP Status Codes are 3-digit numbers returned by the server to
+              indicate the result of an HTTP request.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What is the difference between 401 and 403?</p>
+
+            <p>
+              <b>401 Unauthorized</b> means the user is not authenticated
+              (missing or invalid credentials).<br />
+
+              <b>403 Forbidden</b> means the user is authenticated but does not
+              have permission to access the resource.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Which status code is used after successfully creating a
+              resource?
+            </p>
+
+            <p>
+              <b>201 Created</b>
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Which status code indicates that the requested resource
+              was not found?
+            </p>
+
+            <p>
+              <b>404 Not Found</b>
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Which status code indicates an internal server error?
+            </p>
+
+            <p>
+              <b>500 Internal Server Error</b>
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11 REST APIs & RESTful Principles</h1>
+
+          <p>
+            REST (Representational State Transfer) is an architectural style
+            used to build web APIs. It defines a set of rules for communication
+            between the client and the server. Nowadays, almost every backend
+            application follows REST principles because they make APIs simple,
+            scalable, and easy to understand.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              A REST API is an API that follows REST principles and uses HTTP
+              methods to perform CRUD operations on resources.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11.1 What is an API?</h1>
+
+          <p>
+            API stands for <b>Application Programming Interface</b>. It acts as
+            a bridge between two applications, allowing them to communicate with
+            each other.
+          </p>
+
+          <pre><code>
+
+Frontend
+
+↓
+
+API
+
+↓
+
+Backend
+
+↓
+
+Database
+
+</code></pre>
+
+          <div class="tip">
+            <h3>💡 Example</h3>
+
+            <p>
+              A React frontend doesn't directly access MongoDB. Instead, it
+              communicates with the backend using APIs.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11.2 What is a Resource?</h1>
+
+          <p>In REST, everything is treated as a <b>Resource</b>. Examples:</p>
+
+          <ul>
+            <li>User</li>
+
+            <li>Product</li>
+
+            <li>Order</li>
+
+            <li>Student</li>
+
+            <li>Employee</li>
+          </ul>
+
+          <p>Every resource has its own endpoint.</p>
+
+          <table>
+            <tr>
+              <th>Resource</th>
+
+              <th>Endpoint</th>
+            </tr>
+
+            <tr>
+              <td>User</td>
+
+              <td>/users</td>
+            </tr>
+
+            <tr>
+              <td>Product</td>
+
+              <td>/products</td>
+            </tr>
+
+            <tr>
+              <td>Order</td>
+
+              <td>/orders</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11.3 REST API Example</h1>
+
+          <table>
+            <tr>
+              <th>Method</th>
+
+              <th>Endpoint</th>
+
+              <th>Action</th>
+            </tr>
+
+            <tr>
+              <td>GET</td>
+
+              <td>/users</td>
+
+              <td>Get All Users</td>
+            </tr>
+
+            <tr>
+              <td>GET</td>
+
+              <td>/users/10</td>
+
+              <td>Get Single User</td>
+            </tr>
+
+            <tr>
+              <td>POST</td>
+
+              <td>/users</td>
+
+              <td>Create User</td>
+            </tr>
+
+            <tr>
+              <td>PUT</td>
+
+              <td>/users/10</td>
+
+              <td>Replace User</td>
+            </tr>
+
+            <tr>
+              <td>PATCH</td>
+
+              <td>/users/10</td>
+
+              <td>Update User</td>
+            </tr>
+
+            <tr>
+              <td>DELETE</td>
+
+              <td>/users/10</td>
+
+              <td>Delete User</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11.4 RESTful Principles</h1>
+
+          <div class="cards">
+            <div class="card">
+              <h3>1. Client-Server</h3>
+
+              <p>Frontend and Backend should be independent.</p>
+            </div>
+
+            <div class="card">
+              <h3>2. Stateless</h3>
+
+              <p>
+                Each request contains all required information. The server does
+                not remember previous requests.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>3. Uniform Interface</h3>
+
+              <p>Endpoints should follow consistent naming conventions.</p>
+            </div>
+
+            <div class="card">
+              <h3>4. Resource Based URLs</h3>
+
+              <p>
+                Use nouns instead of verbs. Example: /users /products /orders
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11.5 Good vs Bad API Design</h1>
+
+          <table>
+            <tr>
+              <th>❌ Bad</th>
+
+              <th>✅ Good</th>
+            </tr>
+
+            <tr>
+              <td>/getUsers</td>
+
+              <td>/users</td>
+            </tr>
+
+            <tr>
+              <td>/createUser</td>
+
+              <td>POST /users</td>
+            </tr>
+
+            <tr>
+              <td>/deleteUser/5</td>
+
+              <td>DELETE /users/5</td>
+            </tr>
+
+            <tr>
+              <td>/updateProduct</td>
+
+              <td>PATCH /products/10</td>
+            </tr>
+          </table>
+
+          <div class="tip">
+            <h3>💡 Rule</h3>
+
+            <p>
+              Use HTTP methods to describe the action, and use the URL to
+              describe the resource.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11.6 Stateless Nature of REST</h1>
+
+          <p>
+            REST APIs are <b>stateless</b>. This means every request is
+            independent. The server does not remember previous requests.
+          </p>
+
+          <pre><code>
+
+Request 1
+
+↓
+
+Response
+
+----------------
+
+Request 2
+
+↓
+
+Response
+
+</code></pre>
+
+          <p>
+            If authentication is required, every request must send the JWT token
+            or session information.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11.7 REST API Flow</h1>
+
+          <pre><code>
+
+Client
+
+↓
+
+GET /products
+
+↓
+
+Express Route
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Database
+
+↓
+
+JSON Response
+
+↓
+
+Frontend
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11.8 Best Practices</h1>
+
+          <div class="tip">
+            <ul>
+              <li>✅ Use nouns in endpoints (users, products).</li>
+
+              <li>✅ Use correct HTTP methods.</li>
+
+              <li>✅ Return proper HTTP status codes.</li>
+
+              <li>✅ Return JSON responses.</li>
+
+              <li>✅ Keep endpoint names simple and consistent.</li>
+
+              <li>✅ Use plural resource names.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11.9 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Using verbs in URLs.</li>
+
+              <li>❌ Using POST for every endpoint.</li>
+
+              <li>❌ Returning HTML instead of JSON.</li>
+
+              <li>❌ Ignoring HTTP status codes.</li>
+
+              <li>❌ Inconsistent endpoint naming.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.11.10 Interview Questions</h1>
+
+          <div class="interview">
+            <p><b>Q.</b> What is a REST API?</p>
+
+            <p>
+              A REST API is an API that follows REST principles and uses HTTP
+              methods to perform operations on resources.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What is meant by a Resource in REST?</p>
+
+            <p>
+              A resource is any object or data exposed through an API, such as a
+              user, product, or order.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Why are REST APIs called stateless?</p>
+
+            <p>
+              Because the server does not store information about previous
+              requests. Every request must contain all the required information.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Which endpoint is better: <code>/getUsers</code> or
+              <code>/users</code>?
+            </p>
+
+            <p>
+              <code>/users</code> is better because REST APIs use nouns for
+              resources and HTTP methods for actions.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12 JSON & Why APIs Use JSON</h1>
+
+          <p>
+            JSON (<b>JavaScript Object Notation</b>) is the standard format used
+            to exchange data between the client and the server. Almost every
+            REST API sends and receives data in JSON format because it is
+            lightweight, readable, and supported by almost every programming
+            language.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              JSON is a text-based data format used to store and transfer
+              structured data.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12.1 JSON Syntax</h1>
+
+          <p>A JSON object stores data as <b>key-value pairs</b>.</p>
+
+          <pre><code>
+
+{
+   "name":"Arun",
+   "age":20,
+   "city":"Meerut"
+}
+
+</code></pre>
+
+          <p>Rules:</p>
+
+          <ul>
+            <li>Keys are enclosed in double quotes.</li>
+
+            <li>
+              Values can be String, Number, Boolean, Array, Object, or null.
+            </li>
+
+            <li>Key-value pairs are separated by commas.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12.2 JSON Data Types</h1>
+
+          <table>
+            <tr>
+              <th>Data Type</th>
+
+              <th>Example</th>
+            </tr>
+
+            <tr>
+              <td>String</td>
+
+              <td>"Arun"</td>
+            </tr>
+
+            <tr>
+              <td>Number</td>
+
+              <td>20</td>
+            </tr>
+
+            <tr>
+              <td>Boolean</td>
+
+              <td>true</td>
+            </tr>
+
+            <tr>
+              <td>Array</td>
+
+              <td>["JS","Node"]</td>
+            </tr>
+
+            <tr>
+              <td>Object</td>
+
+              <td>{ "city":"Meerut" }</td>
+            </tr>
+
+            <tr>
+              <td>null</td>
+
+              <td>null</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12.3 JSON in Request Body</h1>
+
+          <p>
+            When a client sends data to the backend, it is usually sent as JSON.
+          </p>
+
+          <pre><code>
+
+POST /register
+
+Content-Type: application/json
+
+{
+   "name":"Arun",
+   "email":"arun@gmail.com",
+   "password":"123456"
+}
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12.4 JSON in Response</h1>
+
+          <p>The backend also returns data in JSON format.</p>
+
+          <pre><code>
+
+HTTP/1.1 200 OK
+
+{
+   "success": true,
+   "message": "Login Successful",
+   "user": {
+      "name": "Arun",
+      "email": "arun@gmail.com"
+   }
+}
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12.5 Why Do APIs Use JSON?</h1>
+
+          <div class="cards">
+            <div class="card">
+              <h3>Lightweight</h3>
+
+              <p>Small data size makes communication faster.</p>
+            </div>
+
+            <div class="card">
+              <h3>Readable</h3>
+
+              <p>Easy for humans to understand.</p>
+            </div>
+
+            <div class="card">
+              <h3>Language Independent</h3>
+
+              <p>Works with JavaScript, Java, Python, C#, Go, etc.</p>
+            </div>
+
+            <div class="card">
+              <h3>Easy Parsing</h3>
+
+              <p>Can be converted directly into objects.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12.6 JavaScript Object vs JSON</h1>
+
+          <table>
+            <tr>
+              <th>JavaScript Object</th>
+
+              <th>JSON</th>
+            </tr>
+
+            <tr>
+              <td>Keys may be unquoted</td>
+
+              <td>Keys must be in double quotes</td>
+            </tr>
+
+            <tr>
+              <td>Can contain functions</td>
+
+              <td>Cannot contain functions</td>
+            </tr>
+
+            <tr>
+              <td>Exists in memory</td>
+
+              <td>Used for data transfer</td>
+            </tr>
+          </table>
+
+          <pre><code>
+
+// JavaScript Object
+
+const user = {
+    name: "Arun",
+    age: 20
+};
+
+</code></pre>
+
+          <pre><code>
+
+{
+   "name":"Arun",
+   "age":20
+}
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12.7 JSON.parse() & JSON.stringify()</h1>
+
+          <p>These two methods are commonly used while working with APIs.</p>
+
+          <pre><code>
+
+// Object → JSON
+
+const json = JSON.stringify(user);
+
+</code></pre>
+
+          <pre><code>
+
+// JSON → Object
+
+const obj = JSON.parse(json);
+
+</code></pre>
+
+          <table>
+            <tr>
+              <th>Method</th>
+
+              <th>Purpose</th>
+            </tr>
+
+            <tr>
+              <td>JSON.stringify()</td>
+
+              <td>Convert Object → JSON String</td>
+            </tr>
+
+            <tr>
+              <td>JSON.parse()</td>
+
+              <td>Convert JSON String → Object</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12.8 Complete API Flow Using JSON</h1>
+
+          <pre><code>
+
+Frontend
+
+↓
+
+JSON Request
+
+↓
+
+Express Server
+
+↓
+
+Controller
+
+↓
+
+Database
+
+↓
+
+JSON Response
+
+↓
+
+Frontend
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12.9 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Using single quotes in JSON.</li>
+
+              <li>❌ Forgetting commas between key-value pairs.</li>
+
+              <li>❌ Adding functions inside JSON.</li>
+
+              <li>
+                ❌ Forgetting <code>Content-Type: application/json</code>.
+              </li>
+
+              <li>❌ Confusing JavaScript objects with JSON.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.12.10 Interview Questions</h1>
+
+          <div class="interview">
+            <p><b>Q.</b> What is JSON?</p>
+
+            <p>
+              JSON is a lightweight text-based format used to exchange data
+              between applications.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Why do REST APIs use JSON?</p>
+
+            <p>
+              Because it is lightweight, easy to read, language-independent, and
+              simple to parse.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> What is the difference between
+              <code>JSON.parse()</code> and <code>JSON.stringify()</code>?
+            </p>
+
+            <p>
+              <code>JSON.stringify()</code> converts a JavaScript object into a
+              JSON string, while <code>JSON.parse()</code> converts a JSON
+              string back into a JavaScript object.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13 Postman & API Testing</h1>
+
+          <p>
+            While developing a backend, the frontend is often not ready. We
+            still need a way to test our APIs. That's where <b>Postman</b> comes
+            in. Postman allows us to send HTTP requests to our backend and
+            inspect the responses without writing frontend code.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              Postman is an API testing tool used to send HTTP requests and
+              inspect server responses.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13.1 Why Do We Need Postman?</h1>
+
+          <p>
+            Instead of creating a frontend every time, we can directly test
+            APIs.
+          </p>
+
+          <div class="cards">
+            <div class="card">
+              <h3>Test APIs</h3>
+
+              <p>Send GET, POST, PUT, PATCH and DELETE requests.</p>
+            </div>
+
+            <div class="card">
+              <h3>Debug Backend</h3>
+
+              <p>Check if APIs are working correctly.</p>
+            </div>
+
+            <div class="card">
+              <h3>Inspect Response</h3>
+
+              <p>View status codes, headers and JSON responses.</p>
+            </div>
+
+            <div class="card">
+              <h3>Authentication Testing</h3>
+
+              <p>Test JWT tokens and cookies.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13.2 Postman Interface</h1>
+
+          <pre><code>
+
+Method
+
+↓
+
+URL
+
+↓
+
+Headers
+
+↓
+
+Body
+
+↓
+
+Send
+
+↓
+
+Response
+
+</code></pre>
+
+          <p>Every request in Postman consists of these five parts.</p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13.3 Sending a GET Request</h1>
+
+          <p>Suppose our backend has the following API:</p>
+
+          <pre><code>
+
+GET http://localhost:8000/api/users
+
+</code></pre>
+
+          <p>Steps:</p>
+
+          <ol>
+            <li>Select <b>GET</b>.</li>
+
+            <li>Enter the URL.</li>
+
+            <li>Click <b>Send</b>.</li>
+          </ol>
+
+          <p>Response:</p>
+
+          <pre><code>
+
+Status : 200 OK
+
+[
+   {
+      "name":"Arun",
+      "age":20
+   }
+]
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13.4 Sending a POST Request</h1>
+
+          <p>POST requests usually send data in the request body.</p>
+
+          <pre><code>
+
+POST http://localhost:8000/api/register
+
+</code></pre>
+
+          <p>Headers</p>
+
+          <pre><code>
+
+Content-Type : application/json
+
+</code></pre>
+
+          <p>Body (Raw → JSON)</p>
+
+          <pre><code>
+
+{
+   "name":"Arun",
+   "email":"arun@gmail.com",
+   "password":"123456"
+}
+
+</code></pre>
+
+          <p>Response</p>
+
+          <pre><code>
+
+Status : 201 Created
+
+{
+   "message":"User Registered Successfully"
+}
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13.5 Adding Headers</h1>
+
+          <p>Headers provide additional information to the server.</p>
+
+          <table>
+            <tr>
+              <th>Header</th>
+
+              <th>Purpose</th>
+            </tr>
+
+            <tr>
+              <td>Content-Type</td>
+
+              <td>Type of Data</td>
+            </tr>
+
+            <tr>
+              <td>Authorization</td>
+
+              <td>JWT Token</td>
+            </tr>
+
+            <tr>
+              <td>Cookie</td>
+
+              <td>Cookies</td>
+            </tr>
+          </table>
+
+          <p>Example:</p>
+
+          <pre><code>
+
+Authorization
+
+Bearer eyJhbGc....
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13.6 Testing Protected APIs</h1>
+
+          <p>Protected APIs require authentication.</p>
+
+          <pre><code>
+
+GET /profile
+
+</code></pre>
+
+          <p>Without Token</p>
+
+          <pre><code>
+
+401 Unauthorized
+
+</code></pre>
+
+          <p>With JWT Token</p>
+
+          <pre><code>
+
+Authorization
+
+Bearer eyJhbGc...
+
+</code></pre>
+
+          <p>Response</p>
+
+          <pre><code>
+
+200 OK
+
+{
+   "name":"Arun"
+}
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13.7 Testing CRUD APIs</h1>
+
+          <table>
+            <tr>
+              <th>Method</th>
+
+              <th>Example</th>
+            </tr>
+
+            <tr>
+              <td>GET</td>
+
+              <td>Fetch Users</td>
+            </tr>
+
+            <tr>
+              <td>POST</td>
+
+              <td>Create User</td>
+            </tr>
+
+            <tr>
+              <td>PUT</td>
+
+              <td>Replace User</td>
+            </tr>
+
+            <tr>
+              <td>PATCH</td>
+
+              <td>Update User</td>
+            </tr>
+
+            <tr>
+              <td>DELETE</td>
+
+              <td>Delete User</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13.8 Reading the Response</h1>
+
+          <p>After clicking <b>Send</b>, Postman shows:</p>
+
+          <ul>
+            <li>Status Code</li>
+
+            <li>Response Time</li>
+
+            <li>Headers</li>
+
+            <li>JSON Response</li>
+          </ul>
+
+          <pre><code>
+
+Status : 200 OK
+
+Time : 45ms
+
+Size : 1.2 KB
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13.9 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>
+                ❌ Forgetting <code>Content-Type: application/json</code>.
+              </li>
+
+              <li>❌ Sending invalid JSON.</li>
+
+              <li>❌ Using the wrong HTTP method.</li>
+
+              <li>
+                ❌ Forgetting the Authorization header for protected routes.
+              </li>
+
+              <li>❌ Testing the wrong URL or port.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.13.10 Interview Questions</h1>
+
+          <div class="interview">
+            <p><b>Q.</b> What is Postman?</p>
+
+            <p>
+              Postman is an API testing tool used to send HTTP requests and
+              inspect server responses.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Why do backend developers use Postman?</p>
+
+            <p>
+              To test APIs independently without needing a frontend application.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> How do you test a protected API in Postman?</p>
+
+            <p>
+              By adding the JWT token in the <b>Authorization</b> header using
+              the Bearer scheme.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Which request body format is most commonly used in REST
+              APIs?
+            </p>
+
+            <p>JSON (<code>application/json</code>).</p>
+          </div>
+        </div>
+      </section>
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14 Complete Backend Request Lifecycle</h1>
+
+          <p>
+            Whenever a user performs an action on a website (login, register,
+            fetch products, upload a file, etc.), the request travels through
+            several layers before a response is returned. Understanding this
+            complete lifecycle is one of the most important concepts in backend
+            development.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              The Request Lifecycle is the complete journey of an HTTP request
+              from the client to the server, database, and back to the client.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.1 Complete Flow</h1>
+
+          <pre><code>
+
+User
+
+↓
+
+Browser / React App
+
+↓
+
+HTTP Request
+
+↓
+
+Express Server
+
+↓
+
+Route
+
+↓
+
+Middleware
+
+↓
+
+Controller
+
+↓
+
+Service (Business Logic)
+
+↓
+
+Database (MongoDB)
+
+↓
+
+Controller
+
+↓
+
+HTTP Response
+
+↓
+
+Browser
+
+↓
+
+User
+
+</code></pre>
+
+          <div class="tip">
+            <h3>💡 Remember</h3>
+
+            <p>
+              Every API request follows this flow, whether it's Login, Register,
+              Product APIs, or Payment APIs.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.2 Step 1 - User Action</h1>
+
+          <p>
+            The lifecycle starts when the user performs an action. Examples:
+          </p>
+
+          <ul>
+            <li>Click Login</li>
+
+            <li>Register</li>
+
+            <li>Search Products</li>
+
+            <li>Add to Cart</li>
+
+            <li>Upload Image</li>
+          </ul>
+
+          <p>The frontend prepares an HTTP request.</p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.3 Step 2 - Browser Sends Request</h1>
+
+          <p>
+            The browser (or React application) sends an HTTP request to the
+            backend.
+          </p>
+
+          <pre><code>
+
+POST /login
+
+Headers
+
+Body
+
+</code></pre>
+
+          <p>The request contains:</p>
+
+          <ul>
+            <li>HTTP Method</li>
+
+            <li>URL</li>
+
+            <li>Headers</li>
+
+            <li>Body (if required)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.4 Step 3 - Express Receives the Request</h1>
+
+          <p>
+            The Express server receives the incoming request and looks for a
+            matching route.
+          </p>
+
+          <pre><code>
+
+app.post("/login", loginUser);
+
+</code></pre>
+
+          <p>
+            If the route exists, Express forwards the request to the next step.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.5 Step 4 - Middleware Executes</h1>
+
+          <p>
+            Before reaching the controller, middleware can process the request.
+            Common middleware tasks:
+          </p>
+
+          <ul>
+            <li>Authentication</li>
+
+            <li>Authorization</li>
+
+            <li>Validation</li>
+
+            <li>Logging</li>
+
+            <li>Error Handling</li>
+
+            <li>Parsing JSON</li>
+          </ul>
+
+          <pre><code>
+
+Client
+
+↓
+
+Middleware
+
+↓
+
+Controller
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.6 Step 5 - Controller</h1>
+
+          <p>
+            The controller receives the request and decides what needs to be
+            done. It does not directly interact with the database. Instead, it
+            calls the service or model.
+          </p>
+
+          <pre><code>
+
+loginUser(req, res)
+
+↓
+
+Validate Request
+
+↓
+
+Call Service
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.7 Step 6 - Business Logic (Service)</h1>
+
+          <p>
+            The service contains the application's business logic. Examples:
+          </p>
+
+          <ul>
+            <li>Verify Password</li>
+
+            <li>Generate JWT</li>
+
+            <li>Calculate Price</li>
+
+            <li>Apply Discount</li>
+
+            <li>Check Stock</li>
+          </ul>
+
+          <p>
+            Keeping business logic separate makes the code easier to maintain.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.8 Step 7 - Database Operation</h1>
+
+          <p>
+            The backend communicates with the database to perform CRUD
+            operations.
+          </p>
+
+          <pre><code>
+
+MongoDB
+
+↓
+
+Find User
+
+↓
+
+Create User
+
+↓
+
+Update User
+
+↓
+
+Delete User
+
+</code></pre>
+
+          <p>The database returns the requested data to the backend.</p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.9 Step 8 - Server Sends Response</h1>
+
+          <p>
+            After processing the request, the backend returns an HTTP response.
+          </p>
+
+          <pre><code>
+
+Status : 200 OK
+
+{
+   "success": true,
+   "message": "Login Successful",
+   "accessToken": "JWT_TOKEN"
+}
+
+</code></pre>
+
+          <p>The browser receives the response and updates the UI.</p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.10 Real Login Flow</h1>
+
+          <pre><code>
+
+User Clicks Login
+
+↓
+
+POST /login
+
+↓
+
+Express Route
+
+↓
+
+Validation Middleware
+
+↓
+
+Controller
+
+↓
+
+Find User in MongoDB
+
+↓
+
+Compare Password
+
+↓
+
+Generate JWT
+
+↓
+
+Send Cookie / Token
+
+↓
+
+200 OK
+
+↓
+
+Frontend Stores Token
+
+↓
+
+User Logged In
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.11 Complete MERN Architecture</h1>
+
+          <pre><code>
+
+React Frontend
+
+↓
+
+Axios / Fetch
+
+↓
+
+Express Server
+
+↓
+
+Routes
+
+↓
+
+Middleware
+
+↓
+
+Controllers
+
+↓
+
+Services
+
+↓
+
+Mongoose Models
+
+↓
+
+MongoDB
+
+↓
+
+JSON Response
+
+↓
+
+React UI Updates
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.12 Best Practices</h1>
+
+          <div class="tip">
+            <ul>
+              <li>✅ Keep Controllers thin.</li>
+
+              <li>✅ Put business logic inside Services.</li>
+
+              <li>✅ Use Middleware for reusable tasks.</li>
+
+              <li>✅ Validate all incoming data.</li>
+
+              <li>✅ Return proper HTTP status codes.</li>
+
+              <li>✅ Handle errors using a Global Error Handler.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.13 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Writing database queries directly inside routes.</li>
+
+              <li>❌ Mixing business logic with controllers.</li>
+
+              <li>❌ Skipping validation.</li>
+
+              <li>❌ Returning inconsistent JSON responses.</li>
+
+              <li>❌ Not handling errors properly.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.14 Interview Questions</h1>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Explain the complete request lifecycle in a MERN
+              application.
+            </p>
+
+            <p>
+              The browser sends an HTTP request to the Express server. The
+              request passes through routes and middleware, reaches the
+              controller, where business logic is executed. The backend
+              interacts with MongoDB if needed, then sends an HTTP response back
+              to the client.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Why do we use Middleware before Controllers?</p>
+
+            <p>
+              Middleware performs common tasks like authentication, validation,
+              logging, and request parsing before the controller handles the
+              request.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Why should business logic be separated from controllers?
+            </p>
+
+            <p>
+              Separating business logic improves code readability, reusability,
+              testing, and maintainability.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Which layer communicates with MongoDB?</p>
+
+            <p>
+              The Service/Model layer communicates with MongoDB using Mongoose.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>📖 Chapter 2 Summary</h1>
+
+          <div class="note">
+            <ul>
+              <li>
+                ✅ Understood how the Internet, Client, and Server communicate.
+              </li>
+
+              <li>
+                ✅ Learned IP Address, Domain Name, DNS, and URL structure.
+              </li>
+
+              <li>✅ Understood HTTP, HTTPS, and HTTP Methods.</li>
+
+              <li>✅ Learned HTTP Requests, Responses, Headers, and Body.</li>
+
+              <li>✅ Understood HTTP Status Codes and their usage.</li>
+
+              <li>✅ Learned REST APIs and RESTful principles.</li>
+
+              <li>✅ Understood JSON and why APIs use it.</li>
+
+              <li>✅ Learned API testing using Postman.</li>
+
+              <li>✅ Understood the complete Backend Request Lifecycle.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14 Complete Backend Request Lifecycle</h1>
+
+          <p>
+            Whenever a user performs an action on a website (login, register,
+            fetch products, upload a file, etc.), the request travels through
+            several layers before a response is returned. Understanding this
+            complete lifecycle is one of the most important concepts in backend
+            development.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              The Request Lifecycle is the complete journey of an HTTP request
+              from the client to the server, database, and back to the client.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.1 Complete Flow</h1>
+
+          <pre><code>
+
+User
+
+↓
+
+Browser / React App
+
+↓
+
+HTTP Request
+
+↓
+
+Express Server
+
+↓
+
+Route
+
+↓
+
+Middleware
+
+↓
+
+Controller
+
+↓
+
+Service (Business Logic)
+
+↓
+
+Database (MongoDB)
+
+↓
+
+Controller
+
+↓
+
+HTTP Response
+
+↓
+
+Browser
+
+↓
+
+User
+
+</code></pre>
+
+          <div class="tip">
+            <h3>💡 Remember</h3>
+
+            <p>
+              Every API request follows this flow, whether it's Login, Register,
+              Product APIs, or Payment APIs.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.2 Step 1 - User Action</h1>
+
+          <p>
+            The lifecycle starts when the user performs an action. Examples:
+          </p>
+
+          <ul>
+            <li>Click Login</li>
+
+            <li>Register</li>
+
+            <li>Search Products</li>
+
+            <li>Add to Cart</li>
+
+            <li>Upload Image</li>
+          </ul>
+
+          <p>The frontend prepares an HTTP request.</p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.3 Step 2 - Browser Sends Request</h1>
+
+          <p>
+            The browser (or React application) sends an HTTP request to the
+            backend.
+          </p>
+
+          <pre><code>
+
+POST /login
+
+Headers
+
+Body
+
+</code></pre>
+
+          <p>The request contains:</p>
+
+          <ul>
+            <li>HTTP Method</li>
+
+            <li>URL</li>
+
+            <li>Headers</li>
+
+            <li>Body (if required)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.4 Step 3 - Express Receives the Request</h1>
+
+          <p>
+            The Express server receives the incoming request and looks for a
+            matching route.
+          </p>
+
+          <pre><code>
+
+app.post("/login", loginUser);
+
+</code></pre>
+
+          <p>
+            If the route exists, Express forwards the request to the next step.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.5 Step 4 - Middleware Executes</h1>
+
+          <p>
+            Before reaching the controller, middleware can process the request.
+            Common middleware tasks:
+          </p>
+
+          <ul>
+            <li>Authentication</li>
+
+            <li>Authorization</li>
+
+            <li>Validation</li>
+
+            <li>Logging</li>
+
+            <li>Error Handling</li>
+
+            <li>Parsing JSON</li>
+          </ul>
+
+          <pre><code>
+
+Client
+
+↓
+
+Middleware
+
+↓
+
+Controller
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.6 Step 5 - Controller</h1>
+
+          <p>
+            The controller receives the request and decides what needs to be
+            done. It does not directly interact with the database. Instead, it
+            calls the service or model.
+          </p>
+
+          <pre><code>
+
+loginUser(req, res)
+
+↓
+
+Validate Request
+
+↓
+
+Call Service
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.7 Step 6 - Business Logic (Service)</h1>
+
+          <p>
+            The service contains the application's business logic. Examples:
+          </p>
+
+          <ul>
+            <li>Verify Password</li>
+
+            <li>Generate JWT</li>
+
+            <li>Calculate Price</li>
+
+            <li>Apply Discount</li>
+
+            <li>Check Stock</li>
+          </ul>
+
+          <p>
+            Keeping business logic separate makes the code easier to maintain.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.8 Step 7 - Database Operation</h1>
+
+          <p>
+            The backend communicates with the database to perform CRUD
+            operations.
+          </p>
+
+          <pre><code>
+
+MongoDB
+
+↓
+
+Find User
+
+↓
+
+Create User
+
+↓
+
+Update User
+
+↓
+
+Delete User
+
+</code></pre>
+
+          <p>The database returns the requested data to the backend.</p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.9 Step 8 - Server Sends Response</h1>
+
+          <p>
+            After processing the request, the backend returns an HTTP response.
+          </p>
+
+          <pre><code>
+
+Status : 200 OK
+
+{
+   "success": true,
+   "message": "Login Successful",
+   "accessToken": "JWT_TOKEN"
+}
+
+</code></pre>
+
+          <p>The browser receives the response and updates the UI.</p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.10 Real Login Flow</h1>
+
+          <pre><code>
+
+User Clicks Login
+
+↓
+
+POST /login
+
+↓
+
+Express Route
+
+↓
+
+Validation Middleware
+
+↓
+
+Controller
+
+↓
+
+Find User in MongoDB
+
+↓
+
+Compare Password
+
+↓
+
+Generate JWT
+
+↓
+
+Send Cookie / Token
+
+↓
+
+200 OK
+
+↓
+
+Frontend Stores Token
+
+↓
+
+User Logged In
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.11 Complete MERN Architecture</h1>
+
+          <pre><code>
+
+React Frontend
+
+↓
+
+Axios / Fetch
+
+↓
+
+Express Server
+
+↓
+
+Routes
+
+↓
+
+Middleware
+
+↓
+
+Controllers
+
+↓
+
+Services
+
+↓
+
+Mongoose Models
+
+↓
+
+MongoDB
+
+↓
+
+JSON Response
+
+↓
+
+React UI Updates
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.12 Best Practices</h1>
+
+          <div class="tip">
+            <ul>
+              <li>✅ Keep Controllers thin.</li>
+
+              <li>✅ Put business logic inside Services.</li>
+
+              <li>✅ Use Middleware for reusable tasks.</li>
+
+              <li>✅ Validate all incoming data.</li>
+
+              <li>✅ Return proper HTTP status codes.</li>
+
+              <li>✅ Handle errors using a Global Error Handler.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.13 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Writing database queries directly inside routes.</li>
+
+              <li>❌ Mixing business logic with controllers.</li>
+
+              <li>❌ Skipping validation.</li>
+
+              <li>❌ Returning inconsistent JSON responses.</li>
+
+              <li>❌ Not handling errors properly.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>2.14.14 Interview Questions</h1>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Explain the complete request lifecycle in a MERN
+              application.
+            </p>
+
+            <p>
+              The browser sends an HTTP request to the Express server. The
+              request passes through routes and middleware, reaches the
+              controller, where business logic is executed. The backend
+              interacts with MongoDB if needed, then sends an HTTP response back
+              to the client.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Why do we use Middleware before Controllers?</p>
+
+            <p>
+              Middleware performs common tasks like authentication, validation,
+              logging, and request parsing before the controller handles the
+              request.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Why should business logic be separated from controllers?
+            </p>
+
+            <p>
+              Separating business logic improves code readability, reusability,
+              testing, and maintainability.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Which layer communicates with MongoDB?</p>
+
+            <p>
+              The Service/Model layer communicates with MongoDB using Mongoose.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>📖 Chapter 2 Summary</h1>
+
+          <div class="note">
+            <ul>
+              <li>
+                ✅ Understood how the Internet, Client, and Server communicate.
+              </li>
+
+              <li>
+                ✅ Learned IP Address, Domain Name, DNS, and URL structure.
+              </li>
+
+              <li>✅ Understood HTTP, HTTPS, and HTTP Methods.</li>
+
+              <li>✅ Learned HTTP Requests, Responses, Headers, and Body.</li>
+
+              <li>✅ Understood HTTP Status Codes and their usage.</li>
+
+              <li>✅ Learned REST APIs and RESTful principles.</li>
+
+              <li>✅ Understood JSON and why APIs use it.</li>
+
+              <li>✅ Learned API testing using Postman.</li>
+
+              <li>✅ Understood the complete Backend Request Lifecycle.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

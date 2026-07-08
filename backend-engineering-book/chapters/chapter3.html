@@ -1,0 +1,828 @@
+<!-- ================================= -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Chapter 1 - Backend Introduction</title>
+
+    <link rel="stylesheet" href="../style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="content">
+      <section>
+        <div class="chapter">
+          <h1>3.1 Introduction to Node.js</h1>
+
+          <p>
+            Node.js is a JavaScript runtime environment that allows us to run
+            JavaScript code outside the browser. Before Node.js, JavaScript
+            could only run inside web browsers like Chrome, Firefox, and Edge.
+            Node.js made it possible to build backend applications using
+            JavaScript.
+          </p>
+
+          <div class="note">
+            <h3>📌 Definition</h3>
+
+            <p>
+              Node.js is a JavaScript runtime built on Google's V8 JavaScript
+              Engine that allows developers to build fast and scalable
+              server-side applications.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.1.1 Why Do We Need Node.js?</h1>
+
+          <p>
+            Earlier, JavaScript was only used for frontend development. If you
+            wanted to build a backend, you had to learn another language like
+            Java, PHP, Python, or C#. Node.js solved this problem by allowing
+            developers to use JavaScript for both frontend and backend.
+          </p>
+
+          <pre><code>
+
+Before Node.js
+
+Frontend  → JavaScript
+
+Backend   → Java / PHP / Python
+
+</code></pre>
+
+          <br />
+
+          <pre><code>
+
+After Node.js
+
+Frontend  → JavaScript
+
+Backend   → JavaScript
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.1.2 Where is Node.js Used?</h1>
+
+          <p>Node.js is commonly used for building:</p>
+
+          <ul>
+            <li>REST APIs</li>
+
+            <li>Backend Servers</li>
+
+            <li>Real-time Chat Applications</li>
+
+            <li>Authentication Systems</li>
+
+            <li>Streaming Applications</li>
+
+            <li>Microservices</li>
+
+            <li>Real-time Dashboards</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.1.3 Node.js vs Browser JavaScript</h1>
+
+          <table>
+            <tr>
+              <th>Browser JavaScript</th>
+
+              <th>Node.js</th>
+            </tr>
+
+            <tr>
+              <td>Runs inside Browser</td>
+
+              <td>Runs outside Browser</td>
+            </tr>
+
+            <tr>
+              <td>Manipulates HTML & CSS</td>
+
+              <td>Builds Backend Applications</td>
+            </tr>
+
+            <tr>
+              <td>Uses DOM</td>
+
+              <td>No DOM</td>
+            </tr>
+
+            <tr>
+              <td>No Direct File Access</td>
+
+              <td>Can Read & Write Files</td>
+            </tr>
+
+            <tr>
+              <td>No Database Access</td>
+
+              <td>Can Connect to Databases</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.1.4 Advantages of Node.js</h1>
+
+          <div class="cards">
+            <div class="card">
+              <h3>Fast</h3>
+
+              <p>Uses Google's V8 Engine for high performance.</p>
+            </div>
+
+            <div class="card">
+              <h3>Single Language</h3>
+
+              <p>Use JavaScript for both frontend and backend.</p>
+            </div>
+
+            <div class="card">
+              <h3>Asynchronous</h3>
+
+              <p>
+                Handles multiple requests efficiently using non-blocking I/O.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Huge Ecosystem</h3>
+
+              <p>Provides millions of packages through npm.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.1.5 Simple Example</h1>
+
+          <p>A simple Node.js program:</p>
+
+          <pre><code>
+
+console.log("Hello Node.js");
+
+</code></pre>
+
+          <p>Run it using:</p>
+
+          <pre><code>
+
+node app.js
+
+</code></pre>
+
+          <p>Output:</p>
+
+          <pre><code>
+
+Hello Node.js
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.1.6 How Node.js Fits in MERN Stack</h1>
+
+          <pre><code>
+
+React (Frontend)
+
+↓
+
+HTTP Request
+
+↓
+
+Node.js + Express
+
+↓
+
+MongoDB
+
+↓
+
+JSON Response
+
+↓
+
+React
+
+</code></pre>
+
+          <p>
+            Node.js provides the runtime environment, while Express helps us
+            build APIs on top of Node.js.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.1.7 Best Practices</h1>
+
+          <div class="tip">
+            <ul>
+              <li>✅ Use Node.js for backend development.</li>
+
+              <li>✅ Use npm to manage packages.</li>
+
+              <li>✅ Keep Node.js updated to the latest LTS version.</li>
+
+              <li>✅ Use asynchronous APIs whenever possible.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.1.8 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Thinking Node.js is a programming language.</li>
+
+              <li>❌ Thinking Node.js is a framework.</li>
+
+              <li>❌ Confusing Node.js with Express.js.</li>
+
+              <li>
+                ❌ Assuming browser APIs like <code>document</code> or
+                <code>window</code> are available in Node.js.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.1.9 Interview Questions</h1>
+
+          <div class="interview">
+            <p><b>Q.</b> What is Node.js?</p>
+
+            <p>
+              Node.js is a JavaScript runtime environment built on Google's V8
+              Engine that allows JavaScript to run outside the browser.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Is Node.js a programming language?</p>
+
+            <p>
+              No. JavaScript is the programming language, and Node.js is the
+              runtime environment that executes JavaScript outside the browser.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> What is the difference between Node.js and Express.js?
+            </p>
+
+            <p>
+              Node.js is the runtime environment, while Express.js is a web
+              framework built on top of Node.js for creating servers and APIs.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> Can Node.js access files and databases?</p>
+
+            <p>
+              Yes. Unlike browser JavaScript, Node.js can read/write files and
+              connect to databases like MongoDB or MySQL.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2 How Node.js Works</h1>
+
+          <p>
+            Node.js is fast because it combines the <b>V8 Engine</b>, the
+            <b>Node.js Runtime</b>, the <b>Event Loop</b>, and
+            <b>Non-Blocking I/O</b>. Together, these components allow Node.js to
+            handle thousands of requests efficiently.
+          </p>
+
+          <div class="note">
+            <h3>📌 Key Idea</h3>
+
+            <p>
+              Node.js uses a single thread with an Event Loop to efficiently
+              handle asynchronous operations without blocking other requests.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2.1 V8 JavaScript Engine</h1>
+
+          <p>
+            The <b>V8 Engine</b> is Google's JavaScript engine used in Chrome.
+            Node.js uses this engine to execute JavaScript code.
+          </p>
+
+          <pre><code>
+
+JavaScript Code
+
+↓
+
+V8 Engine
+
+↓
+
+Machine Code
+
+↓
+
+CPU Executes
+
+</code></pre>
+
+          <p>
+            Instead of interpreting JavaScript line by line, V8 compiles it into
+            machine code, making execution much faster.
+          </p>
+
+          <div class="tip">
+            <h3>💡 Remember</h3>
+
+            <p>
+              <b>Node.js is not the V8 Engine.</b><br />
+
+              Node.js uses the V8 Engine internally.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2.2 What is Node.js Runtime?</h1>
+
+          <p>
+            The V8 Engine can only execute JavaScript. Node.js adds extra
+            features that JavaScript alone doesn't have.
+          </p>
+
+          <p>The Node.js Runtime provides APIs for:</p>
+
+          <ul>
+            <li>Reading and Writing Files</li>
+
+            <li>Creating HTTP Servers</li>
+
+            <li>Working with Operating System</li>
+
+            <li>Networking</li>
+
+            <li>Timers</li>
+          </ul>
+
+          <pre><code>
+
+Node.js Runtime
+
+↓
+
+V8 Engine
+
++
+
+Node APIs
+
++
+
+Event Loop
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2.3 Single Thread</h1>
+
+          <p>
+            Node.js executes JavaScript code on a <b>single main thread</b>.
+            This means only one JavaScript instruction runs at a time.
+          </p>
+
+          <pre><code>
+
+Main Thread
+
+↓
+
+Task 1
+
+↓
+
+Task 2
+
+↓
+
+Task 3
+
+</code></pre>
+
+          <p>
+            Even though JavaScript runs on one thread, Node.js can still handle
+            many users simultaneously because of asynchronous programming.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2.4 Blocking vs Non-Blocking</h1>
+
+          <table>
+            <tr>
+              <th>Blocking</th>
+
+              <th>Non-Blocking</th>
+            </tr>
+
+            <tr>
+              <td>Waits for a task to finish.</td>
+
+              <td>Doesn't wait.</td>
+            </tr>
+
+            <tr>
+              <td>Stops execution.</td>
+
+              <td>Continues executing other tasks.</td>
+            </tr>
+
+            <tr>
+              <td>Slower for many users.</td>
+
+              <td>Better for concurrent users.</td>
+            </tr>
+          </table>
+
+          <p>Example:</p>
+
+          <pre><code>
+
+// Blocking
+
+Read File
+
+↓
+
+Wait
+
+↓
+
+Next Task
+
+</code></pre>
+
+          <br />
+
+          <pre><code>
+
+// Non-Blocking
+
+Read File
+
+↓
+
+Continue Other Work
+
+↓
+
+File Finished
+
+↓
+
+Callback Executes
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2.5 Event Loop</h1>
+
+          <p>
+            The Event Loop is the heart of Node.js. It continuously checks
+            whether asynchronous tasks have completed. If they have, it executes
+            their callbacks.
+          </p>
+
+          <pre><code>
+
+Call Stack
+
+↓
+
+Event Loop
+
+↓
+
+Callback Queue
+
+↓
+
+Execute Callback
+
+</code></pre>
+
+          <p>
+            The Event Loop allows a single thread to manage many asynchronous
+            operations efficiently.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2.6 Non-Blocking I/O</h1>
+
+          <p>I/O means <b>Input/Output</b> operations such as:</p>
+
+          <ul>
+            <li>Reading Files</li>
+
+            <li>Writing Files</li>
+
+            <li>Database Queries</li>
+
+            <li>Network Requests</li>
+
+            <li>API Calls</li>
+          </ul>
+
+          <p>
+            Node.js performs these operations asynchronously so the main thread
+            remains free.
+          </p>
+
+          <pre><code>
+
+Database Query
+
+↓
+
+Node Doesn't Wait
+
+↓
+
+Handles Other Requests
+
+↓
+
+Database Responds
+
+↓
+
+Callback Executes
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2.7 Complete Flow</h1>
+
+          <pre><code>
+
+Client Request
+
+↓
+
+Node.js
+
+↓
+
+V8 Executes JavaScript
+
+↓
+
+Async Task?
+
+↓
+
+Yes
+
+↓
+
+OS / libuv Handles Task
+
+↓
+
+Main Thread Continues
+
+↓
+
+Task Completes
+
+↓
+
+Event Loop
+
+↓
+
+Callback Executes
+
+↓
+
+Response Sent
+
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2.8 Why is Node.js Fast?</h1>
+
+          <div class="cards">
+            <div class="card">
+              <h3>V8 Engine</h3>
+
+              <p>Compiles JavaScript into machine code.</p>
+            </div>
+
+            <div class="card">
+              <h3>Event Loop</h3>
+
+              <p>Efficiently handles asynchronous callbacks.</p>
+            </div>
+
+            <div class="card">
+              <h3>Non-Blocking I/O</h3>
+
+              <p>
+                Doesn't stop the main thread while waiting for I/O operations.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Single Thread</h3>
+
+              <p>Low overhead and efficient request handling.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2.9 Common Mistakes</h1>
+
+          <div class="warning">
+            <ul>
+              <li>❌ Thinking Node.js creates one thread per user.</li>
+
+              <li>❌ Assuming Node.js performs all work on the main thread.</li>
+
+              <li>❌ Confusing the V8 Engine with the Event Loop.</li>
+
+              <li>❌ Thinking asynchronous means multi-threaded JavaScript.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================= -->
+
+      <section>
+        <div class="chapter">
+          <h1>3.2.10 Interview Questions</h1>
+
+          <div class="interview">
+            <p><b>Q.</b> Why is Node.js fast?</p>
+
+            <p>
+              Because it uses the V8 Engine, Event Loop, and Non-Blocking I/O to
+              efficiently handle many requests.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What is the V8 Engine?</p>
+
+            <p>
+              The V8 Engine is Google's JavaScript engine that compiles
+              JavaScript into machine code for faster execution.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What is the Event Loop?</p>
+
+            <p>
+              The Event Loop continuously checks for completed asynchronous
+              tasks and executes their callbacks.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p><b>Q.</b> What is Non-Blocking I/O?</p>
+
+            <p>
+              Non-Blocking I/O allows Node.js to continue executing other tasks
+              while waiting for I/O operations like file reading or database
+              queries.
+            </p>
+          </div>
+
+          <div class="interview">
+            <p>
+              <b>Q.</b> Does Node.js use multiple threads to execute JavaScript?
+            </p>
+
+            <p>
+              No. JavaScript execution runs on a single main thread. Some
+              background operations are handled outside the main thread, and
+              their results are processed through the Event Loop.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
