@@ -41,7 +41,7 @@ passport.use(
         provider_id: profile.id,
       });
       console.log(newUser);
-      return newUser;
+      return cb(null, newUser);
     },
   ),
 );
