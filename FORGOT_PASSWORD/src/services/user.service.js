@@ -19,4 +19,23 @@ const registerService = async (data) => {
   return { user, token };
 };
 
-module.exports = registerService;
+const loginService = async (data) => {
+  const { email, password } = data;
+
+  if (!email || !password) throw new ApiError(400, "All fields are required");
+
+  const user = await User.findOne({ email });
+
+  if (!user) throw new ApiError(400, "wrong credentials");
+
+  const isMatch = await user.comparePassword(password);
+  if (!isMatch) throw new ApiError(400, "Invalid credentials");
+
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "10m",
+  });
+
+  return { user, token };
+};
+
+module.exports = { registerService, loginService };
