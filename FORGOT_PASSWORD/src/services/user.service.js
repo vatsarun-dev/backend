@@ -1,7 +1,6 @@
 const ApiError = require("../utils/ApiError");
 const User = require("../models/user.model");
-const jwt = require("jsonwebtoken");
-
+const generateToken = require("../utils/generateToken");
 const registerService = async (data) => {
   const { name, email, password } = data;
 
@@ -12,9 +11,7 @@ const registerService = async (data) => {
   if (existingUser) throw new ApiError(400, "User already exist");
 
   const user = await User.create({ name, email, password });
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "10m",
-  });
+  const token = generateToken(user._id);
 
   return { user, token };
 };
@@ -31,9 +28,7 @@ const loginService = async (data) => {
   const isMatch = await user.comparePassword(password);
   if (!isMatch) throw new ApiError(400, "Invalid credentials");
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "10m",
-  });
+  const token = generateToken(user._id);
 
   return { user, token };
 };
