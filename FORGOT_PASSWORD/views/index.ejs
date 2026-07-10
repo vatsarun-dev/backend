@@ -6,9 +6,10 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>hello world</h1>
-    <h1>Hello user</h1>
-    <p>please click this link to change your password</p>
-    <a href="link">Click here</a>
+    <form action="http://localhost:5000/api/auth/forgot_password" method="POST">
+      <h1>Enter your mail</h1>
+      <input name="email" type="text" placeholder="enter your mail" />
+      <button>submit</button>
+    </form>
   </body>
 </html>

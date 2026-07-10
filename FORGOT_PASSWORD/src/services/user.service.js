@@ -44,9 +44,9 @@ const forgotPasswordService = async (data) => {
 
   const rowToken = generateRawToken(isExist._id);
 
-  const link = `http://localhost:3000/api/auth/reset-password/${rowToken}`;
+  const link = `http://localhost:5000/api/auth/reset-password/${rowToken}`;
 
-  const tempMail = tempMail(isExist.user, link);
+  const tempMail = tempMail(isExist.name, link);
 
   await sendEmail(process.env.receiverMail, "Forget Password", tempMail);
 };

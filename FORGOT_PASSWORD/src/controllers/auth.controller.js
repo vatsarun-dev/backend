@@ -33,9 +33,9 @@ const loginController = asyncHandler(async (req, res) => {
 });
 
 const forgotPasswordController = asyncHandler(async (req, res) => {
-  const result = await forgotPasswordService(req.body);
-  res.send("ok");
-  res.status(200).json({
+  await forgotPasswordService(req.body);
+
+  return res.status(200).json({
     message: "Link send",
   });
 });
