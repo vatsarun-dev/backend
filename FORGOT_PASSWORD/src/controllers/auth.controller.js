@@ -1,4 +1,9 @@
-const { registerService, loginService } = require("../services/user.service");
+const {
+  registerService,
+  loginService,
+  forgotPasswordService,
+  resetPasswordLinkService,
+} = require("../services/user.service");
 const asyncHandler = require("../utils/asyncHandler");
 const registerController = asyncHandler(async (req, res) => {
   const result = await registerService(req.body);
@@ -27,7 +32,21 @@ const loginController = asyncHandler(async (req, res) => {
   });
 });
 
+const forgotPasswordController = asyncHandler(async (req, res) => {
+  const result = await forgotPasswordService(req.body);
+  res.send("ok");
+  res.status(200).json({
+    message: "Link send",
+  });
+});
+
+const resetPasswordLinkController = asyncHandler(async (req, res) => {
+  const result = await resetPasswordLinkService(req.par);
+  res.send("ok");
+});
 module.exports = {
   registerController,
   loginController,
+  forgotPasswordController,
+  resetPasswordLinkController,
 };

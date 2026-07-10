@@ -1,6 +1,8 @@
 const ApiError = require("../utils/ApiError");
 const User = require("../models/user.model");
-const generateToken = require("../utils/generateToken");
+const { generateToken, generateRawToken } = require("../utils/generateToken");
+const sendEmail = require("../config/nodemailer");
+const tempMail = require("../utils/tempMail");
 const registerService = async (data) => {
   const { name, email, password } = data;
 
@@ -33,4 +35,26 @@ const loginService = async (data) => {
   return { user, token };
 };
 
-module.exports = { registerService, loginService };
+const forgotPasswordService = async (data) => {
+  let { email } = data;
+  if (!email) throw new ApiError(400, "user not register");
+
+  const isExist = await User.findOne({ email });
+  if (!isExist) throw new ApiError(400, "user not register");
+
+  const rowToken = generateRawToken(isExist._id);
+
+  const link = `http://localhost:3000/api/auth/reset-password/${rowToken}`;
+
+  const tempMail = tempMail(isExist.user, link);
+
+  await sendEmail(process.env.receiverMail, "Forget Password", tempMail);
+};
+
+const resetPasswordLinkService = async (data) => {};
+module.exports = {
+  registerService,
+  loginService,
+  forgotPasswordService,
+  resetPasswordLinkService,
+};
