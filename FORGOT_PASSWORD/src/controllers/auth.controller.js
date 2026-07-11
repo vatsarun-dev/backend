@@ -3,6 +3,7 @@ const {
   loginService,
   forgotPasswordService,
   resetPasswordLinkService,
+  updatePasswordService,
 } = require("../services/user.service");
 const asyncHandler = require("../utils/asyncHandler");
 const registerController = asyncHandler(async (req, res) => {
@@ -48,12 +49,20 @@ const forgotPasswordController = asyncHandler(async (req, res) => {
 });
 
 const resetPasswordLinkController = asyncHandler(async (req, res) => {
-  const result = await resetPasswordLinkService(req.par);
-  res.send("ok");
+  const result = await resetPasswordLinkService(req.params.token);
+
+  res.render("update", { userId: result._id });
+});
+
+const updatePasswordController = asyncHandler(async (req, res) => {
+  const result = updatePasswordService(req.body.password, req.params.userId);
+
+  return res.status(200).json({ message: "password update successful" });
 });
 module.exports = {
   registerController,
   loginController,
   forgotPasswordController,
   resetPasswordLinkController,
+  updatePasswordController,
 };

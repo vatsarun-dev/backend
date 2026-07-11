@@ -3,6 +3,8 @@ const User = require("../models/user.model");
 const { generateToken, generateRawToken } = require("../utils/generateToken");
 const sendEmail = require("../config/nodemailer");
 const tempMail = require("../utils/tempMail");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const registerService = async (data) => {
   const { name, email, password } = data;
 
@@ -52,10 +54,35 @@ const forgotPasswordService = async (data) => {
   await sendEmail(isExist.email, "Forget Password", sendMail);
 };
 
-const resetPasswordLinkService = async (data) => {};
+const resetPasswordLinkService = async (data) => {
+  if (!data) throw new ApiError(400, "There is no token");
+
+  const decode = jwt.verify(data, process.env.RAWTOKEN);
+
+  const user = await User.findById(decode.id);
+
+  return user;
+};
+
+const updatePasswordService = async (password, id) => {
+  const hashPassword = await bcrypt.hash(password, 10);
+  if (!password) throw new ApiError(400, "Enter your password");
+
+  const updatePassword = await User.findByIdAndUpdate(
+    id,
+    {
+      password: hashPassword,
+    },
+    { new: true },
+  );
+
+  return updatePassword;
+};
 module.exports = {
   registerService,
   loginService,
   forgotPasswordService,
   resetPasswordLinkService,
+
+  updatePasswordService,
 };
