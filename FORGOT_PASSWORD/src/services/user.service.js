@@ -37,18 +37,19 @@ const loginService = async (data) => {
 
 const forgotPasswordService = async (data) => {
   let { email } = data;
-  if (!email) throw new ApiError(400, "user not register");
+  console.log(email);
+  if (!email) throw new ApiError(400, "email not found");
 
   const isExist = await User.findOne({ email });
   if (!isExist) throw new ApiError(400, "user not register");
 
   const rowToken = generateRawToken(isExist._id);
 
-  const link = `http://localhost:5000/api/auth/reset-password/${rowToken}`;
+  const link = `http://localhost:3000/api/auth/reset-password/${rowToken}`;
 
-  const tempMail = tempMail(isExist.name, link);
+  const sendMail = tempMail(isExist.name, link);
 
-  await sendEmail(process.env.receiverMail, "Forget Password", tempMail);
+  await sendEmail(isExist.email, "Forget Password", sendMail);
 };
 
 const resetPasswordLinkService = async (data) => {};
