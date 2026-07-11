@@ -5,6 +5,8 @@ const sendEmail = require("../config/nodemailer");
 const tempMail = require("../utils/tempMail");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const cacheInstance = require("../config/caching");
+
 const registerService = async (data) => {
   const { name, email, password } = data;
 
@@ -78,11 +80,24 @@ const updatePasswordService = async (password, id) => {
 
   return updatePassword;
 };
+
+const userLogoutService = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) throw new ApiError(404, "provide token");
+
+    await cacheInstance.set(token, "blacklist");
+    res.clearCookie("token");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   registerService,
   loginService,
   forgotPasswordService,
   resetPasswordLinkService,
-
+  userLogoutService,
   updatePasswordService,
 };

@@ -4,11 +4,13 @@ const {
   forgotPasswordService,
   resetPasswordLinkService,
   updatePasswordService,
+  userLogoutService,
 } = require("../services/user.service");
 const asyncHandler = require("../utils/asyncHandler");
 const registerController = asyncHandler(async (req, res) => {
   const result = await registerService(req.body);
   console.log(result);
+  res.cookie("token", result.token);
   res.status(201).json({
     message: "User registered successfully",
     token: result.token,
@@ -22,6 +24,8 @@ const registerController = asyncHandler(async (req, res) => {
 
 const loginController = asyncHandler(async (req, res) => {
   const result = await loginService(req.body);
+  res.cookie("token", result.token);
+
   res.status(200).json({
     message: "user login successful",
     token: result.token,
@@ -59,10 +63,20 @@ const updatePasswordController = asyncHandler(async (req, res) => {
 
   return res.status(200).json({ message: "password update successful" });
 });
+
+const userLogoutController = asyncHandler(async (req, res) => {
+  try {
+    userLogoutService(req, res);
+    res.send("cookie ht gyi");
+  } catch (error) {
+    console.log(error);
+  }
+});
 module.exports = {
   registerController,
   loginController,
   forgotPasswordController,
   resetPasswordLinkController,
   updatePasswordController,
+  userLogoutController,
 };
