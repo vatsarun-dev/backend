@@ -6,6 +6,7 @@ const notesController = async (req, res) => {
     const newUser = await notesModel.create({
       title,
       description,
+      id: req.user.email,
     });
 
     return res.status(200).json({
@@ -23,7 +24,9 @@ const notesController = async (req, res) => {
 
 const readController = async (req, res) => {
   try {
-    const notes = await notesModel.find();
+    const email = req.user.id;
+
+    const notes = await notesModel.findById({ id: email });
     return res.status(200).json({
       message: "all notes",
       notes,
