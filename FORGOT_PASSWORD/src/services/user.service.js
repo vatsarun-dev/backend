@@ -82,15 +82,10 @@ const updatePasswordService = async (password, id) => {
 };
 
 const userLogoutService = async (req, res) => {
-  try {
-    const token = req.cookies.token;
-    if (!token) throw new ApiError(404, "provide token");
-
-    await cacheInstance.set(token, "blacklist");
-    res.clearCookie("token");
-  } catch (error) {
-    console.log(error);
-  }
+  const token = req.cookies.token;
+  if (!token) throw new ApiError(404, "provide token");
+  res.clearCookie("token");
+  await cacheInstance.set(token, "blacklist");
 };
 
 module.exports = {
