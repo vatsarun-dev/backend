@@ -1,4 +1,5 @@
 const userModel = require("../models/user.model");
+const bcrypt = require("bcrypt");
 const { generateJwt, comparePassword } = require("../models/user.model");
 const registerController = async (req, res) => {
   try {
@@ -52,4 +53,49 @@ const loginController = async (req, res) => {
     console.log(error);
   }
 };
-module.exports = { registerController, loginController };
+
+const getAllUserController = async (req, res) => {
+  try {
+    const user = await userModel.find();
+    return res.status(200).json({ message: "all user", user });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const userUpdateController = async (req, res) => {
+  try {
+    let { id } = req.params;
+    if (!id) throw new Error("id compulsory");
+    let { name, email, password } = req.body;
+    const hashPassword = await bcrypt.hash(password, 10);
+    const user = await userModel.findByIdAndUpdate(id, {
+      name,
+      email,
+      password: hashPassword,
+    });
+    return res.status(200).json({ message: "update user", user });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteUserController = async (req, res) => {
+  try {
+    let { id } = req.params;
+
+    if (!id) throw new Error("correct id");
+
+    const user = await userModel.findByIdAndDelete(id);
+    return res.status(200).json({ message: "update deletes" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+module.exports = {
+  registerController,
+  loginController,
+  getAllUserController,
+  userUpdateController,
+  deleteUserController,
+};
