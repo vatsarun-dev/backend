@@ -11,6 +11,21 @@ const httpServer = createServer(app);
 // THERE WE ARE CONNECTING THE HTTP SERVER WITH OUR SOCKET SERVER
 const io = new Server(httpServer);
 
+// WE ARE CREATING BUILT IN EVENT WHEN A NEW USER CONNECT WITH SOCKET
+io.on("connection", (socket) => {
+  console.log("socket is connected successfully");
+
+  socket.on("client", (msg) => {
+    console.log("Received from client:", msg);
+
+    io.emit("server", { message: msg, timestamp: new Date() });
+  });
+
+  socket.on("disconnect", () => {
+    console.log("socket disconnected successfully");
+  });
+});
+
 httpServer.listen(3000, () => {
   console.log("your app is connected");
 });
