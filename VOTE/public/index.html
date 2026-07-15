@@ -65,7 +65,14 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      const socket = io();
+      const room = prompt("Enter your room name");
+
+      //   IT WILL SEND THE ROOM NAME TO THE SOCKET SERVER
+      const socket = io({
+        query: {
+          room: room,
+        },
+      });
       document.querySelector("#yes").addEventListener("click", () => {
         socket.emit("yes-btn");
       });
