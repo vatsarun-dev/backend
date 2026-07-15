@@ -6,9 +6,62 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>hello</h1>
-    <button id="yes">yes</button>
-    <button id="no">no</button>
+    <style>
+      .bar {
+        width: 300px;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .fill {
+        width: 0%;
+        height: 100%;
+        background: transparent;
+        transition:
+          width 0.4s ease,
+          background-color 0.4s ease;
+      }
+      .mn {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        height: 729px;
+      }
+
+      .btn {
+        display: flex;
+        gap: 10px;
+      }
+
+      #yes,
+      #no {
+        padding: 10px;
+        font-size: large;
+        border-radius: 4px;
+      }
+      #yes {
+        background-color: green;
+        color: white;
+      }
+      #no {
+        background-color: red;
+        color: white;
+      }
+    </style>
+    <div class="mn">
+      <div class="bar">
+        <div class="fill"></div>
+      </div>
+
+      <div class="btn">
+        <button id="yes">yes</button>
+        <button id="no">no</button>
+      </div>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -24,6 +77,15 @@
       socket.on("vote-display", (voteCount) => {
         const { yes, no } = voteCount;
         console.log(yes, no);
+        const fill = document.querySelector(".fill");
+        const total = yes + no;
+
+        if (total === 0) return;
+
+        const percentage = (yes / total) * 100;
+
+        fill.style.width = `${percentage}%`;
+        fill.style.backgroundColor = "green";
       });
     </script>
   </body>
