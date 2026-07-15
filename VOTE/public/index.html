@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>hello</h1>
+    <button id="yes">yes</button>
+    <button id="no">no</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      document.querySelector("#yes").addEventListener("click", () => {
+        socket.emit("yes-btn");
+      });
+
+      document.querySelector("#no").addEventListener("click", () => {
+        socket.emit("no-btn");
+      });
+
+      socket.on("vote-display", (voteCount) => {
+        const { yes, no } = voteCount;
+        console.log(yes, no);
+      });
+    </script>
+  </body>
+</html>
