@@ -9,6 +9,11 @@ const envSchema = z.object({
   MONGO_URL: z.string().default(appConstant.MONGO_URL),
   NODE_ENV: z.string().default(appConstant.NODE_ENV),
   LOGGER: z.string().default(appConstant.LOGGER),
+  WINDOWMS: z.coerce.number().default(appConstant.WINDOWMS),
+  LIMIT: z.coerce.number().default(appConstant.LIMIT),
+  GOOGLE_CLIENT: z.string(),
+  GOOGLE_CALLBACK: z.string(),
+  GOOGLE_SECRET: z.string(),
 });
 
 const parsed = envSchema.safeParse(process.env);

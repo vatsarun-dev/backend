@@ -8,10 +8,7 @@ function startServer() {
   connectDB()
     .then(() => {
       app.listen(env.PORT, () => {
-        logger.info(
-          { port: env.PORT },
-          "your server is running and database is connected",
-        );
+        logger.info({ port: env.PORT }, "your server is running ");
       });
     })
     .catch((error) => {

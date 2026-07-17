@@ -3,4 +3,6 @@ export default {
   MONGO_URL: "mongodb://0.0.0.0/production",
   NODE_ENV: "development",
   LOGGER: "info",
+  WINDOWMS: 15 * 60 * 1000,
+  LIMIT: 100,
 };
