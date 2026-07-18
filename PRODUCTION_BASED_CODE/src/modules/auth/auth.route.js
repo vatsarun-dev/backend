@@ -18,4 +18,5 @@ routes.get(
   authController.GoogleCallBack.bind(authController),
 );
 
+routes.get("/", authController.getMe.bind(authController));
 export default routes;

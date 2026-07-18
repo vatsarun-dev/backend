@@ -3,6 +3,7 @@ import securityMiddlewares from "./middlewares/security.middleware.js";
 import googleOAuthMiddleware from "./middlewares/googleOAuth.middleware.js";
 import routes from "./modules/auth/auth.route.js";
 import env from "./config/env.js";
+import errorHandlerMiddleware from "./middlewares/errorHandler.middleware.js";
 import morgan from "morgan";
 
 export default function createApp() {
@@ -13,9 +14,7 @@ export default function createApp() {
     googleOAuthMiddleware(app);
     app.use("/api/user", routes);
 
-    app.use("/", (req, res) => {
-      res.send("bhai api crash hogyi");
-    });
+    app.use(errorHandlerMiddleware);
   }
 
   return app;
