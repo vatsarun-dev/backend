@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import AuthController from "./auth.controller.js";
+import asyncHandler from "../../utils/asyncHandler.js";
 const routes = Router();
 const authController = new AuthController();
 
@@ -15,8 +16,13 @@ routes.get(
 routes.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/", session: false }),
-  authController.GoogleCallBack.bind(authController),
+  asyncHandler(authController.GoogleCallBack.bind(authController)),
 );
 
-routes.get("/", authController.getMe.bind(authController));
+routes.get(
+  "/",
+  asyncHandler(
+    authController.accessTokenGenerationController.bind(authController),
+  ),
+);
 export default routes;

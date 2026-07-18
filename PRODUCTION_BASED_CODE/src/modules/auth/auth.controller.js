@@ -16,7 +16,11 @@ export default class AuthController {
     res.send("ok bhai done");
   }
 
-  async getMe() {
-    throw new error.UnAuthorized("this is not verified");
+  async accessTokenGenerationController(req, res) {
+    let { AToken } =
+      await this.userController.accessTokenGenerationService(req);
+
+    res.cookie("accessToken", AToken, app_constant.cookie.accessToken);
+    return res.status(200).json({ message: "regenerate successfully" });
   }
 }
