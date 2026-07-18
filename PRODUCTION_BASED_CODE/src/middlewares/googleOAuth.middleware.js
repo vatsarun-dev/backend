@@ -10,7 +10,7 @@ const googleOAuthMiddleware = (app) => {
         clientSecret: env.GOOGLE_SECRET,
         callbackURL: env.GOOGLE_CALLBACK,
       },
-      (accessToken, refreshToken, cb, profile) => {
+      (accessToken, refreshToken, profile, cb) => {
         return cb(null, profile);
       },
     ),

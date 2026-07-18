@@ -14,6 +14,8 @@ const envSchema = z.object({
   GOOGLE_CLIENT: z.string(),
   GOOGLE_CALLBACK: z.string(),
   GOOGLE_SECRET: z.string(),
+  ACCESS_TOKEN: z.string(),
+  REFRESH_TOKEN: z.string(),
 });
 
 const parsed = envSchema.safeParse(process.env);
