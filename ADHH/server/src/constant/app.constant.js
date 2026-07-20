@@ -4,3 +4,21 @@ export default {
   WINDOWMS: 15 * 60 * 1000,
   LIMIT: 100,
 };
+
+export const app_constant = {
+  cookie: {
+    accessToken: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 15 * 60 * 1000,
+      sameSite: "lax",
+    },
+
+    refreshToken: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 15 * 60 * 1000,
+      sameSite: "lax",
+    },
+  },
+};
