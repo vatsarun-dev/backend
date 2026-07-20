@@ -1,4 +1,5 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
+import bcrypt from "bcrypt";
 const adminSchema = new Schema(
   {
     name: {
@@ -28,5 +29,9 @@ const adminSchema = new Schema(
   },
 );
 
-const adminModel = Model("adminModel", adminSchema, "adminModel");
+adminSchema.pre("save", function () {
+  this.password = bcrypt.hashSync(this.password, 10);
+});
+
+const adminModel = model("adminModel", adminSchema, "adminModel");
 export default adminModel;
