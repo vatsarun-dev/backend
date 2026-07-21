@@ -24,7 +24,7 @@ export default class AuthController {
   }
 
   async loginUserController(req, res) {
-    const user = this.authController.loginUserService(req.body);
+    const user = await this.authController.loginUserService(req.body);
     res.cookie(
       "accessToken",
       user.accessToken,

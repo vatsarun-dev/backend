@@ -31,6 +31,7 @@ export default class AuthService {
     const isExisted = await this.authService.findByEmail(email);
     if (!isExisted) throw new error.NOTFOUNDERROR("user not found");
 
+    console.log(isExisted);
     const compare = isExisted.comparePassword(password);
 
     if (!compare) throw new error.UNAUTHORIZED("Wrong Credential");
