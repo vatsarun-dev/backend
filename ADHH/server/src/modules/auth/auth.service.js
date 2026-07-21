@@ -1,10 +1,10 @@
-import UserRepo from "../../repository/admin.repository.js";
+import AdminRepo from "../../repository/admin.repository.js";
 import * as error from "../../shared/error/globalError.js";
 import * as token from "../../utils/generateToken.js";
 
 export default class AuthService {
   constructor() {
-    this.authService = new UserRepo();
+    this.authService = new AdminRepo();
   }
   // THIS IS THE REGISTRATION LOGIC
   async createUserService(data) {
@@ -49,7 +49,7 @@ export default class AuthService {
     const isExisted = await this.authService.findByEmail(email);
     if (isExisted) throw new error.ALLREADYEXIST("User is already existed");
 
-    const user = this.authService.create({
+    const user = await this.authService.create({
       email: email,
       name: data.displayName,
     });

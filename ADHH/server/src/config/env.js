@@ -12,6 +12,9 @@ const envSchema = z.object({
   GOOGLE_CALLBACK: z.string(),
   ACCESSTOKEN: z.string(),
   REFRESHTOKEN: z.string(),
+  URLENDPOINT: z.string(),
+  PRIVATEKEY: z.string(),
+  PUBLICKEY: z.string(),
 });
 
 const parsed = envSchema.safeParse(process.env);

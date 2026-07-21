@@ -41,8 +41,10 @@ export default class AuthController {
   }
 
   async GoogleLoginController(req, res) {
-    const user = this.authController.GoogleLoginService(req.user);
+    const user = await this.authController.GoogleLoginService(req.user);
 
+    console.log(user.accessToken);
+    console.log(user.refreshToken);
     res.cookie(
       "accessToken",
       user.accessToken,
