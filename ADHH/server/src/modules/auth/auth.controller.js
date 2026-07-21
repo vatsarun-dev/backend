@@ -6,11 +6,37 @@ export default class AuthController {
   }
 
   async createUserController(req, res) {
-    let { accessToken, refreshToken } =
-      await this.authController.createUserService(req.body);
+    const user = await this.authController.createUserService(req.body);
 
-    res.cookie("accessToken", accessToken, app_constant.cookie.accessToken);
-    res.cookie("refreshToken", refreshToken, app_constant.cookie.refreshToken);
-    res.json({ message: "user created successfully " });
+    res.cookie(
+      "accessToken",
+      user.accessToken,
+      app_constant.cookie.accessToken,
+    );
+    res.cookie(
+      "refreshToken",
+      user.refreshToken,
+      app_constant.cookie.refreshToken,
+    );
+    res
+      .status(201)
+      .json({ message: "User created successfully", user: user.user });
+  }
+
+  async loginUserController(req, res) {
+    const user = this.authController.loginUserService(req.body);
+    res.cookie(
+      "accessToken",
+      user.accessToken,
+      app_constant.cookie.accessToken,
+    );
+    res.cookie(
+      "refreshToken",
+      user.refreshToken,
+      app_constant.cookie.refreshToken,
+    );
+    res
+      .status(200)
+      .json({ message: "User login successfully", user: user.isExisted });
   }
 }

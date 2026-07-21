@@ -33,5 +33,9 @@ adminSchema.pre("save", function () {
   this.password = bcrypt.hashSync(this.password, 10);
 });
 
+adminSchema.methods.comparePassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
 const adminModel = model("adminModel", adminSchema, "adminModel");
 export default adminModel;

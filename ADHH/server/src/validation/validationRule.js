@@ -1,6 +1,6 @@
 import validationRequest from "../utils/validationRequest.js";
 import { body } from "express-validator";
-const validationRule = [
+export const registerValidationRule = [
   body("name")
     .trim()
     .not()
@@ -32,4 +32,24 @@ const validationRule = [
     .withMessage("Must contain a special character"),
   validationRequest,
 ];
-export default validationRule;
+export const loginValidationRule = [
+  body("email")
+    .trim()
+    .not()
+    .contains("+")
+    .notEmpty()
+    .withMessage("Email is required")
+    .normalizeEmail()
+    .isEmail()
+    .withMessage("Enter a valid Email"),
+  body("password")
+    .notEmpty()
+    .withMessage("password required")
+    .isLength({ min: 6, max: 10 })
+    .withMessage("password must contain 6-10 words")
+    .matches(/\d/)
+    .withMessage("Must contain at least one digit")
+    .matches(/[!@#$%]/)
+    .withMessage("Must contain a special character"),
+  validationRequest,
+];
