@@ -8,8 +8,8 @@ export default class AuthService {
   }
   // THIS IS THE REGISTRATION LOGIC
   async createUserService(data) {
-    let { email, password } = data;
-    if (!email || !password)
+    let { name, email, password } = data;
+    if (!name || !email || !password)
       throw new error.NOTFOUNDERROR("all fields are required");
 
     const isExisted = await this.authService.findByEmail(email);
@@ -41,5 +41,22 @@ export default class AuthService {
     const refreshToken = token.generateRefreshToken(isExisted._id);
 
     return { accessToken, refreshToken, isExisted };
+  }
+
+  async GoogleLoginService(data) {
+    let { displayName, emails } = data;
+    const email = data.emails[0].value;
+    const isExisted = await this.authService.findByEmail(email);
+    if (isExisted) throw new error.ALLREADYEXIST("User is already existed");
+
+    const user = this.authService.create({
+      email: email,
+      name: data.displayName,
+    });
+
+    const accessToken = token.generateAccessToken(user._id);
+    const refreshToken = token.generateRefreshToken(user._id);
+
+    return { accessToken, refreshToken, user };
   }
 }

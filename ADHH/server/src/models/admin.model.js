@@ -29,11 +29,13 @@ const adminSchema = new Schema(
   },
 );
 
-adminSchema.pre("save", function () {
+adminSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
   this.password = bcrypt.hashSync(this.password, 10);
 });
 
-adminSchema.methods.comparePassword = function (password) {
+adminSchema.methods.comparePassword = async function (password) {
+  if (!this.password) return false;
   return bcrypt.compareSync(password, this.password);
 };
 

@@ -9,7 +9,7 @@ export default function createApp() {
   securityMiddlewares(app);
   GoogleStrategyMiddlewares();
 
-  app.use("/api/auth", authRoutes);
+  app.use("/api/user", authRoutes);
 
   app.use(errorHandler);
   return app;
