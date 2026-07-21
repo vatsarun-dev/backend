@@ -15,6 +15,9 @@ const envSchema = z.object({
   URLENDPOINT: z.string(),
   PRIVATEKEY: z.string(),
   PUBLICKEY: z.string(),
+  EMAIL: z.string(),
+  PASSWORD: z.string(),
+  RAWTOKEN: z.string(),
 });
 
 const parsed = envSchema.safeParse(process.env);

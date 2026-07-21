@@ -1,7 +1,11 @@
 import AdminRepo from "../../repository/admin.repository.js";
 import * as error from "../../shared/error/globalError.js";
 import * as token from "../../utils/generateToken.js";
-
+import tempMail from "../../utils/generateMail.js";
+import sendEmail from "../../config/nodemailer.js";
+import jwt from "jsonwebtoken";
+import env from "../../config/env.js";
+import bcrypt from "bcrypt";
 export default class AuthService {
   constructor() {
     this.authService = new AdminRepo();
@@ -58,5 +62,42 @@ export default class AuthService {
     const refreshToken = token.generateRefreshToken(user._id);
 
     return { accessToken, refreshToken, user };
+  }
+
+  async forgotPasswordService(data) {
+    let { email } = data;
+    const isExisted = await this.authService.findByEmail(email);
+    if (!isExisted) throw new error.NOTFOUNDERROR("user not found");
+    const rawToken = token.generateRawToken(isExisted._id);
+
+    const link = `http://localhost:3000/api/user/reset-password/${rawToken}`;
+
+    const sendMail = tempMail(isExisted.name, link);
+
+    return await sendEmail(isExisted.email, "forgot password", sendMail);
+  }
+
+  async resetPasswordService(data) {
+    let { token } = data;
+    const decode = jwt.verify(token, env.RAWTOKEN);
+    if (!decode) throw new error.UNAUTHORIZED("user not found");
+    const user = await this.authService.findById(decode.id);
+
+    return user;
+  }
+
+  async updatePasswordService(_id, pass) {
+    let { id } = _id;
+    let { password } = pass;
+    console.log(id);
+    console.log(password);
+    const user = await this.authService.findById(id);
+    console.log(user);
+    if (!user) throw new error.NOTFOUNDERROR("user not found");
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    const update = await this.authService.findByIdAndUpdate(id, hashPassword);
+
+    return update;
   }
 }

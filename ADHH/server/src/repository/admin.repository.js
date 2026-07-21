@@ -10,4 +10,14 @@ export default class AdminRepo {
   async findById(id) {
     return await adminModel.findById(id);
   }
+
+  async findByIdAndUpdate(id, hashPassword) {
+    return await adminModel.findByIdAndUpdate(
+      id,
+      {
+        password: hashPassword,
+      },
+      { new: true },
+    );
+  }
 }

@@ -35,4 +35,18 @@ authRoutes.get(
     authController.GoogleLoginController.bind(authController),
   ),
 );
+
+authRoutes.post(
+  "/forgot_password",
+  authController.forgotPasswordController.bind(authController),
+);
+authRoutes.get(
+  "/reset-password/:token",
+  authController.resetPasswordController.bind(authController),
+);
+authRoutes.post(
+  "/update-password/:id",
+  authController.updatePasswordController.bind(authController),
+);
+
 export default authRoutes;
