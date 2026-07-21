@@ -53,3 +53,14 @@ export const loginValidationRule = [
     .withMessage("Must contain a special character"),
   validationRequest,
 ];
+
+export const studentValidationRule = [
+  body("name").trim().notEmpty().withMessage("Name is required"),
+
+  body("email").isEmail().withMessage("Invalid email"),
+
+  body("studentId").notEmpty().withMessage("Student ID is required"),
+
+  body("mobile").isMobilePhone("en-IN").withMessage("Invalid mobile number"),
+  validationRequest,
+];
