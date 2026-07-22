@@ -5,6 +5,7 @@ dotenv.config();
 const envSchema = z.object({
   PORT: z.coerce.number().default(appConstant.PORT),
   MONGO_URL: z.string().default(appConstant.MONGO_URL),
+  CLIENT_URL: z.string().default(appConstant.CLIENT_URL),
   WINDOWMS: z.string().default(appConstant.WINDOWMS),
   LIMIT: z.string().default(appConstant.LIMIT),
   GOOGLE_CLIENT: z.string(),
