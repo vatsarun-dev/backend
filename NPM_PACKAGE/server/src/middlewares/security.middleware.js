@@ -6,7 +6,9 @@ import express from "express";
 import cors from "cors";
 import passport from "passport";
 import cookieParser from "cookie-parser";
+import morgan from "morgan";
 export default function securityMiddleware(app) {
+  app.use(morgan("dev"));
   app.use(express.json({ limit: "3mb" }));
   app.use(express.urlencoded({ extended: true, limit: "3mb" }));
   app.use(cookieParser());

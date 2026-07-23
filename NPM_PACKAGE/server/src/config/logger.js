@@ -1,6 +1,7 @@
 import pino from "pino";
+
 export default pino({
-  lvel: "info",
+  level: "info",
   transport: {
     target: "pino-pretty",
   },
