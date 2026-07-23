@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-
+import bcrypt from "bcrypt";
 const userSchema = new Schema({
   name: {
     type: String,
@@ -10,24 +10,32 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+
   avatar: {
     type: String,
   },
   authProvider: {
     type: String,
-    enum:["local","google"],
-    default:"local"
+    enum: ["local", "google"],
+    default: "local",
   },
-    mobile: {
+
+  password: {
+    type: String,
+
+    required: function () {
+      return this.authProvider === "local";
+    },
+  },
+  mobile: {
     type: Number,
-    required:function(){
-      return this.authProvider ==="local" 
-    }
-    unique: true,
+    required: function () {
+      return this.authProvider === "local";
+    },
   },
 
   refreshToken: {
-    type: Number,
+    type: String,
   },
 });
 

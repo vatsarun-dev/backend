@@ -1,4 +1,4 @@
-import UserRepo from "../../repository/auth.repository.js";
+import UserRepo from "../../repository/auth.repo.js";
 import * as error from "../../shared/error/globalError.js";
 import * as token from "../../utils/generateToken.js";
 // import tempMail from "../../utils/generateMail.js";
@@ -22,7 +22,7 @@ export default class AuthService {
     const accessToken = token.generateAccessToken(user._id);
     const refreshToken = token.generateRefreshToken(user._id);
 
-    user.refreshToken = refrenshToken;
+    user.refreshToken = refreshToken;
     await user.save();
 
     return { accessToken, refreshToken, user };
@@ -45,7 +45,7 @@ export default class AuthService {
     const accessToken = token.generateAccessToken(isExisted._id);
     const refreshToken = token.generateRefreshToken(isExisted._id);
 
-    isExisted.refreshToken = refrenshToken;
+    isExisted.refreshToken = refreshToken;
     await isExisted.save();
 
     return { accessToken, refreshToken, isExisted };
@@ -57,16 +57,16 @@ export default class AuthService {
     const isExisted = await this.authService.findByEmail(email);
     if (isExisted) throw new error.ALLREADYEXIST("User is already existed");
 
-    const user = await this.authService.create({
+    const user = await this.authService.createUser({
       email: email,
       name: data.displayName,
-      authprovider: data.provider,
+      authProvider: data.provider,
     });
 
     const accessToken = token.generateAccessToken(user._id);
     const refreshToken = token.generateRefreshToken(user._id);
 
-    user.refreshToken = refrenshToken;
+    user.refreshToken = refreshToken;
     await user.save();
 
     return { accessToken, refreshToken, user };
