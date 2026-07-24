@@ -1,3 +1,4 @@
+import React from "react";
 export function PageHeader({ eyebrow, title, subtitle, action, meta }) {
   return (
     <header className="page-header page-panel" data-reveal>

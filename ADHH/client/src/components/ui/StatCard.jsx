@@ -1,3 +1,4 @@
+import React from "react";
 export function StatCard({ label, value, meta, icon: Icon, tone = "neutral", trend }) {
   return (
     <section className={`stat-card tone-${tone}`} data-reveal>

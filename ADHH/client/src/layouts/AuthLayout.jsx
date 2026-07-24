@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import { BookOpenCheck, GraduationCap, Menu, X } from "lucide-react";
-import { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { SCHOOL } from "../constants/app";
 import { SchoolStorySections } from "../components/ui/SchoolStorySections";

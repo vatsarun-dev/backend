@@ -1,3 +1,4 @@
+import React from "react";
 import { DatabaseZap } from "lucide-react";
 
 export function EmptyState({ title, message, icon, action }) {

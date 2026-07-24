@@ -1,3 +1,4 @@
+import React from "react";
 import { Mail, UserRound } from "lucide-react";
 import { PageHeader } from "../../components/ui/PageHeader";
 import { useAuth } from "../../context/AuthContext";

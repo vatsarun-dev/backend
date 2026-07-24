@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpDown, Search } from "lucide-react";
 import { EmptyState } from "./EmptyState";
 import { Button } from "./Button";

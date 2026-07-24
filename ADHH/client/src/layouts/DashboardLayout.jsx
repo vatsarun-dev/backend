@@ -13,7 +13,7 @@ import {
   UsersRound,
   X,
 } from "lucide-react";
-import { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useAuth } from "../context/AuthContext";
 import { SCHOOL } from "../constants/app";

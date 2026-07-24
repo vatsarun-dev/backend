@@ -1,5 +1,5 @@
 import { Activity, ArrowRight, CalendarDays, GraduationCap, Search, UserPlus, UsersRound } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { EmptyState } from "../../components/ui/EmptyState";

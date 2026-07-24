@@ -1,5 +1,5 @@
 import { BarChart3, Building2, GraduationCap, PieChart, TrendingUp, UsersRound } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { PageHeader } from "../../components/ui/PageHeader";
 import { SchoolStorySections } from "../../components/ui/SchoolStorySections";
 import { StatCard } from "../../components/ui/StatCard";

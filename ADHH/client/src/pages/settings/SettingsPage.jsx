@@ -1,3 +1,4 @@
+import React from "react";
 import { Cookie, KeyRound, Palette, ShieldCheck, Sparkles, Sun } from "lucide-react";
 import { PageHeader } from "../../components/ui/PageHeader";
 import { useTheme } from "../../context/ThemeContext";
