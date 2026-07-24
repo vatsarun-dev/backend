@@ -64,6 +64,8 @@ export default class AuthService {
     if (isExisted) {
       const accessToken = token.generateAccessToken(isExisted._id);
       const refreshToken = token.generateRefreshToken(isExisted._id);
+      isExisted.refreshToken = refreshToken;
+      await isExisted.save();
       return { accessToken, refreshToken, user: isExisted };
     }
 
