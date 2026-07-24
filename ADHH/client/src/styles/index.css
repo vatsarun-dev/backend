@@ -57,10 +57,18 @@ body {
   min-height: 100vh;
   color: var(--ink);
   background: var(--cream);
+  overflow-x: hidden;
+}
+#root {
+  min-height: 100vh;
 }
 a {
   color: inherit;
   text-decoration: none;
+}
+img,
+svg {
+  max-width: 100%;
 }
 button,
 input,
@@ -116,7 +124,7 @@ button:disabled {
   min-height: 70px;
   margin: 14px auto 0;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto;
   align-items: center;
   gap: 24px;
   padding: 10px 12px 10px 18px;
@@ -130,6 +138,7 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 .site-logo span,
 .site-logo-mark,
@@ -151,6 +160,10 @@ button:disabled {
   font-family: var(--font-display);
   font-size: 1.18rem;
   font-weight: 700;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .menu-button {
   display: none;
@@ -229,12 +242,15 @@ button:disabled {
   align-items: center;
   gap: 10px;
   font-size: 0.9rem;
-  width: 100%;
+  justify-content: flex-end;
+  min-width: 0;
 }
 .text-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 46px;
+  padding: 0 4px;
   border: 0;
   background: transparent;
   color: var(--ink);
@@ -244,10 +260,10 @@ button:disabled {
 .btn,
 .oauth-button,
 .icon-button {
-  width: 100%;
+  width: auto;
   min-height: 46px;
   display: inline-flex;
-  margin-top: 10px;
+  margin-top: 0;
   align-items: center;
   justify-content: center;
   gap: 9px;
@@ -257,6 +273,7 @@ button:disabled {
   background: var(--dark);
   color: var(--cream-2);
   font-weight: 800;
+  white-space: nowrap;
   transition:
     transform 0.2s var(--ease),
     background 0.2s var(--ease),
@@ -290,6 +307,13 @@ button:disabled {
 .icon-button {
   width: 46px;
   padding: 0;
+}
+.stack-form > .btn,
+.oauth-button {
+  width: 100%;
+}
+.oauth-button {
+  margin-top: 14px;
 }
 
 .auth-page {
@@ -345,10 +369,11 @@ button:disabled {
 .auth-brand h1 {
   margin: 14px 0 16px;
   font-family: var(--font-display);
-  font-size: clamp(4.4rem, 9vw, 8.6rem);
+  font-size: clamp(3.8rem, 8vw, 7.6rem);
   font-weight: 700;
   line-height: 0.88;
   letter-spacing: 0;
+  overflow-wrap: anywhere;
 }
 .auth-brand p,
 .hero-widget p,
@@ -397,6 +422,7 @@ button:disabled {
   font-weight: 700;
   line-height: 0.96;
   letter-spacing: 0;
+  overflow-wrap: anywhere;
 }
 .auth-card-head p {
   max-width: 560px;
@@ -477,6 +503,10 @@ button:disabled {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
+  min-width: 0;
+}
+.form-row {
+  flex-wrap: wrap;
 }
 .check {
   display: inline-flex;
@@ -547,7 +577,7 @@ button:disabled {
   max-width: min(820px, 100%);
   color: var(--cream-2);
   font-size: clamp(3rem, 6.4vw, 6.2rem);
-  overflow-wrap: normal;
+  overflow-wrap: anywhere;
   text-wrap: balance;
 }
 .page-header p {
@@ -670,6 +700,16 @@ button:disabled {
   flex-wrap: wrap;
   gap: 10px;
   justify-content: flex-end;
+}
+.quick-actions a,
+.page-action a,
+.empty-action a {
+  display: inline-flex;
+}
+.quick-actions .btn,
+.page-action .btn,
+.empty-action .btn {
+  margin-top: 0;
 }
 .timeline-widget,
 .recent-list,
@@ -852,6 +892,7 @@ button:disabled {
 .table-search {
   flex: 1;
   display: flex;
+  min-width: min(100%, 260px);
   min-height: 48px;
   padding: 0 16px;
 }
@@ -979,6 +1020,7 @@ tbody tr:hover {
   font-size: clamp(2.4rem, 4vw, 4rem);
   font-weight: 700;
   line-height: 0.96;
+  overflow-wrap: anywhere;
 }
 .profile-arrow {
   color: var(--muted);
@@ -1402,7 +1444,9 @@ dd {
 
 @media (max-width: 900px) {
   .site-header {
-    grid-template-columns: auto auto;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    border-radius: 28px;
   }
   .menu-button {
     display: grid;
@@ -1435,14 +1479,26 @@ dd {
   .site-actions {
     grid-column: 1 / -1;
     justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .site-actions .pill-button,
+  .site-actions .text-link {
+    flex: 1 1 150px;
+    justify-content: center;
   }
   .page-header,
-  .hero-widget,
   .form-row,
   .table-toolbar,
   .table-footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+  .hero-widget {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .quick-actions {
+    justify-content: flex-start;
   }
   .footer-links {
     grid-template-columns: 1fr;
@@ -1457,31 +1513,39 @@ dd {
   .site-header,
   .auth-page,
   .page,
-  .site-footer {
+  .site-footer,
+  .public-story-wrap {
     width: min(calc(100% - 18px), 100%);
   }
   .site-header {
     top: 9px;
     margin-top: 9px;
+    padding: 10px;
+  }
+  .site-logo strong {
+    max-width: calc(100vw - 128px);
+    font-size: 1rem;
   }
   .auth-brand {
-    min-height: 520px;
+    min-height: 420px;
+    padding: 28px;
   }
   .auth-brand h1,
   .page-header h1 {
-    font-size: clamp(3.1rem, 16vw, 5rem);
+    font-size: clamp(2.7rem, 13vw, 4.4rem);
+    line-height: 0.95;
   }
   .auth-card,
   .panel {
-    padding: 24px;
+    padding: 20px;
   }
   .page {
     padding-top: 34px;
   }
   .page-header {
-    min-height: 480px;
-    padding: 28px;
-    margin-bottom: 56px;
+    min-height: 380px;
+    padding: 24px;
+    margin-bottom: 40px;
   }
   .stats-grid,
   .form-grid,
@@ -1510,10 +1574,62 @@ dd {
   .quick-actions {
     justify-content: flex-start;
   }
-  .site-actions .pill-button {
-    flex: 1;
+  .quick-actions,
+  .quick-actions a,
+  .quick-actions .btn,
+  .form-actions,
+  .form-actions .btn,
+  .page-action,
+  .page-action a,
+  .page-action .btn {
+    width: 100%;
+  }
+  .form-actions {
+    align-items: stretch;
   }
   table {
     min-width: 720px;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header,
+  .auth-page,
+  .page,
+  .site-footer,
+  .public-story-wrap {
+    width: min(calc(100% - 14px), 100%);
+  }
+  .site-logo span,
+  .site-logo-mark,
+  .brand-mark,
+  .stat-icon,
+  .avatar,
+  .empty-visual {
+    width: 38px;
+    height: 38px;
+  }
+  .site-actions {
+    gap: 8px;
+  }
+  .auth-card-head h2,
+  .page-header h1,
+  .hero-widget h2,
+  .story-intro h2,
+  .testimonial-copy blockquote,
+  .closing-cta h2 {
+    font-size: clamp(2.3rem, 12vw, 3.5rem);
+  }
+  .field input,
+  .field select,
+  .search-bar input,
+  .input-shell {
+    min-height: 48px;
+  }
+  .btn,
+  .pill-button,
+  .oauth-button {
+    min-height: 44px;
+    padding-inline: 16px;
   }
 }
