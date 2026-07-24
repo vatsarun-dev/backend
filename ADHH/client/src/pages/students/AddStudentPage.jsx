@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { ImagePlus, Save } from "lucide-react";
+import { BadgeCheck, ImagePlus, Mail, Phone, Save, UserRound } from "lucide-react";
 import { Button } from "../../components/ui/Button";
 import { FormField } from "../../components/ui/FormField";
 import { PageHeader } from "../../components/ui/PageHeader";
 import { studentService } from "../../services/studentService";
 import { getApiError } from "../../services/apiClient";
+import { useGsapReveal } from "../../hooks/useGsapReveal";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -18,29 +19,17 @@ const schema = z.object({
   mobile: z.string().regex(/^[6-9]\d{9}$/, "Enter an Indian mobile number"),
   course: z.string().min(1, "Course is required"),
   class: z.coerce.number().min(1, "Class is required"),
-  totalFees: z.coerce.number().min(0, "Total fees is required"),
-  paidFees: z.coerce.number().min(0).optional(),
-  dueDate: z.string().optional(),
   image: z.any().refine((files) => files?.length === 1, "Student image is required"),
 });
 
 export function AddStudentPage() {
+  const scope = useGsapReveal();
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState("");
-  const { register, handleSubmit, watch, reset, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { paidFees: 0 },
+    defaultValues: { class: 6 },
   });
-
-  const totalFees = Number(watch("totalFees") || 0);
-  const paidFees = Number(watch("paidFees") || 0);
-  const progress = totalFees ? Math.min(100, Math.round((paidFees / totalFees) * 100)) : 0;
-
-  function rememberStudent(student) {
-    const key = "adhh.students.session";
-    const existing = JSON.parse(sessionStorage.getItem(key) || "[]");
-    sessionStorage.setItem(key, JSON.stringify([student, ...existing.filter((item) => item.studentId !== student.studentId)]));
-  }
 
   async function onSubmit(values) {
     setLoading(true);
@@ -49,10 +38,11 @@ export function AddStudentPage() {
       if (key === "image") formData.append("image", value[0]);
       else if (value !== undefined && value !== "") formData.append(key, value);
     });
+    formData.append("totalFees", "0");
+    formData.append("paidFees", "0");
 
     try {
       const { data } = await studentService.register(formData);
-      rememberStudent(data.student);
       toast.success(data.message || "Student added");
       reset();
       setPreview("");
@@ -64,37 +54,49 @@ export function AddStudentPage() {
   }
 
   const imageRegister = register("image", {
-    onChange: (event) => setPreview(URL.createObjectURL(event.target.files[0])),
+    onChange: (event) => {
+      const file = event.target.files?.[0];
+      if (file) setPreview(URL.createObjectURL(file));
+    },
   });
 
+  useEffect(() => () => {
+    if (preview) URL.revokeObjectURL(preview);
+  }, [preview]);
+
   return (
-    <main className="page">
-      <PageHeader eyebrow="Student Management" title="Add student" subtitle="This form posts multipart data to /api/student/register and uses the backend ImageKit upload flow." />
+    <main className="page" ref={scope}>
+      <PageHeader
+        eyebrow="Student Management"
+        title="Register a student"
+        subtitle="Create a polished, backend-backed student profile with photo, contact, class, and course details."
+        meta={<><span>ImageKit upload</span><span>Shared register</span></>}
+      />
       <form className="student-form panel" onSubmit={handleSubmit(onSubmit)}>
         <label className="upload-zone">
-          {preview ? <img src={preview} alt="Student preview" /> : <ImagePlus size={34} />}
-          <span>Drop or choose student photo</span>
+          {preview ? <img src={preview} alt="Student preview" /> : <div className="upload-placeholder"><ImagePlus size={34} /><strong>Drop or choose student photo</strong><small>Portrait images work best for profile cards.</small></div>}
           <input type="file" accept="image/*" {...imageRegister} />
           {errors.image ? <small className="field-error">{errors.image.message}</small> : null}
         </label>
         <div className="form-grid">
-          <FormField label="Student name" error={errors.name?.message}><input {...register("name")} /></FormField>
-          <FormField label="Father name" error={errors.fatherName?.message}><input {...register("fatherName")} /></FormField>
-          <FormField label="Student ID" error={errors.studentId?.message}><input {...register("studentId")} /></FormField>
-          <FormField label="Email" error={errors.email?.message}><input type="email" {...register("email")} /></FormField>
-          <FormField label="Mobile" error={errors.mobile?.message}><input {...register("mobile")} /></FormField>
-          <FormField label="Course" error={errors.course?.message}><input {...register("course")} /></FormField>
-          <FormField label="Class" error={errors.class?.message}><input type="number" {...register("class")} /></FormField>
-          <FormField label="Due date" error={errors.dueDate?.message}><input type="date" {...register("dueDate")} /></FormField>
-          <FormField label="Total fees" error={errors.totalFees?.message}><input type="number" {...register("totalFees")} /></FormField>
-          <FormField label="Paid fees" error={errors.paidFees?.message}><input type="number" {...register("paidFees")} /></FormField>
+          <FormField label="Student name" error={errors.name?.message}><div className="input-shell"><UserRound size={17} /><input {...register("name")} /></div></FormField>
+          <FormField label="Father name" error={errors.fatherName?.message}><div className="input-shell"><UserRound size={17} /><input {...register("fatherName")} /></div></FormField>
+          <FormField label="Student ID" error={errors.studentId?.message}><div className="input-shell"><BadgeCheck size={17} /><input {...register("studentId")} /></div></FormField>
+          <FormField label="Email" error={errors.email?.message}><div className="input-shell"><Mail size={17} /><input type="email" {...register("email")} /></div></FormField>
+          <FormField label="Mobile" error={errors.mobile?.message}><div className="input-shell"><Phone size={17} /><input {...register("mobile")} /></div></FormField>
+          <FormField label="Course" error={errors.course?.message}><div className="input-shell"><BadgeCheck size={17} /><input {...register("course")} /></div></FormField>
+          <FormField label="Class" error={errors.class?.message}>
+            <div className="input-shell">
+              <BadgeCheck size={17} />
+              <select {...register("class")}>
+                {[6, 7, 8, 9, 10, 11, 12].map((item) => <option key={item} value={item}>Class {item}</option>)}
+              </select>
+            </div>
+          </FormField>
         </div>
-        <div className="fee-preview">
-          <span>Payment progress</span>
-          <strong>{progress}%</strong>
-          <div><i style={{ width: `${progress}%` }} /></div>
+        <div className="form-actions">
+          <Button loading={loading} icon={Save} type="submit">Save student</Button>
         </div>
-        <Button loading={loading} icon={Save} type="submit">Save student</Button>
       </form>
     </main>
   );

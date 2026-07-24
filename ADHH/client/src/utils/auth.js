@@ -15,8 +15,12 @@ export function dashboardFor(user) {
 
 export function saveSession(session, remember) {
   const payload = JSON.stringify({ ...session, remember, loginAt: Date.now() });
-  localStorage.setItem(storageKey, payload);
-  if (!remember) sessionStorage.setItem(storageKey, payload);
+  clearSession();
+  if (remember) {
+    localStorage.setItem(storageKey, payload);
+  } else {
+    sessionStorage.setItem(storageKey, payload);
+  }
 }
 
 export function readSession() {

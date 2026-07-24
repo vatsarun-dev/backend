@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-export function useGsapReveal(selector = "[data-reveal]") {
+export function useGsapReveal(selector = "[data-reveal], .page-header, .stats-grid > *, .dashboard-grid > *, .panel, .table-shell, .class-tabs, .search-bar, .student-form") {
   const scope = useRef(null);
 
   useEffect(() => {

@@ -1,33 +1,37 @@
+import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthLayout } from "./layouts/AuthLayout";
 import { DashboardLayout } from "./layouts/DashboardLayout";
 import { ProtectedRoute, PublicRoute } from "./routes/Guards";
-import { LoginPage } from "./pages/auth/LoginPage";
-import { SignupPage } from "./pages/auth/SignupPage";
-import { ForgotPasswordPage } from "./pages/auth/ForgotPasswordPage";
-import { ResetPasswordPage } from "./pages/auth/ResetPasswordPage";
-import { GoogleCallbackPage } from "./pages/auth/GoogleCallbackPage";
-import { TeacherDashboard } from "./pages/dashboard/TeacherDashboard";
-import { PrincipalDashboard } from "./pages/dashboard/PrincipalDashboard";
-import { StudentsPage } from "./pages/students/StudentsPage";
-import { AddStudentPage } from "./pages/students/AddStudentPage";
-import { SearchStudentPage } from "./pages/students/SearchStudentPage";
-import { FeeManagementPage } from "./pages/fees/FeeManagementPage";
-import { ProfilePage } from "./pages/settings/ProfilePage";
-import { SettingsPage } from "./pages/settings/SettingsPage";
-import { AnalyticsPage } from "./pages/dashboard/AnalyticsPage";
-import { ForbiddenPage } from "./pages/system/ForbiddenPage";
-import { NotFoundPage } from "./pages/system/NotFoundPage";
+
+const LoginPage = lazy(() => import("./pages/auth/LoginPage").then((module) => ({ default: module.LoginPage })));
+const SignupPage = lazy(() => import("./pages/auth/SignupPage").then((module) => ({ default: module.SignupPage })));
+const ForgotPasswordPage = lazy(() => import("./pages/auth/ForgotPasswordPage").then((module) => ({ default: module.ForgotPasswordPage })));
+const ResetPasswordPage = lazy(() => import("./pages/auth/ResetPasswordPage").then((module) => ({ default: module.ResetPasswordPage })));
+const PasswordUpdatedPage = lazy(() => import("./pages/auth/PasswordUpdatedPage").then((module) => ({ default: module.PasswordUpdatedPage })));
+const GoogleCallbackPage = lazy(() => import("./pages/auth/GoogleCallbackPage").then((module) => ({ default: module.GoogleCallbackPage })));
+const TeacherDashboard = lazy(() => import("./pages/dashboard/TeacherDashboard").then((module) => ({ default: module.TeacherDashboard })));
+const PrincipalDashboard = lazy(() => import("./pages/dashboard/PrincipalDashboard").then((module) => ({ default: module.PrincipalDashboard })));
+const StudentsPage = lazy(() => import("./pages/students/StudentsPage").then((module) => ({ default: module.StudentsPage })));
+const AddStudentPage = lazy(() => import("./pages/students/AddStudentPage").then((module) => ({ default: module.AddStudentPage })));
+const SearchStudentPage = lazy(() => import("./pages/students/SearchStudentPage").then((module) => ({ default: module.SearchStudentPage })));
+const ProfilePage = lazy(() => import("./pages/settings/ProfilePage").then((module) => ({ default: module.ProfilePage })));
+const SettingsPage = lazy(() => import("./pages/settings/SettingsPage").then((module) => ({ default: module.SettingsPage })));
+const AnalyticsPage = lazy(() => import("./pages/dashboard/AnalyticsPage").then((module) => ({ default: module.AnalyticsPage })));
+const ForbiddenPage = lazy(() => import("./pages/system/ForbiddenPage").then((module) => ({ default: module.ForbiddenPage })));
+const NotFoundPage = lazy(() => import("./pages/system/NotFoundPage").then((module) => ({ default: module.NotFoundPage })));
 
 export default function App() {
   return (
-    <Routes>
+    <Suspense fallback={<div className="screen-loader">Loading page...</div>}>
+      <Routes>
       <Route element={<PublicRoute />}>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password/:id" element={<ResetPasswordPage />} />
+          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+          <Route path="/password-updated" element={<PasswordUpdatedPage />} />
           <Route path="/auth/google/callback" element={<GoogleCallbackPage />} />
         </Route>
       </Route>
@@ -38,7 +42,6 @@ export default function App() {
           <Route path="students" element={<StudentsPage />} />
           <Route path="students/new" element={<AddStudentPage />} />
           <Route path="search" element={<SearchStudentPage />} />
-          <Route path="fees" element={<FeeManagementPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>
@@ -51,7 +54,6 @@ export default function App() {
           <Route path="students" element={<StudentsPage />} />
           <Route path="students/new" element={<AddStudentPage />} />
           <Route path="search" element={<SearchStudentPage />} />
-          <Route path="fees" element={<FeeManagementPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>
@@ -60,6 +62,7 @@ export default function App() {
       <Route path="/403" element={<ForbiddenPage />} />
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+      </Routes>
+    </Suspense>
   );
 }

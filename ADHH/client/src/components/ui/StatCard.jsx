@@ -1,4 +1,4 @@
-export function StatCard({ label, value, meta, icon: Icon, tone = "neutral" }) {
+export function StatCard({ label, value, meta, icon: Icon, tone = "neutral", trend }) {
   return (
     <section className={`stat-card tone-${tone}`} data-reveal>
       <div className="stat-icon">{Icon ? <Icon size={20} /> : null}</div>
@@ -7,6 +7,7 @@ export function StatCard({ label, value, meta, icon: Icon, tone = "neutral" }) {
         <strong>{value}</strong>
         {meta ? <span>{meta}</span> : null}
       </div>
+      {trend ? <em>{trend}</em> : null}
     </section>
   );
 }

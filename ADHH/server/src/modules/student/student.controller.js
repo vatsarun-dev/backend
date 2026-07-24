@@ -17,4 +17,21 @@ export default class StudentController {
       student: student,
     });
   }
+
+  async listStudentsController(req, res) {
+    const students = await this.studentController.listStudentsService();
+    res.status(200).json({ students });
+  }
+
+  async searchStudentsController(req, res) {
+    const students = await this.studentController.searchStudentsService(
+      req.query.q,
+    );
+    res.status(200).json({ students });
+  }
+
+  async dashboardController(req, res) {
+    const dashboard = await this.studentController.dashboardService();
+    res.status(200).json({ dashboard });
+  }
 }

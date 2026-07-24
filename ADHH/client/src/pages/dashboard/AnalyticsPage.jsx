@@ -1,13 +1,20 @@
 import { BarChart3 } from "lucide-react";
 import { EmptyState } from "../../components/ui/EmptyState";
 import { PageHeader } from "../../components/ui/PageHeader";
+import { useGsapReveal } from "../../hooks/useGsapReveal";
 
 export function AnalyticsPage() {
+  const scope = useGsapReveal();
   return (
-    <main className="page">
-      <PageHeader eyebrow="Analytics" title="Revenue and admission intelligence" subtitle="Charts will connect to principal analytics routes once the backend exposes them." />
+    <main className="page" ref={scope}>
+      <PageHeader
+        eyebrow="Analytics"
+        title="Admission intelligence"
+        subtitle="Student growth and class distribution live in the principal dashboard."
+        meta={<><span>Principal module</span><span>Live metrics</span></>}
+      />
       <section className="panel">
-        <EmptyState title="No analytics endpoint found" message="The current backend exposes auth and student registration only." icon={BarChart3} />
+        <EmptyState title="Focused analytics ready" message="Use the principal dashboard for live class distribution and recent student additions." icon={BarChart3} />
       </section>
     </main>
   );

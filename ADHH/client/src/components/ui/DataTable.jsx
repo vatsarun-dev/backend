@@ -1,11 +1,20 @@
 import { useMemo, useState } from "react";
-import { ArrowUpDown, Search } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpDown, Search } from "lucide-react";
 import { EmptyState } from "./EmptyState";
+import { Button } from "./Button";
 
-export function DataTable({ columns, rows, searchKey = "name" }) {
+export function DataTable({
+  columns,
+  rows,
+  searchKey = "name",
+  emptyTitle = "No records yet",
+  emptyMessage = "Records returned by the existing APIs will appear here.",
+  pageSize = 8,
+}) {
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState(columns[0]?.key);
   const [direction, setDirection] = useState("asc");
+  const [page, setPage] = useState(1);
 
   const data = useMemo(() => {
     const filtered = rows.filter((row) =>
@@ -18,16 +27,30 @@ export function DataTable({ columns, rows, searchKey = "name" }) {
     });
   }, [rows, query, searchKey, sortKey, direction]);
 
+  const pageCount = Math.max(1, Math.ceil(data.length / pageSize));
+  const pageRows = data.slice((page - 1) * pageSize, page * pageSize);
+
   function toggleSort(key) {
     if (sortKey === key) setDirection((current) => (current === "asc" ? "desc" : "asc"));
     setSortKey(key);
+    setPage(1);
   }
 
   return (
     <section className="table-shell" data-reveal>
       <div className="table-toolbar">
-        <Search size={17} />
-        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search records" />
+        <div className="table-search">
+          <Search size={17} />
+          <input
+            value={query}
+            onChange={(event) => {
+              setQuery(event.target.value);
+              setPage(1);
+            }}
+            placeholder="Search records"
+          />
+        </div>
+        <span>{data.length} records</span>
       </div>
       <div className="table-scroll">
         <table>
@@ -44,7 +67,7 @@ export function DataTable({ columns, rows, searchKey = "name" }) {
             </tr>
           </thead>
           <tbody>
-            {data.map((row) => (
+            {pageRows.map((row) => (
               <tr key={row._id || row.studentId}>
                 {columns.map((column) => (
                   <td key={column.key}>{column.render ? column.render(row) : row[column.key]}</td>
@@ -54,8 +77,17 @@ export function DataTable({ columns, rows, searchKey = "name" }) {
           </tbody>
         </table>
       </div>
+      {data.length ? (
+        <div className="table-footer">
+          <span>Page {page} of {pageCount}</span>
+          <div>
+            <Button variant="ghost" size="sm" icon={ArrowLeft} disabled={page === 1} onClick={() => setPage((value) => Math.max(1, value - 1))}>Prev</Button>
+            <Button variant="ghost" size="sm" icon={ArrowRight} disabled={page === pageCount} onClick={() => setPage((value) => Math.min(pageCount, value + 1))}>Next</Button>
+          </div>
+        </div>
+      ) : null}
       {!data.length ? (
-        <EmptyState title="No backend records yet" message="Records returned by the existing APIs will appear here." />
+        <EmptyState title={emptyTitle} message={emptyMessage} />
       ) : null}
     </section>
   );

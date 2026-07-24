@@ -1,5 +1,7 @@
 import { apiClient } from "./apiClient";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api";
+
 export const authService = {
   register(payload) {
     return apiClient.post("/user/register", payload);
@@ -10,10 +12,13 @@ export const authService = {
   forgotPassword(payload) {
     return apiClient.post("/user/forgot_password", payload);
   },
+  validateResetToken(token) {
+    return apiClient.get(`/user/reset-password/${token}`);
+  },
   updatePassword(userId, payload) {
     return apiClient.post(`/user/update-password/${userId}`, payload);
   },
   googleLoginUrl() {
-    return "/api/user/google";
+    return `${apiBaseUrl}/user/google`;
   },
 };

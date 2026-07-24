@@ -35,11 +35,9 @@ export default class AuthService {
     const isExisted = await this.authService.findByEmail(email);
     if (!isExisted) throw new error.NOTFOUNDERROR("user not found");
 
-    console.log(isExisted);
-    const compare = isExisted.comparePassword(password);
+    const compare = await isExisted.comparePassword(password);
 
     if (!compare) throw new error.UNAUTHORIZED("Wrong Credential");
-    console.log(compare);
 
     const accessToken = token.generateAccessToken(isExisted._id);
     const refreshToken = token.generateRefreshToken(isExisted._id);
@@ -48,10 +46,13 @@ export default class AuthService {
   }
 
   async GoogleLoginService(data) {
-    let { displayName, emails } = data;
     const email = data.emails[0].value;
     const isExisted = await this.authService.findByEmail(email);
-    if (isExisted) throw new error.ALLREADYEXIST("User is already existed");
+    if (isExisted) {
+      const accessToken = token.generateAccessToken(isExisted._id);
+      const refreshToken = token.generateRefreshToken(isExisted._id);
+      return { accessToken, refreshToken, user: isExisted };
+    }
 
     const user = await this.authService.create({
       email: email,
@@ -66,11 +67,12 @@ export default class AuthService {
 
   async forgotPasswordService(data) {
     let { email } = data;
+    if (!email) throw new error.NOTFOUNDERROR("email is required");
     const isExisted = await this.authService.findByEmail(email);
     if (!isExisted) throw new error.NOTFOUNDERROR("user not found");
     const rawToken = token.generateRawToken(isExisted._id);
 
-    const link = `http://localhost:3000/api/user/reset-password/${rawToken}`;
+    const link = `${env.CLIENT_URL || "http://localhost:5173"}/reset-password/${rawToken}`;
 
     const sendMail = tempMail(isExisted.name, link);
 
@@ -79,9 +81,15 @@ export default class AuthService {
 
   async resetPasswordService(data) {
     let { token } = data;
-    const decode = jwt.verify(token, env.RAWTOKEN);
-    if (!decode) throw new error.UNAUTHORIZED("user not found");
+    if (!token) throw new error.UNAUTHORIZED("Reset link is invalid or expired");
+    let decode;
+    try {
+      decode = jwt.verify(token, env.RAWTOKEN);
+    } catch {
+      throw new error.UNAUTHORIZED("Reset link is invalid or expired");
+    }
     const user = await this.authService.findById(decode.id);
+    if (!user) throw new error.UNAUTHORIZED("Reset link is invalid or expired");
 
     return user;
   }
@@ -89,10 +97,10 @@ export default class AuthService {
   async updatePasswordService(_id, pass) {
     let { id } = _id;
     let { password } = pass;
-    console.log(id);
-    console.log(password);
+    if (!password) throw new error.NOTFOUNDERROR("password is required");
+    if (password.length < 6 || password.length > 10)
+      throw new error.UNAUTHORIZED("Password must contain 6-10 characters");
     const user = await this.authService.findById(id);
-    console.log(user);
     if (!user) throw new error.NOTFOUNDERROR("user not found");
     const hashPassword = await bcrypt.hash(password, 10);
 
