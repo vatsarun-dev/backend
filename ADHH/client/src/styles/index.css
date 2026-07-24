@@ -137,6 +137,10 @@ button:disabled {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px;
 }
+.dashboard-header {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+}
 .site-logo,
 .footer-brand {
   display: inline-flex;
@@ -183,10 +187,57 @@ button:disabled {
   place-items: center;
   justify-self: end;
 }
+.dashboard-header .menu-button {
+  display: grid;
+  place-items: center;
+  justify-self: end;
+}
 .site-nav {
   display: flex;
   justify-content: center;
   gap: 10px;
+}
+.dashboard-nav {
+  grid-column: 1 / -1;
+  display: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: stretch;
+  gap: 12px;
+  padding-top: 8px;
+}
+.dashboard-nav.open {
+  display: grid;
+}
+.dashboard-header .nav-group > button {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+  background: var(--cream-2);
+}
+.dashboard-header .nav-menu {
+  position: static;
+  min-width: 0;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  box-shadow: none;
+  background: var(--cream-2);
+}
+.dashboard-menu-actions {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.dashboard-menu-actions .text-link,
+.dashboard-menu-actions .pill-button {
+  justify-content: center;
+  min-height: 52px;
+}
+.dashboard-menu-actions .text-link {
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
 }
 .auth-menu {
   grid-column: 1 / -1;
@@ -1520,6 +1571,9 @@ dd {
     display: grid;
     gap: 10px;
   }
+  .dashboard-nav.open {
+    grid-template-columns: 1fr;
+  }
   .nav-group > button {
     width: 100%;
     justify-content: flex-start;
@@ -1543,6 +1597,9 @@ dd {
   .site-actions .text-link {
     flex: 1 1 150px;
     justify-content: center;
+  }
+  .dashboard-menu-actions {
+    grid-template-columns: 1fr;
   }
   .page-header,
   .form-row,

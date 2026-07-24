@@ -65,15 +65,21 @@ export function DashboardLayout() {
 
   return (
     <div className="site-shell" ref={shell}>
-      <header className="site-header">
+      <header className="site-header dashboard-header">
         <NavLink to={base} className="site-logo" onClick={() => setMenuOpen(false)}>
           <span><GraduationCap size={22} /></span>
           <strong>{SCHOOL.shortName}</strong>
         </NavLink>
-        <button className="menu-button" type="button" onClick={() => setMenuOpen((value) => !value)} aria-label="Toggle navigation">
+        <button
+          className="menu-button"
+          type="button"
+          onClick={() => setMenuOpen((value) => !value)}
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
+        >
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
-        <nav className={`site-nav ${menuOpen ? "open" : ""}`}>
+        <nav className={`site-nav dashboard-nav ${menuOpen ? "open" : ""}`}>
           {groups.map((group) => (
             <div className="nav-group" key={group.label}>
               <button type="button">{group.label}</button>
@@ -87,16 +93,16 @@ export function DashboardLayout() {
               </div>
             </div>
           ))}
+          <div className="site-actions dashboard-menu-actions">
+            <button className="text-link" type="button" onClick={handleLogout}>
+              <LogOut size={16} />
+              <span>Sign out</span>
+            </button>
+            <NavLink className="pill-button dark" to={`${base}/students/new`} onClick={() => setMenuOpen(false)}>
+              Get started
+            </NavLink>
+          </div>
         </nav>
-        <div className="site-actions">
-          <button className="text-link" type="button" onClick={handleLogout}>
-            <LogOut size={16} />
-            Sign out
-          </button>
-          <NavLink className="pill-button dark" to={`${base}/students/new`}>
-            Get started
-          </NavLink>
-        </div>
       </header>
       <Outlet />
       <footer className="site-footer">

@@ -39,10 +39,11 @@ if (!parsed.success) {
 const env = {
   ...parsed.data,
 };
+const isLocalClientUrl = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(env.CLIENT_URL);
 
 env.GOOGLE_CALLBACK =
-  process.env.NODE_ENV === "production"
-    ? `${env.CLIENT_URL}/api/user/google/callback`
-    : parsed.data.GOOGLE_CALLBACK || `${env.CLIENT_URL}/api/user/google/callback`;
+  isLocalClientUrl && parsed.data.GOOGLE_CALLBACK
+    ? parsed.data.GOOGLE_CALLBACK
+    : `${env.CLIENT_URL}/api/user/google/callback`;
 
 export default env;
