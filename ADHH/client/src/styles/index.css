@@ -133,6 +133,10 @@ button:disabled {
   background: rgba(255, 253, 247, 0.88);
   backdrop-filter: blur(18px);
 }
+.auth-public-header {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+}
 .site-logo,
 .footer-brand {
   display: inline-flex;
@@ -174,10 +178,39 @@ button:disabled {
   background: var(--paper);
   color: var(--ink);
 }
+.auth-public-header .menu-button {
+  display: grid;
+  place-items: center;
+  justify-self: end;
+}
 .site-nav {
   display: flex;
   justify-content: center;
   gap: 10px;
+}
+.auth-menu {
+  grid-column: 1 / -1;
+  display: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 8px;
+}
+.auth-menu.open {
+  display: grid;
+}
+.auth-menu .text-link,
+.auth-menu .pill-button {
+  justify-content: center;
+  min-height: 52px;
+  border-radius: var(--radius-pill);
+}
+.auth-menu .text-link {
+  border: 1px solid transparent;
+  padding: 0 18px;
+}
+.auth-menu .text-link:hover {
+  border-color: var(--line);
+  background: var(--cream-2);
 }
 .nav-group {
   position: relative;

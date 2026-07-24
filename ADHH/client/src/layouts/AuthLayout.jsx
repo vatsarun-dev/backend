@@ -24,7 +24,7 @@ export function AuthLayout() {
 
   return (
     <main className="auth-site" ref={scope}>
-      <header className="site-header">
+      <header className="site-header auth-public-header">
         <Link
           to="/login"
           className="site-logo"
@@ -40,44 +40,18 @@ export function AuthLayout() {
           type="button"
           onClick={() => setMenuOpen((value) => !value)}
           aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
         >
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
-        <nav className={`site-nav ${menuOpen ? "open" : ""}`}>
-          <div className="nav-group">
-            <button type="button">Student Experience</button>
-            <div className="nav-menu">
-              <Link to="/login" onClick={() => setMenuOpen(false)}>
-                Approach
-              </Link>
-              <Link to="/signup" onClick={() => setMenuOpen(false)}>
-                Admissions
-              </Link>
-              <Link to="/forgot-password" onClick={() => setMenuOpen(false)}>
-                Family support
-              </Link>
-            </div>
-          </div>
-          <div className="nav-group">
-            <button type="button">About</button>
-            <div className="nav-menu">
-              <Link to="/login" onClick={() => setMenuOpen(false)}>
-                Company
-              </Link>
-              <Link to="/login" onClick={() => setMenuOpen(false)}>
-                Newsroom
-              </Link>
-            </div>
-          </div>
-        </nav>
-        <div className="site-actions">
-          <Link className="text-link" to="/login">
+        <nav className={`auth-menu ${menuOpen ? "open" : ""}`} aria-label="Account navigation">
+          <Link className="text-link" to="/login" onClick={() => setMenuOpen(false)}>
             Sign in
           </Link>
-          <Link className="pill-button dark" to="/signup">
+          <Link className="pill-button dark" to="/signup" onClick={() => setMenuOpen(false)}>
             Get started
           </Link>
-        </div>
+        </nav>
       </header>
       <section className="auth-page">
         <div className="auth-brand">
