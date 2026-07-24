@@ -16,8 +16,13 @@ export default class AdminRepo {
       id,
       {
         password: hashPassword,
+        authProvider: "local",
       },
       { new: true },
     );
+  }
+
+  async updateRefreshToken(id, refreshToken) {
+    return await adminModel.findByIdAndUpdate(id, { refreshToken }, { new: true });
   }
 }

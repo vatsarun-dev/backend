@@ -59,7 +59,8 @@ export default class AuthService {
   }
 
   async GoogleLoginService(data) {
-    const email = data.emails[0].value;
+    const email = data.emails?.[0]?.value;
+    if (!email) throw new error.UNAUTHORIZED("Google account email was not provided");
     const isExisted = await this.authService.findByEmail(email);
     if (isExisted) {
       const accessToken = token.generateAccessToken(isExisted._id);
@@ -83,8 +84,55 @@ export default class AuthService {
     return { accessToken, refreshToken, user };
   }
 
+  async refreshTokenService(refreshToken) {
+    if (!refreshToken) throw new error.UNAUTHORIZED("Refresh token is required");
+    let decoded;
+    try {
+      decoded = jwt.verify(refreshToken, env.REFRESHTOKEN);
+    } catch {
+      throw new error.UNAUTHORIZED("Refresh token is invalid or expired");
+    }
+
+    const user = await this.authService.findById(decoded.id);
+    if (!user || user.refreshToken !== refreshToken) {
+      throw new error.UNAUTHORIZED("Refresh token is invalid");
+    }
+
+    const accessToken = token.generateAccessToken(user._id);
+    const newRefreshToken = token.generateRefreshToken(user._id);
+    user.refreshToken = newRefreshToken;
+    await user.save();
+
+    return { accessToken, refreshToken: newRefreshToken, user };
+  }
+
+  async currentUserService(accessToken) {
+    if (!accessToken) throw new error.UNAUTHORIZED("Access token is required");
+    let decoded;
+    try {
+      decoded = jwt.verify(accessToken, env.ACCESSTOKEN);
+    } catch {
+      throw new error.UNAUTHORIZED("Access token is invalid or expired");
+    }
+
+    const user = await this.authService.findById(decoded.id);
+    if (!user) throw new error.UNAUTHORIZED("User not found");
+    return user;
+  }
+
+  async logoutService(refreshToken) {
+    if (!refreshToken) return;
+    try {
+      const decoded = jwt.verify(refreshToken, env.REFRESHTOKEN);
+      await this.authService.updateRefreshToken(decoded.id, "");
+    } catch {
+      return;
+    }
+  }
+
   async forgotPasswordService(data) {
     let { email } = data;
+    email = email?.trim().toLowerCase();
     if (!email) throw new error.NOTFOUNDERROR("email is required");
     const isExisted = await this.authService.findByEmail(email);
     if (!isExisted) throw new error.NOTFOUNDERROR("user not found");
@@ -92,7 +140,7 @@ export default class AuthService {
 
     const link = `${env.CLIENT_URL || "http://localhost:5173"}/reset-password/${rawToken}`;
 
-    const sendMail = tempMail(isExisted.name, link);
+    const sendMail = tempMail(isExisted.name || "there", link);
 
     return await sendEmail(isExisted.email, "forgot password", sendMail);
   }
@@ -125,6 +173,6 @@ export default class AuthService {
 
     const update = await this.authService.findByIdAndUpdate(id, hashPassword);
 
-    return update;
+    return { _id: update._id, email: update.email };
   }
 }

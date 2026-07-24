@@ -1,4 +1,6 @@
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction =
+  process.env.NODE_ENV === "production" ||
+  /^https:\/\//i.test(process.env.CLIENT_URL || "");
 
 export default {
   PORT: 8000,
@@ -21,7 +23,7 @@ export const app_constant = {
     refreshToken: {
       httpOnly: true,
       secure: isProduction,
-      maxAge: 15 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
       sameSite: isProduction ? "none" : "lax",
     },
   },

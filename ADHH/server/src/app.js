@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 
 export default function createApp() {
   const app = express();
+  app.set("trust proxy", 1);
 
   securityMiddlewares(app);
   GoogleStrategyMiddlewares();

@@ -21,6 +21,21 @@ authRoutes.post(
   asyncHandler(authController.loginUserController.bind(authController)),
 );
 
+authRoutes.post(
+  "/refresh-token",
+  asyncHandler(authController.refreshTokenController.bind(authController)),
+);
+
+authRoutes.post(
+  "/logout",
+  asyncHandler(authController.logoutController.bind(authController)),
+);
+
+authRoutes.get(
+  "/me",
+  asyncHandler(authController.currentUserController.bind(authController)),
+);
+
 authRoutes.get(
   "/google",
   passport.authenticate("google", {
