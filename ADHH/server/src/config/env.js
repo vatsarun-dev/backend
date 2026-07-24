@@ -38,9 +38,11 @@ if (!parsed.success) {
 
 const env = {
   ...parsed.data,
-  GOOGLE_CALLBACK:
-    parsed.data.GOOGLE_CALLBACK ||
-    `${parsed.data.CLIENT_URL}/api/user/google/callback`,
 };
+
+env.GOOGLE_CALLBACK =
+  process.env.NODE_ENV === "production"
+    ? `${env.CLIENT_URL}/api/user/google/callback`
+    : parsed.data.GOOGLE_CALLBACK || `${env.CLIENT_URL}/api/user/google/callback`;
 
 export default env;

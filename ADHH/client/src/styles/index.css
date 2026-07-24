@@ -294,6 +294,7 @@ button:disabled {
 .oauth-button,
 .icon-button {
   width: auto;
+  max-width: 100%;
   min-height: 46px;
   display: inline-flex;
   margin-top: 0;
@@ -306,11 +307,18 @@ button:disabled {
   background: var(--dark);
   color: var(--cream-2);
   font-weight: 800;
-  white-space: nowrap;
+  text-align: center;
   transition:
     transform 0.2s var(--ease),
     background 0.2s var(--ease),
     color 0.2s var(--ease);
+}
+.btn span,
+.pill-button span,
+.oauth-button span,
+.text-link span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .pill-button:hover,
 .btn:hover,
@@ -365,7 +373,7 @@ button:disabled {
 .auth-brand {
   position: relative;
   overflow: hidden;
-  min-height: 720px;
+  min-height: clamp(460px, 58vw, 660px);
   display: grid;
   align-items: end;
   padding: clamp(34px, 6vw, 76px);
@@ -451,7 +459,7 @@ button:disabled {
   margin: 8px 0 12px;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 4.4vw, 4.6rem);
+  font-size: clamp(2.15rem, 4vw, 4.2rem);
   font-weight: 700;
   line-height: 0.96;
   letter-spacing: 0;
@@ -581,13 +589,15 @@ button:disabled {
 .page {
   width: min(calc(100% - 28px), var(--container));
   margin: 0 auto;
-  padding: clamp(28px, 5vw, 56px) 0 var(--section);
+  padding: clamp(24px, 4vw, 44px) 0 var(--section);
 }
 .page-header {
   position: relative;
   min-height: clamp(300px, 36vw, 440px);
-  align-items: end;
-  margin-bottom: clamp(28px, 4vw, 48px);
+  display: grid;
+  align-content: end;
+  justify-items: start;
+  margin-bottom: clamp(34px, 4.5vw, 56px);
   padding: clamp(28px, 4.5vw, 48px);
   overflow: hidden;
   border-radius: var(--radius-lg);
@@ -595,6 +605,7 @@ button:disabled {
   background: var(--sage)
     url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=82")
     center/cover;
+  isolation: isolate;
 }
 .page-header > * {
   position: relative;
@@ -609,14 +620,14 @@ button:disabled {
 .page-header h1 {
   max-width: min(820px, 100%);
   color: var(--cream-2);
-  font-size: clamp(2.6rem, 5.2vw, 5rem);
+  font-size: clamp(2.35rem, 4.8vw, 4.6rem);
   overflow-wrap: anywhere;
   text-wrap: balance;
 }
 .page-header p {
   max-width: 630px;
   color: rgba(255, 253, 247, 0.86);
-  font-size: 1.18rem;
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
 }
 .page-action {
   margin-top: 24px;
@@ -638,6 +649,7 @@ button:disabled {
   background: rgba(255, 253, 247, 0.12);
   font-size: 0.82rem;
   font-weight: 850;
+  max-width: 100%;
 }
 .stats-grid {
   display: grid;
@@ -654,7 +666,7 @@ button:disabled {
   background: var(--paper);
 }
 .stat-card {
-  min-height: 240px;
+  min-height: 200px;
   display: grid;
   align-content: space-between;
   gap: 20px;
@@ -713,7 +725,7 @@ button:disabled {
   margin-bottom: clamp(42px, 7vw, 88px);
 }
 .hero-widget {
-  min-height: 360px;
+  min-height: 320px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
@@ -798,7 +810,7 @@ button:disabled {
 }
 
 .empty-state {
-  min-height: 330px;
+  min-height: 260px;
   display: grid;
   place-items: center;
   align-content: center;
@@ -822,11 +834,15 @@ button:disabled {
 }
 
 .class-tabs {
+  position: relative;
+  z-index: 2;
   display: flex;
   gap: 10px;
   overflow-x: auto;
-  margin: 0 0 36px;
-  padding-bottom: 6px;
+  margin: 0 0 clamp(28px, 4vw, 44px);
+  padding: 2px 0 8px;
+  scroll-padding-inline: 8px;
+  -webkit-overflow-scrolling: touch;
 }
 .class-tabs button,
 .theme-toggle button {
@@ -863,7 +879,7 @@ button:disabled {
 .upload-zone {
   position: sticky;
   top: 110px;
-  min-height: 520px;
+  min-height: 460px;
   display: grid;
   place-items: center;
   align-content: center;
@@ -899,7 +915,7 @@ button:disabled {
 .upload-zone img {
   width: 100%;
   height: 100%;
-  min-height: 520px;
+  min-height: 460px;
   object-fit: cover;
 }
 .upload-zone input {
@@ -1022,6 +1038,8 @@ tbody tr:hover {
 }
 
 .search-bar {
+  position: relative;
+  z-index: 2;
   min-height: 64px;
   margin: 0 0 30px;
   padding: 0 22px;
@@ -1034,7 +1052,7 @@ tbody tr:hover {
 }
 .student-profile {
   display: grid;
-  grid-template-columns: 210px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(160px, 210px) minmax(0, 1fr) auto;
   gap: 28px;
   align-items: center;
 }
@@ -1121,6 +1139,7 @@ dd {
 .profile-card {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 22px;
 }
 .profile-card p {
@@ -1368,7 +1387,7 @@ dd {
   margin: 0;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(6rem, 18vw, 12rem);
+  font-size: clamp(4rem, 14vw, 9rem);
   font-weight: 700;
   line-height: 0.82;
 }
@@ -1582,9 +1601,9 @@ dd {
     padding-top: 34px;
   }
   .page-header {
-    min-height: 380px;
-    padding: 24px;
-    margin-bottom: 40px;
+    min-height: 300px;
+    padding: 22px;
+    margin-bottom: 26px;
   }
   .stats-grid,
   .form-grid,
@@ -1600,6 +1619,15 @@ dd {
   .class-tabs,
   .search-bar {
     margin-top: 0;
+  }
+  .class-tabs {
+    gap: 8px;
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+  }
+  .class-tabs button {
+    min-height: 40px;
+    padding: 0 15px;
   }
   .student-profile {
     align-items: stretch;

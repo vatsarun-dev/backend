@@ -7,6 +7,7 @@ import env from "../../config/env.js";
 const authRoutes = Router();
 
 const authController = new AuthController();
+const googleFailureRedirect = `${env.CLIENT_URL}/login?error=google_auth_failed`;
 
 authRoutes.post(
   "/register",
@@ -31,7 +32,7 @@ authRoutes.get(
 authRoutes.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: `${env.CLIENT_URL}/login`,
+    failureRedirect: googleFailureRedirect,
     session: false,
   }),
   asyncHandler(authController.GoogleLoginController.bind(authController)),
