@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { EmptyState } from "../../components/ui/EmptyState";
 import { PageHeader } from "../../components/ui/PageHeader";
+import { SchoolStorySections } from "../../components/ui/SchoolStorySections";
 import { StatCard } from "../../components/ui/StatCard";
 import { useAuth } from "../../context/AuthContext";
 import { useGsapReveal } from "../../hooks/useGsapReveal";
@@ -88,6 +89,7 @@ export function TeacherDashboard() {
           <EmptyState title="No students yet" message="Add a student to populate this dashboard." action={<Link to="students/new"><Button icon={UserPlus}>Add first student</Button></Link>} />
         )}
       </section>
+      <SchoolStorySections basePath="/teacher" />
     </main>
   );
 }

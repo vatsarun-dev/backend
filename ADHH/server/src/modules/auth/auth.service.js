@@ -22,6 +22,9 @@ export default class AuthService {
     const accessToken = token.generateAccessToken(user._id);
     const refreshToken = token.generateRefreshToken(user._id);
 
+    user.refreshToken = refreshToken;
+    await user.save();
+
     return { accessToken, refreshToken, user };
   }
 
@@ -42,6 +45,9 @@ export default class AuthService {
     const accessToken = token.generateAccessToken(isExisted._id);
     const refreshToken = token.generateRefreshToken(isExisted._id);
 
+    isExisted.refreshToken = refreshToken;
+    await isExisted.save();
+
     return { accessToken, refreshToken, isExisted };
   }
 
@@ -57,11 +63,14 @@ export default class AuthService {
     const user = await this.authService.create({
       email: email,
       name: data.displayName,
+      authProvider: data.provider,
     });
 
     const accessToken = token.generateAccessToken(user._id);
     const refreshToken = token.generateRefreshToken(user._id);
 
+    user.refreshToken = refreshToken;
+    await user.save();
     return { accessToken, refreshToken, user };
   }
 
@@ -81,7 +90,8 @@ export default class AuthService {
 
   async resetPasswordService(data) {
     let { token } = data;
-    if (!token) throw new error.UNAUTHORIZED("Reset link is invalid or expired");
+    if (!token)
+      throw new error.UNAUTHORIZED("Reset link is invalid or expired");
     let decode;
     try {
       decode = jwt.verify(token, env.RAWTOKEN);

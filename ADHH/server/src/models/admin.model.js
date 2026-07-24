@@ -1,37 +1,41 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
+
 const adminSchema = new Schema(
   {
-    name: {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+
+    authProvider: {
       type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
+      enum: ["local", "google"],
+      default: "local",
     },
 
     designation: {
       type: String,
+      enum: ["teacher", "admin", "principal"], // adjust as needed
     },
 
     password: {
       type: String,
+      required: function () {
+        return this.authProvider === "local";
+      },
     },
 
-    refreshToken: {
-      type: String,
-    },
+    refreshToken: { type: String },
   },
-  {
-    timestamp: true,
-  },
+  { timestamps: true }, // was "timestamp" — fixed typo
 );
 
 adminSchema.pre("save", async function () {
-  if (!this.isModified("password")) return;
-  this.password = bcrypt.hashSync(this.password, 10);
+  if (this.authProvider === "google" && !this.designation) {
+    this.designation = "teacher";
+  }
+  if (this.isModified("password")) {
+    this.password = bcrypt.hashSync(this.password, 10);
+  }
 });
 
 adminSchema.methods.comparePassword = async function (password) {

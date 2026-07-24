@@ -1,6 +1,7 @@
 import { BarChart3, Building2, GraduationCap, PieChart, TrendingUp, UsersRound } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { PageHeader } from "../../components/ui/PageHeader";
+import { SchoolStorySections } from "../../components/ui/SchoolStorySections";
 import { StatCard } from "../../components/ui/StatCard";
 import { EmptyState } from "../../components/ui/EmptyState";
 import { useGsapReveal } from "../../hooks/useGsapReveal";
@@ -83,6 +84,7 @@ export function PrincipalDashboard() {
           <EmptyState title="No analytics yet" message="Student metrics will appear after registrations are created." />
         )}
       </section>
+      <SchoolStorySections basePath="/principal" />
     </main>
   );
 }

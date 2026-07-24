@@ -10,7 +10,10 @@ export function normalizeRole(user) {
 }
 
 export function dashboardFor(user) {
-  return normalizeRole(user) === "Principal" ? ROUTES.principal : ROUTES.teacher;
+  const role = normalizeRole(user);
+  if (role === "Principal") return ROUTES.principal;
+  if (role === "Teacher") return ROUTES.teacher;
+  return ROUTES.teacher;
 }
 
 export function saveSession(session, remember) {

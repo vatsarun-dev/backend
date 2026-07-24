@@ -1,27 +1,27 @@
-import { Cookie, KeyRound, Moon, Palette, ShieldCheck, Sun } from "lucide-react";
+import { Cookie, KeyRound, Palette, ShieldCheck, Sparkles, Sun } from "lucide-react";
 import { PageHeader } from "../../components/ui/PageHeader";
 import { useTheme } from "../../context/ThemeContext";
 import { useGsapReveal } from "../../hooks/useGsapReveal";
 
 export function SettingsPage() {
   const scope = useGsapReveal();
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   return (
     <main className="page" ref={scope}>
       <PageHeader
         eyebrow="Settings"
         title="Workspace preferences"
-        subtitle="Control local display preferences and review the active workspace safeguards."
+        subtitle="Review local presentation preferences and the active workspace safeguards."
         meta={<><span>Local preferences</span><span>Protected access</span></>}
       />
       <section className="panel settings-list">
         <div>
           <Palette size={20} />
-          <span><strong>Theme</strong><small>Choose the interface mode for this browser.</small></span>
+          <span><strong>Warm schoolhouse theme</strong><small>The interface stays in the cream editorial system across the workspace.</small></span>
           <div className="theme-toggle" role="group" aria-label="Theme">
-            <button className={theme === "light" ? "active" : ""} type="button" onClick={() => setTheme("light")}><Sun size={16} /> Light</button>
-            <button className={theme === "dark" ? "active" : ""} type="button" onClick={() => setTheme("dark")}><Moon size={16} /> Dark</button>
+            <button className="active" type="button" onClick={() => setTheme("light")}><Sun size={16} /> Cream</button>
+            <button type="button" onClick={() => setTheme("light")}><Sparkles size={16} /> Editorial</button>
           </div>
         </div>
         <div><ShieldCheck size={20} /><span><strong>Protected routes</strong><small>Unauthenticated users return to login.</small></span><strong>Enabled</strong></div>

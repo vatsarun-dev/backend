@@ -48,12 +48,11 @@ export function DashboardLayout() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".site-header, [data-reveal]", {
+      gsap.from(".site-header", {
         autoAlpha: 0,
-        y: 18,
-        duration: 0.7,
+        y: -12,
+        duration: 0.45,
         ease: "power3.out",
-        stagger: 0.05,
       });
     }, shell);
     return () => ctx.revert();
@@ -114,7 +113,7 @@ export function DashboardLayout() {
           <div><strong>Contact</strong><span>Admissions desk</span><span>786-791-GROW</span><span>{SCHOOL.location}</span></div>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 {SCHOOL.shortName}. All rights reserved.</span>
+          <span>(c) 2026 {SCHOOL.shortName}. All rights reserved.</span>
           <span><BookOpenCheck size={16} /> A warm, teacher-led school workspace.</span>
         </div>
       </footer>
