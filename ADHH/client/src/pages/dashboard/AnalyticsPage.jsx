@@ -10,7 +10,7 @@ export function AnalyticsPage() {
       <PageHeader
         eyebrow="Analytics"
         title="Admission intelligence"
-        subtitle="Student growth and class distribution live in the principal dashboard."
+        subtitle="A focused analytics entry point for class distribution and admission signals."
         meta={<><span>Principal module</span><span>Live metrics</span></>}
       />
       <section className="panel">

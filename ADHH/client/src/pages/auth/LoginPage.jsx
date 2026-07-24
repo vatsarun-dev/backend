@@ -65,11 +65,11 @@ export function LoginPage() {
   }
 
   return (
-    <section className="auth-card glass" ref={card}>
+    <section className="auth-card" ref={card}>
       <div className="auth-card-head" data-auth-reveal>
-        <span className="eyebrow">Secure Login</span>
-        <h2>Open your ERP workspace</h2>
-        <p>Teacher and Principal access is assigned by the backend account designation.</p>
+        <span className="eyebrow">Secure login</span>
+        <h2>Sign in to ADHH</h2>
+        <p>Use your staff credentials to enter the workspace assigned to your role.</p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="stack-form" data-auth-reveal>
         <FormField label="Email" error={errors.email?.message}>

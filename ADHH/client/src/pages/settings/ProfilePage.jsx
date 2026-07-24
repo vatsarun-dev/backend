@@ -12,7 +12,7 @@ export function ProfilePage() {
       <PageHeader
         eyebrow="Profile"
         title="Account details"
-        subtitle="Profile data is rendered from the authenticated backend login response."
+        subtitle="Staff identity and role details from the authenticated backend session."
         meta={<><span>Signed-in staff</span><span>Role-aware workspace</span></>}
       />
       <section className="profile-card panel">

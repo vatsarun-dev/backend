@@ -2,13 +2,13 @@ import { Activity, ArrowRight, CalendarDays, GraduationCap, Search, UserPlus, Us
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
+import { EmptyState } from "../../components/ui/EmptyState";
 import { PageHeader } from "../../components/ui/PageHeader";
 import { StatCard } from "../../components/ui/StatCard";
-import { EmptyState } from "../../components/ui/EmptyState";
-import { useGsapReveal } from "../../hooks/useGsapReveal";
-import { studentService } from "../../services/studentService";
-import { getApiError } from "../../services/apiClient";
 import { useAuth } from "../../context/AuthContext";
+import { useGsapReveal } from "../../hooks/useGsapReveal";
+import { getApiError } from "../../services/apiClient";
+import { studentService } from "../../services/studentService";
 
 export function TeacherDashboard() {
   const scope = useGsapReveal();
@@ -38,24 +38,24 @@ export function TeacherDashboard() {
   return (
     <main className="page" ref={scope}>
       <PageHeader
-        eyebrow="Teacher Workspace"
-        title={`Welcome, ${user?.name || "Teacher"}`}
-        subtitle="Register, browse, and search shared student records through backend-backed workflows."
-        meta={<><span>Live student operations</span><span>Role: Teacher</span></>}
+        eyebrow="Teacher workspace"
+        title={`Good to see you, ${user?.name || "Teacher"}`}
+        subtitle="Register students, search records, and keep daily academic work moving from one focused desk."
+        meta={<><span>Live operations</span><span>Teacher workspace</span></>}
         action={<Link to="students/new"><Button icon={UserPlus}>Add student</Button></Link>}
       />
       <div className="stats-grid">
         <StatCard label="Total students" value={dashboard?.totalStudents ?? "--"} meta="Shared database" icon={UsersRound} tone="green" trend="+ live" />
         <StatCard label="Today's registrations" value={dashboard?.todaysRegistrations ?? "--"} meta="Created since midnight" icon={Activity} tone="blue" trend="today" />
         <StatCard label="Most active class" value={topClass?.[0] || "--"} meta={topClass ? `${topClass[1]} students` : "Waiting for records"} icon={GraduationCap} tone="amber" trend="focus" />
-        <StatCard label="Search mode" value="Live" meta="Name, ID, mobile, class" icon={Search} tone="rose" trend="ready" />
+        <StatCard label="Search" value="Live" meta="Name, ID, mobile, class" icon={Search} tone="rose" trend="ready" />
       </div>
       <div className="dashboard-grid">
         <section className="panel hero-widget" data-reveal>
           <div>
-            <span className="eyebrow">Today’s rhythm</span>
-            <h2>Keep admissions moving with fewer clicks.</h2>
-            <p>Jump into the workflows teachers use most often: add a student, search the register, or review the full class list.</p>
+            <span className="eyebrow">Today's rhythm</span>
+            <h2>Move from registration to lookup without losing context.</h2>
+            <p>Start the workflows teachers use most often: add a student, search the register, or review the current class list.</p>
           </div>
           <div className="quick-actions">
             <Link to="students/new"><Button icon={UserPlus}>Register</Button></Link>
@@ -79,7 +79,7 @@ export function TeacherDashboard() {
             {dashboard.recentStudents.map((student) => (
               <Link to="students" key={student._id || student.studentId}>
                 <span className="avatar">{student.name?.slice(0, 1)}</span>
-                <div><strong>{student.name}</strong><small>Class {student.class} · {student.studentId}</small></div>
+                <div><strong>{student.name}</strong><small>Class {student.class} / {student.studentId}</small></div>
                 <ArrowRight size={16} />
               </Link>
             ))}

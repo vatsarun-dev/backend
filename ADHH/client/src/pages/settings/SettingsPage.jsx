@@ -12,13 +12,13 @@ export function SettingsPage() {
       <PageHeader
         eyebrow="Settings"
         title="Workspace preferences"
-        subtitle="Theme, browser session, and route security controls for this ERP workspace."
+        subtitle="Control local display preferences and review the active workspace safeguards."
         meta={<><span>Local preferences</span><span>Protected access</span></>}
       />
       <section className="panel settings-list">
         <div>
           <Palette size={20} />
-          <span><strong>Theme</strong><small>Choose the handcrafted interface mode.</small></span>
+          <span><strong>Theme</strong><small>Choose the interface mode for this browser.</small></span>
           <div className="theme-toggle" role="group" aria-label="Theme">
             <button className={theme === "light" ? "active" : ""} type="button" onClick={() => setTheme("light")}><Sun size={16} /> Light</button>
             <button className={theme === "dark" ? "active" : ""} type="button" onClick={() => setTheme("dark")}><Moon size={16} /> Dark</button>

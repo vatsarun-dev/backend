@@ -31,7 +31,7 @@ export function GoogleCallbackPage() {
   }, [authenticate, navigate, params]);
 
   return (
-    <section className="auth-card glass">
+    <section className="auth-card">
       <div className="auth-card-head">
         <span className="eyebrow">Google Authentication</span>
         <h2>Finishing sign-in</h2>

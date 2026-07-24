@@ -31,7 +31,7 @@ export function ForgotPasswordPage() {
   }
 
   return (
-    <section className="auth-card glass">
+    <section className="auth-card">
       <div className="auth-card-head">
         <span className="eyebrow">Password Recovery</span>
         <h2>Request a reset link</h2>

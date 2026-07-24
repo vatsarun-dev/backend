@@ -34,9 +34,9 @@ export function PrincipalDashboard() {
   return (
     <main className="page" ref={scope}>
       <PageHeader
-        eyebrow="Principal Console"
+        eyebrow="Principal console"
         title="Institution overview"
-        subtitle="Live admission and class distribution metrics from the shared backend database."
+        subtitle="Track class strength, admission velocity, and operational coverage from live student records."
         meta={<><span>Executive workspace</span><span>{classCount || 0} active classes</span></>}
       />
       <div className="stats-grid">
@@ -49,8 +49,8 @@ export function PrincipalDashboard() {
         <section className="panel hero-widget" data-reveal>
           <div>
             <span className="eyebrow">Academic intelligence</span>
-            <h2>See class strength, admission velocity, and operational focus at a glance.</h2>
-            <p>Designed for fast scanning before making staffing, admission, and classroom decisions.</p>
+            <h2>Read the school register like an operating dashboard.</h2>
+            <p>Fast signals for staffing, admission planning, and classroom capacity decisions.</p>
           </div>
           <div className="radial-meter" style={{ "--meter": `${Math.min(100, classCount * 12)}%` }}>
             <PieChart size={26} />

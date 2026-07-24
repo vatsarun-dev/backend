@@ -38,7 +38,7 @@ export function StudentsPage() {
       <PageHeader
         eyebrow="Students"
         title="Student records"
-        subtitle="Browse the shared student database class-wise."
+        subtitle="Browse, filter, and sort the shared student register by class and status."
         meta={<><span>{students.length} total records</span><span>{classes.length - 1} class filters</span></>}
         action={<Button icon={RefreshCw} onClick={refresh} loading={loading}>Refresh</Button>}
       />
@@ -57,7 +57,7 @@ export function StudentsPage() {
       {error ? (
         <section className="panel"><EmptyState icon={GraduationCap} title="Could not load students" message={error} /></section>
       ) : loading ? (
-        <section className="table-shell skeleton-list" aria-label="Loading students"><i /><i /><i /><i /></section>
+        <section className="table-shell skeleton-list" aria-label="Loading students"><i /><i /><i /><i /><i /></section>
       ) : (
         <DataTable columns={columns} rows={rows} searchKey="name" emptyTitle="No students in this class" emptyMessage="New registrations will appear here automatically after they are saved." />
       )}

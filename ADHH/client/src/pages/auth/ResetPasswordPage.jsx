@@ -75,7 +75,7 @@ export function ResetPasswordPage() {
   }
 
   return (
-    <section className="auth-card glass">
+    <section className="auth-card">
       <div className="auth-card-head">
         <span className="eyebrow">Reset Password</span>
         <h2>Create a new password</h2>

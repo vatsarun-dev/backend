@@ -4,7 +4,7 @@ import { Button } from "../../components/ui/Button";
 
 export function PasswordUpdatedPage() {
   return (
-    <section className="auth-card glass success-card">
+    <section className="auth-card success-card">
       <CheckCircle2 size={42} />
       <div className="auth-card-head">
         <span className="eyebrow">Password Updated</span>

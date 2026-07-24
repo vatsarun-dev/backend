@@ -99,11 +99,11 @@ export function SignupPage() {
   }
 
   return (
-    <section className="auth-card glass" ref={card}>
+    <section className="auth-card" ref={card}>
       <div className="auth-card-head" data-auth-reveal>
-        <span className="eyebrow">Create Account</span>
-        <h2>Register ERP staff access</h2>
-        <p>Signup is connected to the backend admin schema and posts only supported fields.</p>
+        <span className="eyebrow">Create account</span>
+        <h2>Invite staff access</h2>
+        <p>Create a role-scoped staff login using the existing admin account flow.</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="stack-form" data-auth-reveal>

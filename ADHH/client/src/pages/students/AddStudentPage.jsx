@@ -69,12 +69,12 @@ export function AddStudentPage() {
       <PageHeader
         eyebrow="Student Management"
         title="Register a student"
-        subtitle="Create a polished, backend-backed student profile with photo, contact, class, and course details."
+        subtitle="Capture the profile, contact, class, course, and photo details required by the existing student API."
         meta={<><span>ImageKit upload</span><span>Shared register</span></>}
       />
       <form className="student-form panel" onSubmit={handleSubmit(onSubmit)}>
         <label className="upload-zone">
-          {preview ? <img src={preview} alt="Student preview" /> : <div className="upload-placeholder"><ImagePlus size={34} /><strong>Drop or choose student photo</strong><small>Portrait images work best for profile cards.</small></div>}
+          {preview ? <img src={preview} alt="Student preview" /> : <div className="upload-placeholder"><ImagePlus size={34} /><strong>Choose student photo</strong><small>Portrait images work best for profile cards and search results.</small></div>}
           <input type="file" accept="image/*" {...imageRegister} />
           {errors.image ? <small className="field-error">{errors.image.message}</small> : null}
         </label>

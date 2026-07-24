@@ -45,14 +45,14 @@ export function SearchStudentPage() {
   return (
     <main className="page" ref={scope}>
       <PageHeader
-        eyebrow="Search Student"
+        eyebrow="Search student"
         title="Find a student"
         subtitle="Search by student ID, name, class, course, father name, or mobile number."
         meta={<><span>Live backend search</span><span>Debounced requests</span></>}
       />
       <div className="search-bar panel">
         <Search size={18} />
-        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Type a name, roll number, student ID, class, or course" />
+        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Name, mobile, student ID, class, or course" />
         {loading ? <Loader2 className="spin" size={18} /> : <SlidersHorizontal size={18} />}
       </div>
       {!query.trim() ? (
@@ -69,7 +69,7 @@ export function SearchStudentPage() {
               <div>
                 <span className={`chip ${String(student.status).toLowerCase()}`}>{student.status}</span>
                 <h2>{student.name}</h2>
-                <p>{student.course} - Class {student.class}</p>
+                <p>{student.course} / Class {student.class}</p>
                 <dl>
                   <div><dt>Student ID</dt><dd>{student.studentId}</dd></div>
                   <div><dt>Email</dt><dd>{student.email}</dd></div>
