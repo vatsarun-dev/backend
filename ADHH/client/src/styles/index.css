@@ -451,7 +451,7 @@ button:disabled {
   margin: 8px 0 12px;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 5vw, 5.4rem);
+  font-size: clamp(2.3rem, 4.4vw, 4.6rem);
   font-weight: 700;
   line-height: 0.96;
   letter-spacing: 0;
@@ -585,10 +585,10 @@ button:disabled {
 }
 .page-header {
   position: relative;
-  min-height: clamp(360px, 44vw, 520px);
+  min-height: clamp(300px, 36vw, 440px);
   align-items: end;
-  margin-bottom: clamp(34px, 6vw, 72px);
-  padding: clamp(28px, 5vw, 56px);
+  margin-bottom: clamp(28px, 4vw, 48px);
+  padding: clamp(28px, 4.5vw, 48px);
   overflow: hidden;
   border-radius: var(--radius-lg);
   color: var(--cream-2);
@@ -609,7 +609,7 @@ button:disabled {
 .page-header h1 {
   max-width: min(820px, 100%);
   color: var(--cream-2);
-  font-size: clamp(3rem, 6.4vw, 6.2rem);
+  font-size: clamp(2.6rem, 5.2vw, 5rem);
   overflow-wrap: anywhere;
   text-wrap: balance;
 }
@@ -648,6 +648,7 @@ button:disabled {
 .stat-card,
 .panel,
 .table-shell {
+  min-width: 0;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--paper);
@@ -668,7 +669,7 @@ button:disabled {
   display: block;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(3rem, 5vw, 5rem);
+  font-size: clamp(2.4rem, 4vw, 4rem);
   font-weight: 700;
   line-height: 0.92;
 }
@@ -712,7 +713,7 @@ button:disabled {
   margin-bottom: clamp(42px, 7vw, 88px);
 }
 .hero-widget {
-  min-height: 420px;
+  min-height: 360px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
@@ -724,7 +725,7 @@ button:disabled {
   margin: 10px 0 16px;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6vw, 5.8rem);
+  font-size: clamp(2.4rem, 4.6vw, 4.6rem);
   font-weight: 700;
   line-height: 0.96;
 }
@@ -762,6 +763,7 @@ button:disabled {
   font-size: clamp(2rem, 3vw, 3rem);
   font-weight: 700;
   line-height: 1;
+  overflow-wrap: anywhere;
 }
 .timeline-widget div {
   display: grid;
@@ -823,7 +825,7 @@ button:disabled {
   display: flex;
   gap: 10px;
   overflow-x: auto;
-  margin: calc(var(--section) * -0.65) 0 36px;
+  margin: 0 0 36px;
   padding-bottom: 6px;
 }
 .class-tabs button,
@@ -910,6 +912,7 @@ button:disabled {
 .table-toolbar {
   padding: 18px 22px;
   border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
 }
 .table-search,
 .search-bar {
@@ -990,6 +993,7 @@ tbody tr:hover {
 }
 .table-footer div {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 .chip {
@@ -1019,7 +1023,7 @@ tbody tr:hover {
 
 .search-bar {
   min-height: 64px;
-  margin: calc(var(--section) * -0.65) 0 30px;
+  margin: 0 0 30px;
   padding: 0 22px;
   border-radius: 34px;
 }
@@ -1127,7 +1131,7 @@ dd {
 }
 .settings-list > div {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 18px;
   align-items: center;
   padding: 20px 0;
@@ -1171,9 +1175,10 @@ dd {
   margin: 10px 0 16px;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(3rem, 7vw, 6.8rem);
+  font-size: clamp(2.4rem, 5.5vw, 5.2rem);
   font-weight: 700;
   line-height: 0.94;
+  overflow-wrap: anywhere;
 }
 .story-intro p {
   max-width: 640px;
@@ -1209,6 +1214,7 @@ dd {
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   font-weight: 700;
   line-height: 1;
+  overflow-wrap: anywhere;
 }
 .feature-card p,
 .numbered-copy p,
@@ -1233,7 +1239,7 @@ dd {
   border-radius: var(--radius);
 }
 .testimonial-copy blockquote {
-  font-size: clamp(2.4rem, 5vw, 5.2rem);
+  font-size: clamp(2.1rem, 4.4vw, 4.2rem);
 }
 .numbered-section {
   display: grid;
@@ -1256,7 +1262,7 @@ dd {
   margin-bottom: 18px;
   color: var(--clay);
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(2.6rem, 6vw, 5.4rem);
   font-weight: 700;
   line-height: 0.8;
 }

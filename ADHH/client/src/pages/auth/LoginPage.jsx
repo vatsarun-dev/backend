@@ -62,6 +62,13 @@ export function LoginPage() {
     return () => ctx.revert();
   }, []);
 
+  useLayoutEffect(() => {
+    if (new URLSearchParams(location.search).get("error") === "google_auth_failed") {
+      toast.error("Google sign-in failed. Check the deployed redirect URI and try again.");
+      navigate("/login", { replace: true });
+    }
+  }, [location.search, navigate]);
+
   async function onSubmit(values) {
     setLoading(true);
     try {

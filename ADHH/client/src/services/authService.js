@@ -17,6 +17,7 @@ export const authService = {
     return apiClient.post(`/user/update-password/${userId}`, payload);
   },
   googleLoginUrl() {
-    return `${apiBaseUrl}/user/google`;
+    const baseUrl = import.meta.env.PROD ? "/api" : apiBaseUrl;
+    return `${baseUrl}/user/google`;
   },
 };

@@ -12,7 +12,17 @@ export function GoogleCallbackPage() {
 
   useEffect(() => {
     const encoded = params.get("user");
-    if (!encoded) return;
+    const error = params.get("error");
+    if (error) {
+      toast.error("Google sign-in failed. Please try again.");
+      navigate("/login", { replace: true });
+      return;
+    }
+    if (!encoded) {
+      toast.error("Google sign-in did not return account details.");
+      navigate("/login", { replace: true });
+      return;
+    }
     try {
       const user = JSON.parse(decodeURIComponent(encoded));
       const role = normalizeRole(user);
