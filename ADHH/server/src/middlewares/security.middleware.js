@@ -4,6 +4,7 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import express from "express";
 import env from "../config/env.js";
+import appConstant from "../constant/app.constant.js";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -11,20 +12,34 @@ import cors from "cors";
 const normalizeUrl = (url) => (url ? url.replace(/\/+$/, "") : "");
 
 const allowedOrigins = [
-  normalizeUrl(env.CLIENT_URL),
-  "http://localhost:5173",
-  "http://127.0.0.1:5173",
-  "http://localhost:5174",
-  "http://127.0.0.1:5174",
-].filter(Boolean);
+  ...new Set(
+    [
+      normalizeUrl(env.CLIENT_URL),
+      normalizeUrl(appConstant.PRODUCTION_CLIENT_URL),
+      ...(env.ALLOWED_ORIGINS || "")
+        .split(",")
+        .map((origin) => normalizeUrl(origin.trim()))
+        .filter(Boolean),
+      "http://localhost:5173",
+      "http://127.0.0.1:5173",
+      "http://localhost:5174",
+      "http://127.0.0.1:5174",
+    ].filter(Boolean),
+  ),
+];
 
 const securityMiddlewares = (app) => {
   app.use(
     cors({
       origin(origin, callback) {
-        const cleanOrigin = normalizeUrl(origin);
-        if (!origin || allowedOrigins.includes(cleanOrigin) || allowedOrigins.includes("*")) {
+        if (!origin) {
           callback(null, true);
+          return;
+        }
+
+        const cleanOrigin = normalizeUrl(origin);
+        if (allowedOrigins.includes(cleanOrigin)) {
+          callback(null, cleanOrigin);
           return;
         }
 

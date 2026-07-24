@@ -12,13 +12,20 @@ export default class AuthService {
   }
   // THIS IS THE REGISTRATION LOGIC
   async createUserService(data) {
-    let { name, email, password } = data;
+    let { name, email, password, designation } = data;
     if (!name || !email || !password)
       throw new error.NOTFOUNDERROR("all fields are required");
 
     const isExisted = await this.authService.findByEmail(email);
     if (isExisted) throw new error.ALLREADYEXIST("User is already existed");
-    const user = await this.authService.create(data);
+
+    const normalizedDesignation = designation?.trim().toLowerCase();
+    const user = await this.authService.create({
+      name,
+      email,
+      password,
+      ...(normalizedDesignation ? { designation: normalizedDesignation } : {}),
+    });
     const accessToken = token.generateAccessToken(user._id);
     const refreshToken = token.generateRefreshToken(user._id);
 

@@ -1,10 +1,20 @@
 import axios from "axios";
 import { clearSession } from "../utils/auth";
 
-const rawApiUrl =
-  import.meta.env.VITE_API_BASE_URL ||
-  (import.meta.env.DEV ? "/api" : "https://backend-wbrl.onrender.com/api");
-export const apiBaseUrl = rawApiUrl.replace(/\/+$/, "");
+function resolveApiBaseUrl() {
+  const configured = import.meta.env.VITE_API_BASE_URL?.trim().replace(/\/+$/, "");
+
+  if (configured) {
+    if (!import.meta.env.DEV && /localhost|127\.0\.0\.1/i.test(configured)) {
+      return "/api";
+    }
+    return configured;
+  }
+
+  return "/api";
+}
+
+export const apiBaseUrl = resolveApiBaseUrl();
 
 export const apiClient = axios.create({
   baseURL: apiBaseUrl,
