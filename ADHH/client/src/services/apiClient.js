@@ -1,8 +1,11 @@
 import axios from "axios";
 import { clearSession } from "../utils/auth";
 
+export const apiBaseUrl =
+  import.meta.env.VITE_API_BASE_URL || "https://backend-wbrl.onrender.com/api";
+
 export const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api",
+  baseURL: apiBaseUrl,
   withCredentials: true,
   timeout: 20000,
 });

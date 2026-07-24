@@ -1,6 +1,4 @@
-import { apiClient } from "./apiClient";
-
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api";
+import { apiBaseUrl, apiClient } from "./apiClient";
 
 export const authService = {
   register(payload) {
