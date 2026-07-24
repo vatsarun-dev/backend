@@ -10,6 +10,8 @@ function startServer() {
         logger.info({ port: env.PORT }, "your server is running");
       });
     })
-    .catch((error) => logger.error("there is some error"));
+    .catch((error) => {
+      logger.error({ err: error?.message || error }, "Failed to connect to database. Server not started.");
+    });
 }
 startServer();

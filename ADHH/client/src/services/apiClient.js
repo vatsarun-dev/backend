@@ -1,8 +1,8 @@
 import axios from "axios";
 import { clearSession } from "../utils/auth";
 
-export const apiBaseUrl =
-  import.meta.env.VITE_API_BASE_URL || "https://backend-wbrl.onrender.com/api";
+const rawApiUrl = import.meta.env.VITE_API_BASE_URL || "https://backend-wbrl.onrender.com/api";
+export const apiBaseUrl = rawApiUrl.replace(/\/+$/, "");
 
 export const apiClient = axios.create({
   baseURL: apiBaseUrl,

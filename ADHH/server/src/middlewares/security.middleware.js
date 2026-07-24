@@ -8,8 +8,10 @@ import passport from "passport";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
+const normalizeUrl = (url) => (url ? url.replace(/\/+$/, "") : "");
+
 const allowedOrigins = [
-  env.CLIENT_URL,
+  normalizeUrl(env.CLIENT_URL),
   "http://localhost:5173",
   "http://127.0.0.1:5173",
   "http://localhost:5174",
@@ -20,7 +22,8 @@ const securityMiddlewares = (app) => {
   app.use(
     cors({
       origin(origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
+        const cleanOrigin = normalizeUrl(origin);
+        if (!origin || allowedOrigins.includes(cleanOrigin) || allowedOrigins.includes("*")) {
           callback(null, true);
           return;
         }
