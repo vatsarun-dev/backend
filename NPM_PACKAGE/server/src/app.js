@@ -5,8 +5,9 @@ import authRoutes from "./modules/auth/auth.route.js";
 import errorHandler from "./middlewares/errorHandler.middleware.js";
 export default function createApp() {
   const app = express();
-
+// this is the security middleware
   securityMiddleware(app);
+// this is the Google middleware
   GoogleMiddleware();
 
   app.use("/api/user", authRoutes);
