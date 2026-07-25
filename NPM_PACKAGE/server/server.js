@@ -13,3 +13,4 @@ import env from "./src/config/env.js";
       logger.error({ error: error }, "there is an error while connection");
     });
 })();
+// this is the IIFE which is use for immediately invoke a function
