@@ -1,3 +1,4 @@
+// this file is used to make the constants
 export const SCHOOL = {
   name: "Amardeep Hr. Sec School",
   shortName: "ADHH",
