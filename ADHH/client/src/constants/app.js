@@ -9,7 +9,7 @@ export const SCHOOL = {
 };
 
 export const SESSION_TTL_MS = 15 * 60 * 1000;
-
+// this constants is used for routes
 export const ROUTES = {
   login: "/login",
   forgotPassword: "/forgot-password",
