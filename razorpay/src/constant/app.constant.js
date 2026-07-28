@@ -2,6 +2,7 @@ export default {
   PORT: 3000,
   MONGO_URL: "mongodb://0.0.0.0/constant",
 };
+// this is the app constant
 
 export const app_constant = {
   cookie: {
