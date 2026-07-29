@@ -1,7 +1,8 @@
 import express from "express";
 import securityMiddleware from "./middlewares/security.middleware.js";
 import GoogleMiddleware from "./middlewares/googleOauth.middleware.js";
-import authRoutes from "./modules/auth/auth.route.js";
+import userRoutes from "./modules/user/user.route.js";
+import adminRoutes from "./modules/admin/admin.route.js";
 import errorHandler from "./middlewares/errorHandler.middleware.js";
 export default function createApp() {
   const app = express();
@@ -9,7 +10,8 @@ export default function createApp() {
   securityMiddleware(app);
   GoogleMiddleware();
 
-  app.use("/api/user", authRoutes);
+  app.use("/api/admin", adminRoutes);
+  app.use("/api/user", userRoutes);
 
   app.use(errorHandler);
   return app;
