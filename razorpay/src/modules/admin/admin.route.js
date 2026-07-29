@@ -11,14 +11,13 @@ const adminController = new AdminController();
 adminRoutes.post(
   "/register",
   validation.registerValidationRule,
-  isAdmin,
   asyncHandler(adminController.createUserController.bind(adminController)),
 );
 
 adminRoutes.post(
   "/login",
   validation.loginValidationRule,
-  isAdmin,
+
   asyncHandler(adminController.loginUserController.bind(adminController)),
 );
 

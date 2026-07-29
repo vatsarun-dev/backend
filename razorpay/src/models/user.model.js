@@ -28,17 +28,39 @@ const userSchema = new Schema(
       type: Number,
       required: true,
     },
-
-    address: {
-      fullName: String,
-      phone: String,
-      state: String,
-      city: String,
-      pincode: String,
-      address: String,
-      landmark: String,
-      isDefault: Boolean,
-    },
+    addresses: [
+      {
+        fullName: {
+          type: String,
+          required: true,
+        },
+        phone: {
+          type: String,
+          required: true,
+        },
+        state: {
+          type: String,
+          required: true,
+        },
+        city: {
+          type: String,
+          required: true,
+        },
+        pincode: {
+          type: Number,
+          required: true,
+        },
+        address: {
+          type: String,
+          required: true,
+        },
+        landmark: String,
+        isDefault: {
+          type: Boolean,
+          default: false,
+        },
+      },
+    ],
 
     role: {
       type: String,
@@ -55,6 +77,7 @@ const userSchema = new Schema(
 );
 
 userSchema.pre("save", function () {
+  if (!this.isModified("password")) return;
   this.password = bcrypt.hashSync(this.password, 10);
 });
 

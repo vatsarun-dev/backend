@@ -2,18 +2,18 @@ import userModel from "../models/user.model.js";
 
 export default class UserRepo {
   async createUser(payload) {
-    return await adminModel.create(payload);
+    return await userModel.create(payload);
   }
 
   async findByEmail(email) {
-    return await adminModel.findOne({ email });
+    return await userModel.findOne({ email });
   }
 
   async findById(id) {
-    return await adminModel.findById(id);
+    return await userModel.findById(id);
   }
 
   async updatePassword(id, password) {
-    return await adminModel.findByIdAndUpdate(id, { password });
+    return await userModel.findByIdAndUpdate(id, { password });
   }
 }

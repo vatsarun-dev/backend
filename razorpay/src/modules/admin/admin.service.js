@@ -33,10 +33,12 @@ export default class AdminService {
     const isExisted = await this.adminService.findByEmail(email);
     if (!isExisted) throw new error.NOTFOUNDERROR("user not found");
 
-    console.log(isExisted.password);
+    if (isExisted.role !== "admin") {
+      throw new UNAUTHORIZED("Only admins can login here");
+    }
+
     const compare = isExisted.comparePassword(password);
 
-    console.log(compare);
     if (!compare) throw new error.UNAUTHORIZED("Wrong Credential");
 
     const accessToken = token.generateAccessToken(isExisted._id);

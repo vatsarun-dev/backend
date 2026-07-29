@@ -10,8 +10,8 @@ export default class UserService {
   }
   // THIS IS THE REGISTRATION LOGIC
   async createUserService(data) {
-    let { name, email, password, mobile, role, avatar } = data;
-    if (!name || !email || !password || !mobile || !role)
+    let { name, email, password, mobile, addresses } = data;
+    if (!name || !email || !password || !mobile)
       throw new error.NOTFOUNDERROR("all fields are required");
 
     const isExisted = await this.userService.findByEmail(email);

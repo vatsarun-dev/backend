@@ -40,6 +40,7 @@ const adminSchema = new Schema(
 );
 
 adminSchema.pre("save", function () {
+  if (!this.isModified("password")) return;
   this.password = bcrypt.hashSync(this.password, 10);
 });
 
