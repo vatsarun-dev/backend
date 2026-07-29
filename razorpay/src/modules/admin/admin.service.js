@@ -1,6 +1,7 @@
 import AdminRepo from "../../repository/admin.repo.js";
 import * as error from "../../shared/error/globalError.js";
 import * as token from "../../utils/generateToken.js";
+import productModel from "../../models/product.model.js";
 export default class AdminService {
   constructor() {
     this.adminService = new AdminRepo();
@@ -48,5 +49,71 @@ export default class AdminService {
     await isExisted.save();
 
     return { accessToken, refreshToken, isExisted };
+  }
+
+  async createProductService(data) {
+    let {
+      title,
+      description,
+      brand,
+      category,
+      price,
+      discountPrice,
+      stock,
+      images,
+      ratings,
+      totalReviews,
+    } = data;
+
+    if (
+      !title ||
+      !description ||
+      !brand ||
+      !category ||
+      !price ||
+      !discountPrice ||
+      !stock ||
+      !images ||
+      !ratings ||
+      !totalReviews
+    )
+      throw new error.NOTFOUNDERROR("all fields are required");
+
+    const product = await productModel.create(data);
+    return product;
+  }
+
+  async viewProductService(data) {
+    const product = await productModel.find();
+    return product;
+  }
+
+  async updateProductService(data, body) {
+    let { id } = data;
+    let {
+      title,
+      description,
+      brand,
+      category,
+      price,
+      discountPrice,
+      stock,
+      images,
+      ratings,
+      totalReviews,
+    } = body;
+    if (!id) throw new error.NOTFOUNDERROR("give id");
+
+    const product = await productModel.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
+    return product;
+  }
+
+  async deleteProductService(data) {
+    let { id } = data;
+    const product = await productModel.findByIdAndDelete(id, { new: true });
+    return product;
   }
 }

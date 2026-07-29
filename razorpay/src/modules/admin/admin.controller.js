@@ -39,4 +39,36 @@ export default class AdminController {
       .status(200)
       .json({ message: "User login successfully", user: user.isExisted });
   }
+
+  async createProductController(req, res) {
+    const product = await this.adminController.createProductService(req.body);
+
+    console.log(product);
+    return res.status(201).json({
+      message: "product created successfully",
+      product: product,
+    });
+  }
+
+  async viewProductController(req, res) {
+    const product = await this.adminController.viewProductService(req.body);
+    return res
+      .status(200)
+      .json({ message: "all product fetch", product: product });
+  }
+
+  async updateProductController(req, res) {
+    const product = await this.adminController.updateProductService(
+      req.params,
+      req.body,
+    );
+    return res
+      .status(200)
+      .json({ message: "product updated successfully", product: product });
+  }
+
+  async deleteProductController(req, res) {
+    const product = await this.adminController.deleteProductService(req.params);
+    return res.status(200).json({ message: "product deleted successfully" });
+  }
 }

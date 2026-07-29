@@ -17,8 +17,30 @@ adminRoutes.post(
 adminRoutes.post(
   "/login",
   validation.loginValidationRule,
-
   asyncHandler(adminController.loginUserController.bind(adminController)),
+);
+
+adminRoutes.post(
+  "/product",
+  isAdmin,
+  asyncHandler(adminController.createProductController.bind(adminController)),
+);
+
+adminRoutes.get(
+  "/allproducts",
+  isAdmin,
+  asyncHandler(adminController.viewProductController.bind(adminController)),
+);
+
+adminRoutes.patch(
+  "/product/:id",
+  isAdmin,
+  asyncHandler(adminController.updateProductController.bind(adminController)),
+);
+adminRoutes.delete(
+  "/productDelete/:id",
+  isAdmin,
+  asyncHandler(adminController.deleteProductController.bind(adminController)),
 );
 
 export default adminRoutes;
