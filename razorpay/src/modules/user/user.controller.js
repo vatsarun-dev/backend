@@ -39,4 +39,27 @@ export default class UserController {
       .status(200)
       .json({ message: "User login successfully", user: user.isExisted });
   }
+
+  async addToCartController(req, res) {
+    const cart = await this.userController.addToCartService(
+      req.params.id,
+      req.user.id,
+    );
+    return res.status(201).json({
+      message: "item add successfully",
+      cart,
+    });
+  }
+
+  async removeToCartController(req, res) {
+    const cart = await this.userController.removeToCartService(
+      req.params.id,
+      req.user.id,
+    );
+
+    return res.status(200).json({
+      message: "product remove successfully",
+      cart,
+    });
+  }
 }
