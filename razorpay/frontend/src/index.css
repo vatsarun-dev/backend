@@ -1,0 +1,551 @@
+/* ── Reset & Base ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f4f6f9;
+  color: #1a1a2e;
+  min-height: 100vh;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ── Navbar ───────────────────────────────────────────── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+  background: #1a1a2e;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.navbar-brand a {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #e94560;
+  letter-spacing: 1px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.navbar-links a {
+  color: #ccc;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover { color: #fff; }
+
+.navbar-user {
+  font-size: 0.85rem;
+  color: #a0aec0;
+}
+
+.btn-logout {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.btn-logout:hover { background: #c73652; }
+
+/* ── Page Container ───────────────────────────────────── */
+.page-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1a1a2e;
+}
+
+/* ── Buttons ──────────────────────────────────────────── */
+.btn-primary {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s, opacity 0.2s;
+  display: inline-block;
+}
+
+.btn-primary:hover:not(:disabled) { background: #c73652; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-admin { background: #4a6cf7; }
+.btn-admin:hover:not(:disabled) { background: #3a5ce4; }
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #1a1a2e;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover { background: #cbd5e0; }
+
+.btn-edit {
+  background: #4a6cf7;
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.2s;
+}
+
+.btn-edit:hover { background: #3a5ce4; }
+
+.btn-delete {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.2s;
+}
+
+.btn-delete:hover:not(:disabled) { background: #c73652; }
+.btn-delete:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-icon {
+  background: #e2e8f0;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.btn-icon:hover:not(:disabled) { background: #cbd5e0; }
+.btn-icon:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Auth Pages ───────────────────────────────────────── */
+.auth-container {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+.auth-card--admin {
+  border-top: 4px solid #4a6cf7;
+}
+
+.auth-badge {
+  display: inline-block;
+  background: #4a6cf7;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.auth-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.auth-subtitle {
+  color: #718096;
+  font-size: 0.9rem;
+  margin-bottom: 1.8rem;
+}
+
+.auth-form { display: flex; flex-direction: column; gap: 1rem; }
+
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.9rem;
+  color: #1a1a2e;
+  background: #f7fafc;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #4a6cf7;
+  background: #fff;
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #718096;
+  margin-top: 1rem;
+}
+
+.auth-switch a { color: #4a6cf7; font-weight: 600; }
+.auth-switch a:hover { text-decoration: underline; }
+
+/* ── Product Grid ─────────────────────────────────────── */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.11);
+}
+
+.product-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.product-img-placeholder {
+  width: 100%;
+  height: 180px;
+  background: #edf2f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a0aec0;
+  font-size: 0.85rem;
+}
+
+.product-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.product-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.product-desc {
+  font-size: 0.82rem;
+  color: #718096;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-meta { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+.tag {
+  background: #edf2f7;
+  color: #4a5568;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.product-pricing {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.product-discount {
+  font-size: 0.85rem;
+  color: #a0aec0;
+  text-decoration: line-through;
+}
+
+.product-stock {
+  font-size: 0.82rem;
+  color: #718096;
+}
+
+.out-of-stock { color: #e94560; }
+
+.product-body .btn-primary { margin-top: auto; width: 100%; text-align: center; }
+
+/* ── Cart ─────────────────────────────────────────────── */
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .cart-layout { grid-template-columns: 1fr; }
+}
+
+.cart-items { display: flex; flex-direction: column; gap: 1rem; }
+
+.cart-item {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+
+.cart-item-img img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-img-placeholder {
+  width: 60px;
+  height: 60px;
+  background: #edf2f7;
+  border-radius: 8px;
+}
+
+.cart-item-info h3 { font-size: 1rem; font-weight: 600; }
+
+.cart-item-price {
+  font-size: 0.85rem;
+  color: #718096;
+  margin-top: 0.2rem;
+}
+
+.cart-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.cart-qty {
+  font-size: 1rem;
+  font-weight: 700;
+  min-width: 24px;
+  text-align: center;
+}
+
+.cart-summary {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  position: sticky;
+  top: 80px;
+}
+
+.cart-summary h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 0.7rem;
+}
+
+.summary-total {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  padding-top: 0.8rem;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 0.5rem;
+}
+
+/* ── Admin Dashboard ──────────────────────────────────── */
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 0.88rem;
+}
+
+.product-table th {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.product-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  color: #2d3748;
+  vertical-align: middle;
+}
+
+.product-table tbody tr:hover { background: #f7fafc; }
+
+.table-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.no-img { color: #a0aec0; }
+
+.table-actions { display: flex; gap: 0.5rem; }
+
+/* ── Modal ────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+}
+
+.modal-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+/* ── Spinner ──────────────────────────────────────────── */
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #4a6cf7;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Empty State ──────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #718096;
+  font-size: 1rem;
+}
