@@ -2,14 +2,13 @@ import { Schema, model } from "mongoose";
 const paymentSchema = new Schema(
   {
     user: {
-      type: Schema.Types.ObjectID,
-      ref: "user",
+      type: Schema.Types.ObjectId,
+      ref: "userModel",
     },
     amount: {
       value: {
         type: Number,
         required: true,
-        trim: true,
       },
       currency: {
         type: String,
