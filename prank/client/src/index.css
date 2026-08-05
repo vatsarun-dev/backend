@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Variables ─────────────────────────────────────── */
+:root {
+  --gold:        #c8a84b;
+  --gold-light:  #e8c96a;
+  --gold-dark:   #9a7a2e;
+  --mustard:     #d4a017;
+  --green-dark:  #0d2218;
+  --green-mid:   #1a3a2a;
+  --green-off:   #2d5a3d;
+  --brown-dark:  #2c1a0e;
+  --brown-mid:   #4a2c1a;
+  --beige:       #f0e6c8;
+  --beige-dark:  #d4c4a0;
+  --dirty-white: #f5f0e8;
+  --bronze:      #8c5e2a;
+  --bronze-lt:   #b8834a;
+  --black:       #0a0a0a;
+  --ink:         #1a1008;
+  --rust:        #8b3a1a;
+  --crt:         #00ff41;
+  --amber:       #ffb000;
+  --warm-light:  rgba(255,200,100,0.08);
+}
+
+/* ── Reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  background: var(--black);
+  color: var(--beige);
+  font-family: 'Courier Prime', monospace;
+  overflow-x: hidden;
+  cursor: default;
+}
+::selection { background: var(--gold); color: var(--ink); }
+
+/* ── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--green-dark); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+
+/* ── Film grain (fixed overlay) ────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain .12s steps(1) infinite;
+}
+@keyframes grain {
+  0%   { background-position: 0 0; }
+  25%  { background-position: -2% 1%; }
+  50%  { background-position: 1% -2%; }
+  75%  { background-position: -1% -1%; }
+  100% { background-position: 2% 1%; }
+}
+
+/* ── Vignette (fixed) ──────────────────────────────── */
+.vignette::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,.7) 100%);
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ── CRT scanlines ─────────────────────────────────── */
+.crt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 4px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Tube light flicker ────────────────────────────── */
+.flicker { animation: flicker 5s ease-in-out infinite; }
+@keyframes flicker {
+  0%,100%   { opacity: 1; }
+  92%,96%   { opacity: .5; }
+  94%,98%   { opacity: 1; }
+  93%       { opacity: .2; }
+  97%       { opacity: .7; }
+}
+
+/* ── Old paper ─────────────────────────────────────── */
+.paper {
+  background-color: #f0e6c8;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23p)' opacity='.05'/%3E%3C/svg%3E");
+}
+
+/* ── Gold gradient text ────────────────────────────── */
+.gold-text {
+  background: linear-gradient(135deg,#c8a84b 0%,#e8c96a 40%,#c8a84b 60%,#9a7a2e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glitch ─────────────────────────────────────────── */
+.glitch {
+  animation: glitch .25s steps(2) infinite;
+}
+@keyframes glitch {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(-3px,2px); filter: hue-rotate(90deg); }
+  40%  { transform: translate(3px,-2px); filter: hue-rotate(-90deg); }
+  60%  { transform: translate(-2px,1px); }
+  80%  { transform: translate(2px,-1px); }
+  100% { transform: translate(0); filter: none; }
+}
+
+/* ── Window 98 popup ───────────────────────────────── */
+.win98 {
+  background: #c0c0c0;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0 #fff inset, -2px -2px 0 #888 inset, 4px 4px 0 #000;
+  font-family: 'Courier Prime', monospace;
+}
+.win98-title {
+  background: linear-gradient(90deg,#000080,#1084d0);
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+.win98-btn {
+  background: #c0c0c0;
+  border: 1px solid #000;
+  box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #888 inset;
+  width: 16px; height: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; cursor: pointer; color: #000;
+}
+
+/* ── LED display ───────────────────────────────────── */
+.led {
+  background: #080d08;
+  color: var(--crt);
+  font-family: 'Share Tech Mono', monospace;
+  text-shadow: 0 0 8px var(--crt), 0 0 16px var(--crt);
+  border: 2px solid #1a2a1a;
+  box-shadow: inset 0 0 20px rgba(0,0,0,.8), 0 0 10px rgba(0,255,65,.15);
+}
+.led-amber {
+  color: var(--amber);
+  text-shadow: 0 0 8px var(--amber), 0 0 16px var(--amber);
+}
+
+/* ── Receipt perforations ──────────────────────────── */
+.receipt {
+  background: #fafaf0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(0,0,0,.04) 23px, rgba(0,0,0,.04) 24px);
+}
+
+/* ── Typewriter cursor ─────────────────────────────── */
+.tw-cursor::after {
+  content: '▮';
+  animation: blink .7s step-end infinite;
+  color: var(--gold);
+  margin-left: 2px;
+}
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+/* ── Vintage border ────────────────────────────────── */
+.vin-border {
+  border: 1px solid var(--gold);
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ── Chromatic aberration ──────────────────────────── */
+.chroma {
+  text-shadow: -1px 0 1px rgba(255,0,0,.3), 1px 0 1px rgba(0,0,255,.3);
+}
+
+/* ── Scene fade transitions ────────────────────────── */
+.scene-enter { animation: scene-in .8s ease forwards; }
+@keyframes scene-in {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Smoke ─────────────────────────────────────────── */
+@keyframes smoke {
+  0%   { transform: translateY(0) scale(1); opacity: .5; }
+  100% { transform: translateY(-80px) scale(2.5); opacity: 0; }
+}
+
+/* ── Gear ─────────────────────────────────────────── */
+@keyframes spin-cw  { to { transform: rotate(360deg); } }
+@keyframes spin-ccw { to { transform: rotate(-360deg); } }
+
+/* ── Parallax helper ───────────────────────────────── */
+.parallax-layer { will-change: transform; }
+
+/* ── Money fly ─────────────────────────────────────── */
+@keyframes money-fly {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
+}
+
+/* ── Pressure gauge needle ─────────────────────────── */
+@keyframes needle-rise {
+  0%   { transform: rotate(-140deg); }
+  100% { transform: rotate(90deg); }
+}
+
+/* ══════════════════════════════════════════════════════
+   V1 COMPONENT UTILITIES (backward compat)
+══════════════════════════════════════════════════════ */
+
+.old-paper {
+  background-color: #f0e6c8;
+  color: #2c1a0e;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23p)' opacity='.05'/%3E%3C/svg%3E");
+  box-shadow: 0 2px 4px rgba(0,0,0,.3), inset 0 0 60px rgba(180,140,60,.1);
+}
+
+.vintage-border {
+  border: 2px solid #c8a84b;
+  box-shadow: inset 0 0 0 3px #2c1a0e, inset 0 0 0 5px #c8a84b, 0 0 20px rgba(200,168,75,.15);
+}
+
+.gov-badge {
+  border: 3px double #c8a84b;
+  background: radial-gradient(ellipse at center, #1a3a2a 0%, #1a1008 100%);
+  box-shadow: 0 0 0 1px #9a7a2e, 0 0 20px rgba(200,168,75,.3), inset 0 0 20px rgba(0,0,0,.5);
+}
+
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #c8a84b;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c8a84b, transparent);
+}
+
+.section-office-bg {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(45,90,61,.2) 0%, transparent 70%),
+    linear-gradient(180deg, #1a1008 0%, #2c1a0e 30%, #1a1008 100%);
+}
+
+.tube-light {
+  animation: tube-flicker 6s ease-in-out infinite;
+}
+@keyframes tube-flicker {
+  0%,95%,100% { opacity:1; filter:brightness(1); }
+  96%         { opacity:.4; filter:brightness(.4); }
+  97%         { opacity:1; filter:brightness(1); }
+  98%         { opacity:.6; filter:brightness(.6); }
+  99%         { opacity:1; filter:brightness(1); }
+}
+
+.money-note {
+  background: linear-gradient(135deg,#2d5a1e 0%,#3a7a28 30%,#2d5a1e 60%,#1e4414 100%);
+  border: 1px solid #4a8a34;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+.money-note::before {
+  content: '₹';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 1.2em;
+  color: rgba(200,168,75,.6);
+  font-family: 'Courier Prime', monospace;
+}
+.money-note::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px dashed rgba(200,168,75,.3);
+}
+
+.stamp-mark {
+  transform-origin: center;
+  animation: stamp-impact .4s cubic-bezier(.25,.46,.45,.94) forwards;
+}
+@keyframes stamp-impact {
+  0%   { transform: scale(1.8) rotate(-8deg); opacity:0; }
+  60%  { transform: scale(.95) rotate(2deg); opacity:1; }
+  80%  { transform: scale(1.05) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0deg); opacity:1; }
+}
+
+.receipt-paper {
+  background: #fafaf0;
+  background-image: repeating-linear-gradient(0deg,transparent,transparent 23px,rgba(0,0,0,.04) 23px,rgba(0,0,0,.04) 24px);
+  border-left: 3px solid #c8a84b;
+}
+
+.led-display {
+  background: #080d08;
+  color: #00ff41;
+  font-family: 'Share Tech Mono', monospace;
+  text-shadow: 0 0 8px #00ff41, 0 0 16px #00ff41;
+  border: 2px solid #1a2a1a;
+  box-shadow: inset 0 0 20px rgba(0,0,0,.8), 0 0 10px rgba(0,255,65,.15);
+}
+
+/* no-select helper */
+.no-select { user-select: none; }
