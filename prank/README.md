@@ -13,92 +13,34 @@ Built as a dark comedy experience inspired by 90s Bollywood, complete with a cin
 
 ---
 
-## 📁 Project Structure
-
-```
-prank/
-├── client/                  # React + Vite frontend
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Card.jsx         # Crush name search card
-│   │   │   ├── Login.jsx        # Login form
-│   │   │   ├── Register.jsx     # Register form
-│   │   │   ├── Payment.jsx      # Pay Now button + result modal
-│   │   │   └── ProtectedRoute.jsx
-│   │   ├── context/
-│   │   │   └── AuthContext.jsx  # Global auth state
-│   │   ├── hooks/
-│   │   │   └── useRazorpay.js   # Razorpay checkout flow
-│   │   ├── services/
-│   │   │   └── api.js           # All Axios API calls
-│   │   └── App.jsx              # Route definitions
-│   ├── index.html
-│   ├── .env                     # Frontend env vars
-│   └── package.json
-│
-└── server/                  # Node.js + Express backend
-    ├── src/
-    │   ├── config/
-    │   │   ├── env.js           # Zod env validation
-    │   │   └── logger.js        # Pino logger
-    │   ├── constant/
-    │   │   └── app.constant.js  # Cookie settings
-    │   ├── database/
-    │   │   └── db.js            # MongoDB connection
-    │   ├── middlewares/
-    │   │   ├── isUser.middleware.js     # JWT auth guard
-    │   │   ├── security.middleware.js   # CORS, helmet, rate limit
-    │   │   └── errorHandler.middleware.js
-    │   ├── models/
-    │   │   ├── auth.model.js    # User schema
-    │   │   ├── crush.model.js   # Crush name schema
-    │   │   └── payment.model.js # Payment schema
-    │   ├── modules/
-    │   │   ├── auth/
-    │   │   │   ├── auth.controller.js
-    │   │   │   ├── auth.service.js
-    │   │   │   └── auth.route.js
-    │   │   └── payment/
-    │   │       ├── payment.controller.js
-    │   │       ├── payment.service.js
-    │   │       └── payment.route.js
-    │   ├── services/
-    │   │   └── razorpay.js      # Razorpay instance + createOrder
-    │   └── utils/
-    │       ├── asyncHandler.js
-    │       └── generateToken.js
-    ├── server.js                # App entry point
-    └── package.json
-```
-
----
-
 ## ⚙️ Tech Stack
 
 ### Frontend
-| Tool | Purpose |
-|---|---|
-| React 18 | UI framework |
-| Vite | Build tool |
-| React Router DOM | Client-side routing |
-| Axios | HTTP requests |
-| React Hook Form | Form handling |
-| Styled Components | Component styling |
-| Framer Motion | Animations |
-| TailwindCSS | Utility styles |
+
+| Tool              | Purpose             |
+| ----------------- | ------------------- |
+| React 18          | UI framework        |
+| Vite              | Build tool          |
+| React Router DOM  | Client-side routing |
+| Axios             | HTTP requests       |
+| React Hook Form   | Form handling       |
+| Styled Components | Component styling   |
+| Framer Motion     | Animations          |
+| TailwindCSS       | Utility styles      |
 
 ### Backend
-| Tool | Purpose |
-|---|---|
-| Node.js + Express 5 | Server |
-| MongoDB + Mongoose | Database |
-| JWT | Authentication tokens |
-| bcrypt | Password hashing |
-| Razorpay SDK | Payment processing |
-| Zod | Env variable validation |
-| Pino | Logging |
-| Helmet | Security headers |
-| express-rate-limit | Rate limiting |
+
+| Tool                | Purpose                 |
+| ------------------- | ----------------------- |
+| Node.js + Express 5 | Server                  |
+| MongoDB + Mongoose  | Database                |
+| JWT                 | Authentication tokens   |
+| bcrypt              | Password hashing        |
+| Razorpay SDK        | Payment processing      |
+| Zod                 | Env variable validation |
+| Pino                | Logging                 |
+| Helmet              | Security headers        |
+| express-rate-limit  | Rate limiting           |
 
 ---
 
@@ -107,6 +49,7 @@ prank/
 ### Prerequisites
 
 Make sure you have these installed:
+
 - Node.js v18 or higher
 - npm
 - MongoDB Atlas account (free tier works)
@@ -266,6 +209,7 @@ Frontend shows success/failure image modal
 The Razorpay Key ID is technically a public key — but to avoid putting it in frontend environment variables (which get bundled into the JavaScript and are visible to anyone), this project fetches it from the backend at runtime via `GET /api/user/razorpay-key`.
 
 This means:
+
 - No Razorpay keys in frontend `.env`
 - Key is only stored in server `.env`
 - Works cleanly in all deployment environments
@@ -276,13 +220,13 @@ This means:
 
 In test mode, use these Razorpay test credentials:
 
-| Method | Details |
-|---|---|
-| **Test Card** | Card number: `4111 1111 1111 1111` |
-| | Expiry: Any future date |
-| | CVV: Any 3 digits |
-| | OTP: `1234` |
-| **Test UPI** | UPI ID: `success@razorpay` |
+| Method          | Details                                     |
+| --------------- | ------------------------------------------- |
+| **Test Card**   | Card number: `4111 1111 1111 1111`          |
+|                 | Expiry: Any future date                     |
+|                 | CVV: Any 3 digits                           |
+|                 | OTP: `1234`                                 |
+| **Test UPI**    | UPI ID: `success@razorpay`                  |
 | **Net Banking** | Select any bank, use test credentials shown |
 
 > These test credentials only work in test mode (keys starting with `rzp_test_`).
@@ -325,26 +269,27 @@ On page refresh:
 
 ### Auth Routes — `/api/user`
 
-| Method | Endpoint | Auth Required | Description |
-|---|---|---|---|
-| POST | `/api/user/register` | No | Register new user |
-| POST | `/api/user/login` | No | Login |
-| GET | `/api/user/me` | Yes | Get logged in user |
-| GET | `/api/user/razorpay-key` | No | Get Razorpay key ID |
-| POST | `/api/user/name` | Yes | Save crush name |
+| Method | Endpoint                 | Auth Required | Description         |
+| ------ | ------------------------ | ------------- | ------------------- |
+| POST   | `/api/user/register`     | No            | Register new user   |
+| POST   | `/api/user/login`        | No            | Login               |
+| GET    | `/api/user/me`           | Yes           | Get logged in user  |
+| GET    | `/api/user/razorpay-key` | No            | Get Razorpay key ID |
+| POST   | `/api/user/name`         | Yes           | Save crush name     |
 
 ### Payment Routes — `/api/payment`
 
-| Method | Endpoint | Auth Required | Description |
-|---|---|---|---|
-| POST | `/api/payment/` | Yes | Create Razorpay order |
-| POST | `/api/payment/verify` | Yes | Verify payment signature |
+| Method | Endpoint              | Auth Required | Description              |
+| ------ | --------------------- | ------------- | ------------------------ |
+| POST   | `/api/payment/`       | Yes           | Create Razorpay order    |
+| POST   | `/api/payment/verify` | Yes           | Verify payment signature |
 
 ---
 
 ## 🗄️ Database Models
 
 ### User (`auth.model.js`)
+
 ```
 name        String  required
 email       String  required, unique
@@ -353,6 +298,7 @@ refreshToken String
 ```
 
 ### Crush (`crush.model.js`)
+
 ```
 user        ObjectId  ref: userModel, required
 crushName   String    required
@@ -360,6 +306,7 @@ timestamps  true
 ```
 
 ### Payment (`payment.model.js`)
+
 ```
 user            ObjectId  ref: userModel
 amount.value    Number
@@ -402,15 +349,15 @@ timestamps      true
 
 ### Environment Variables for Production (Render)
 
-| Variable | Value |
-|---|---|
-| `PORT` | `3000` |
-| `MONGO_URL` | Your MongoDB Atlas connection string |
-| `ACCESSTOKEN` | Any random secret string (min 32 chars) |
-| `REFRESHTOKEN` | Any random secret string (min 32 chars) |
+| Variable          | Value                                         |
+| ----------------- | --------------------------------------------- |
+| `PORT`            | `3000`                                        |
+| `MONGO_URL`       | Your MongoDB Atlas connection string          |
+| `ACCESSTOKEN`     | Any random secret string (min 32 chars)       |
+| `REFRESHTOKEN`    | Any random secret string (min 32 chars)       |
 | `RAZORPAY_KEY_ID` | `rzp_test_XXXXXXXXXX` from Razorpay dashboard |
-| `RAZORPAY_SECRET` | Your Razorpay secret from dashboard |
-| `FRONTNED_URL` | Your Vercel frontend URL (no trailing slash) |
+| `RAZORPAY_SECRET` | Your Razorpay secret from dashboard           |
+| `FRONTNED_URL`    | Your Vercel frontend URL (no trailing slash)  |
 
 > ⚠️ `FRONTNED_URL` must exactly match your frontend domain with no trailing slash.
 > Wrong: `https://myapp.vercel.app/`
@@ -421,26 +368,31 @@ timestamps      true
 ## 🐛 Common Issues
 
 ### 401 Unauthorized on payment
+
 - Token is expired — log out and log in again
 - Check `RAZORPAY_KEY_ID` and `RAZORPAY_SECRET` are correct on Render
 - Razorpay keys may have been regenerated — update them on Render
 
 ### CORS error
+
 - Make sure `FRONTNED_URL` on Render matches your Vercel URL exactly
 - No trailing slash
 - Must include `https://`
 
 ### Payment window opens but shows "Authentication failed"
+
 - Your Razorpay keys are wrong or expired
 - Go to Razorpay dashboard and regenerate keys
 - Update on Render and redeploy
 
 ### Page goes blank after refresh (logged out)
+
 - The `/api/user/me` call failed
 - Check that your backend is running
 - Check Render logs for errors
 
 ### `trust proxy` warning in Render logs
+
 - Already fixed — `app.set("trust proxy", 1)` is set in security middleware
 
 ---
@@ -448,6 +400,7 @@ timestamps      true
 ## 📝 Environment Variables Reference
 
 ### `server/.env`
+
 ```env
 PORT=3000
 MONGO_URL=mongodb+srv://username:password@cluster.mongodb.net/dbname
@@ -459,6 +412,7 @@ FRONTNED_URL=http://localhost:5173
 ```
 
 ### `client/.env`
+
 ```env
 VITE_URL=http://localhost:3000/api
 ```
