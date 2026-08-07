@@ -13,6 +13,66 @@ Built as a dark comedy experience inspired by 90s Bollywood, complete with a cin
 
 ---
 
+## 📁 Project Structure
+
+```
+prank/
+├── client/                  # React + Vite frontend
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Card.jsx         # Crush name search card
+│   │   │   ├── Login.jsx        # Login form
+│   │   │   ├── Register.jsx     # Register form
+│   │   │   ├── Payment.jsx      # Pay Now button + result modal
+│   │   │   └── ProtectedRoute.jsx
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx  # Global auth state
+│   │   ├── hooks/
+│   │   │   └── useRazorpay.js   # Razorpay checkout flow
+│   │   ├── services/
+│   │   │   └── api.js           # All Axios API calls
+│   │   └── App.jsx              # Route definitions
+│   ├── index.html
+│   ├── .env                     # Frontend env vars
+│   └── package.json
+│
+└── server/                  # Node.js + Express backend
+    ├── src/
+    │   ├── config/
+    │   │   ├── env.js           # Zod env validation
+    │   │   └── logger.js        # Pino logger
+    │   ├── constant/
+    │   │   └── app.constant.js  # Cookie settings
+    │   ├── database/
+    │   │   └── db.js            # MongoDB connection
+    │   ├── middlewares/
+    │   │   ├── isUser.middleware.js     # JWT auth guard
+    │   │   ├── security.middleware.js   # CORS, helmet, rate limit
+    │   │   └── errorHandler.middleware.js
+    │   ├── models/
+    │   │   ├── auth.model.js    # User schema
+    │   │   ├── crush.model.js   # Crush name schema
+    │   │   └── payment.model.js # Payment schema
+    │   ├── modules/
+    │   │   ├── auth/
+    │   │   │   ├── auth.controller.js
+    │   │   │   ├── auth.service.js
+    │   │   │   └── auth.route.js
+    │   │   └── payment/
+    │   │       ├── payment.controller.js
+    │   │       ├── payment.service.js
+    │   │       └── payment.route.js
+    │   ├── services/
+    │   │   └── razorpay.js      # Razorpay instance + createOrder
+    │   └── utils/
+    │       ├── asyncHandler.js
+    │       └── generateToken.js
+    ├── server.js                # App entry point
+    └── package.json
+```
+
+---
+
 ## ⚙️ Tech Stack
 
 ### Frontend
