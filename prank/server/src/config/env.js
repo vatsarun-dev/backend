@@ -10,6 +10,7 @@ const envSchema = z.object({
   REFRESHTOKEN: z.string(),
   RAZORPAY_KEY_ID: z.string(),
   RAZORPAY_SECRET: z.string(),
+  FRONTNED_URL: z.string(),
 });
 
 const parsed = envSchema.safeParse(process.env);

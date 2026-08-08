@@ -12,7 +12,7 @@ paymentRoutes.post(
   asyncHandler(paymentController.createPayment.bind(paymentController)),
 );
 paymentRoutes.post(
-  "/",
+  "/verify",
   isUser,
   asyncHandler(paymentController.verifyPayment.bind(paymentController)),
 );

@@ -2,7 +2,7 @@ import { Router } from "express";
 import AuthController from "./auth.controller.js";
 import asyncHandler from "../../utils/asyncHandler.js";
 import * as validation from "../../validation/validationRule.js";
-import passport from "passport";
+import isUser from "../../middlewares/isUser.middleware.js";
 const authRoutes = Router();
 
 const authController = new AuthController();
@@ -10,7 +10,6 @@ const authController = new AuthController();
 authRoutes.post(
   "/register",
   validation.registerValidationRule,
-
   asyncHandler(authController.createUserController.bind(authController)),
 );
 
@@ -18,6 +17,21 @@ authRoutes.post(
   "/login",
   validation.loginValidationRule,
   asyncHandler(authController.loginUserController.bind(authController)),
+);
+
+// Called on every page load to restore session from cookie
+authRoutes.get(
+  "/me",
+  asyncHandler(isUser),
+  asyncHandler((req, res) => {
+    res.status(200).json({ user: req.user });
+  }),
+);
+
+authRoutes.post(
+  "/name",
+  isUser,
+  asyncHandler(authController.saveName.bind(authController)),
 );
 
 export default authRoutes;

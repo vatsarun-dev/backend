@@ -39,4 +39,12 @@ export default class AuthController {
       .status(200)
       .json({ message: "User login successfully", user: user.isExisted });
   }
+
+  async saveName(req, res) {
+    const name = await this.authController.saveNameService(req.user, req.body);
+    return res.status(200).json({
+      message: "save crush name",
+      name,
+    });
+  }
 }

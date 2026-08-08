@@ -9,13 +9,13 @@ export const app_constant = {
       httpOnly: true,
       sameSite: "lax",
       secure: false,
-      maxAge: 15 * 60 * 1000,
+      maxAge: 15 * 60 * 1000,        // 15 minutes — matches token expiry
     },
     refreshToken: {
       httpOnly: true,
       sameSite: "lax",
       secure: false,
-      maxAge: 30 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days — matches token expiry
     },
   },
 };

@@ -7,16 +7,17 @@ import cors from "cors";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
+import env from "../config/env.js";
 export default function securityMiddleware(app) {
   app.use(morgan("dev"));
   app.use(express.json({ limit: "3mb" }));
   app.use(express.urlencoded({ extended: true, limit: "3mb" }));
   app.use(cookieParser());
-
+  console.log(env.FRONTNED_URL);
   app.use(
     cors({
-      origin: "http://localhost:3000/",
-      withCredential: true,
+      origin: env.FRONTNED_URL,
+      credentials: true,
     }),
   );
   app.use(passport.initialize());

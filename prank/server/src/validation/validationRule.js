@@ -45,12 +45,8 @@ export const loginValidationRule = [
   body("password")
     .notEmpty()
     .withMessage("password required")
-    .isLength({ min: 6, max: 10 })
-    .withMessage("password must contain 6-10 words")
-    .matches(/\d/)
-    .withMessage("Must contain at least one digit")
-    .matches(/[!@#$%]/)
-    .withMessage("Must contain a special character"),
+    .isLength({ min: 6 })
+    .withMessage("password must be at least 6 characters"),
   validRequest,
 ];
 
