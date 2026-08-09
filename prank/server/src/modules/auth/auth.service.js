@@ -54,11 +54,13 @@ export default class AuthService {
   async saveNameService(userName, body) {
     // userName is the full user document from req.user — use _id
     const { crushName } = body;
+    const user = await this.authService.findById(userName._id);
+    if (!user) throw new error.NOTFOUNDERROR("no user found");
 
     if (!crushName) throw new error.NOTFOUNDERROR("crushName is required");
 
     const user_Name = await crushModel.create({
-      user: userName._id,   // store only the ObjectId reference
+      user: user.name, // store only the ObjectId reference
       crushName: crushName,
     });
 
