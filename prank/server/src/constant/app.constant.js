@@ -7,15 +7,15 @@ export const app_constant = {
   cookie: {
     accessToken: {
       httpOnly: true,
-      sameSite: "lax",
-      secure: false,
-      maxAge: 15 * 60 * 1000,        // 15 minutes — matches token expiry
+      sameSite: "none",             // required for cross-origin cookies
+      secure: true,                 // required when sameSite is "none"
+      maxAge: 15 * 60 * 1000,
     },
     refreshToken: {
       httpOnly: true,
-      sameSite: "lax",
-      secure: false,
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days — matches token expiry
+      sameSite: "none",             // required for cross-origin cookies
+      secure: true,                 // required when sameSite is "none"
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     },
   },
 };
