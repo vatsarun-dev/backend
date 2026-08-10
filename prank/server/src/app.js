@@ -13,6 +13,11 @@ export default function createApp() {
   app.use("/api/user", authRoutes);
   app.use("/api/payment", paymentRoutes);
 
+  // 404 handler — must be after all routes
+  app.use((req, res) => {
+    res.status(404).json({ message: `Route ${req.originalUrl} not found` });
+  });
+
   app.use(errorHandler);
   return app;
 }

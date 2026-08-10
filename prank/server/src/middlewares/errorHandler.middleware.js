@@ -1,8 +1,14 @@
 import { StatusCodes } from "http-status-codes";
-export default async function errorHandler(err, req, res, next) {
+import logger from "../config/logger.js";
+
+export default function errorHandler(err, req, res, next) {
   const message = err.message || "Internal Server Error";
   const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
 
-  console.log(err);
-  return res.status(statusCode).json({ message: message });
+  // Only log actual server errors, not expected 401/404s
+  if (statusCode >= 500) {
+    logger.error({ err, path: req.originalUrl }, "Server error");
+  }
+
+  return res.status(statusCode).json({ message });
 }

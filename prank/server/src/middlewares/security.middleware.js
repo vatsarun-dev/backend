@@ -22,17 +22,13 @@ export default function securityMiddleware(app) {
   app.use(
     cors({
       origin: allowedOrigin,
-      credentials: true,             // allow cookies cross-origin
+      credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
     }),
   );
 
-  // Handle preflight requests for all routes
-  app.options("*", cors({
-    origin: allowedOrigin,
-    credentials: true,
-  }));
+  // cors() handles OPTIONS preflight automatically — no need for app.options("*")
 
   app.use(passport.initialize());
   app.use(hpp());
