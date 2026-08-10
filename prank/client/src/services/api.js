@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiUrl = "https://backend-1-9jl7.onrender.com/api/";
+const apiUrl = import.meta.env.VITE_URL || "https://backend-1-9jl7.onrender.com/api";
 // Axios instance — uses Vite dev proxy so cookies work on the same origin
 const api = axios.create({
   baseURL: apiUrl,
