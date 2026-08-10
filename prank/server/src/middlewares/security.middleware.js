@@ -10,12 +10,15 @@ import morgan from "morgan";
 import env from "../config/env.js";
 
 export default function securityMiddleware(app) {
+  // Required for Render/proxied deployments — fixes rate limiter X-Forwarded-For error
+  app.set("trust proxy", 1);
+
   app.use(morgan("dev"));
   app.use(express.json({ limit: "3mb" }));
   app.use(express.urlencoded({ extended: true, limit: "3mb" }));
   app.use(cookieParser());
 
-  // Strip trailing slash from FRONTNED_URL if present
+  // Strip trailing slash from origin if present
   const allowedOrigin = env.FRONTNED_URL?.replace(/\/$/, "");
   console.log("Allowed origin:", allowedOrigin);
 
@@ -28,12 +31,9 @@ export default function securityMiddleware(app) {
     }),
   );
 
-  // cors() handles OPTIONS preflight automatically — no need for app.options("*")
-
   app.use(passport.initialize());
   app.use(hpp());
 
-  // Helmet configured to not break cross-origin cookie flow
   app.use(
     helmet({
       crossOriginResourcePolicy: { policy: "cross-origin" },
