@@ -5,21 +5,30 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser]       = useState(null);
-  const [loading, setLoading] = useState(true); // true while checking cookie
+  const [loading, setLoading] = useState(true);
 
-  // On every page load — try to restore session from cookie
   useEffect(() => {
     getMeApi()
       .then((res) => setUser(res.data.user))
-      .catch(() => setUser(null))   // cookie missing or expired — stay logged out
+      .catch(() => {
+        setUser(null);
+        localStorage.removeItem("accessToken");
+      })
       .finally(() => setLoading(false));
   }, []);
 
-  const login  = (userData) => setUser(userData);
-  const logout = () => setUser(null);
+  const login = (userData, accessToken) => {
+    setUser(userData);
+    if (accessToken) {
+      localStorage.setItem("accessToken", accessToken);
+    }
+  };
 
-  // Don't render anything until we know if user is logged in
-  // This prevents a flash redirect to /login on refresh
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("accessToken");
+  };
+
   if (loading) return null;
 
   return (
