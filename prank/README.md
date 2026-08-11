@@ -1,4 +1,4 @@
-# 🎭 Paisa Double Yojana
+# 🎭 Crush founder prank
 
 A full-stack prank web app where users enter their crush's name and are tricked into paying ₹10 to "reveal their crush's phone number" — only to receive **+100 Experience Points** instead of any real number.
 
