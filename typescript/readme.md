@@ -198,14 +198,6 @@ interface User {
   isAdmin: boolean;
   phone?: string;
 }
-
-const user: User = {
-  id: 1,
-  name: "Arun",
-  email: "arun@example.com",
-  rollno: 10,
-  isAdmin: false,
-};
 ```
 
 Interfaces are extendable object contracts and can be reopened through declaration merging. Type aliases can describe objects, unions, primitives, tuples, and more:
