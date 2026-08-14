@@ -11,3 +11,7 @@ const arun: object = {
   name: "arun",
   phone: 12345,
 };
+
+const b: number | string;
+if (b === "number") console.log("a is number");
+console.log("a is string");
