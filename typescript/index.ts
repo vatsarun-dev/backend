@@ -60,12 +60,22 @@
 // const key = new amrita();
 // key.envs();
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  rollno: number;
-  isAdmin: boolean;
+// interface User {
+//   id: number;
+//   name: string;
+//   email: string;
+//   rollno: number;
+//   isAdmin: boolean;
+// }
+
+// type user = Pick<User, "id" | "email" | "password">;
+
+function factorialRecursive(n: number): number {
+  if (n < 0) throw new Error("Number must be non-negative.");
+  if (n === 0 || n === 1) {
+    return 1;
+  }
+  return n * factorialRecursive(n - 1);
 }
 
-type user = Pick<User, "id" | "email" | "password">;
+console.log(factorialRecursive(5));
