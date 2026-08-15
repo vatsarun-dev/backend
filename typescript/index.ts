@@ -70,12 +70,23 @@
 
 // type user = Pick<User, "id" | "email" | "password">;
 
-function factorialRecursive(n: number): number {
-  if (n < 0) throw new Error("Number must be non-negative.");
-  if (n === 0 || n === 1) {
-    return 1;
+// function factorialRecursive(n: number): number {
+//   if (n < 0) throw new Error("Number must be non-negative.");
+//   if (n === 0 || n === 1) {
+//     return 1;
+//   }
+//   return n * factorialRecursive(n - 1);
+// }
+
+// console.log(factorialRecursive(5));
+
+function greet(name: string, age?: number): string {
+  if (age) {
+    return `Hello ${name}, you are ${age} years old!`;
   }
-  return n * factorialRecursive(n - 1);
+  return `Hello ${name}!`;
 }
 
-console.log(factorialRecursive(5));
+// Test cases
+console.log(greet("Alice"));
+console.log(greet("Bob", 25));
