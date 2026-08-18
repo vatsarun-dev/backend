@@ -26,7 +26,14 @@
 // }
 // greet("arun", "hii");
 
-function greet(name: string, greet: string = "hello"): void {
-  console.log(`${greet} my name is ${name}`);
+// function greet(name: string, greet: string = "hello"): void {
+//   console.log(`${greet} my name is ${name}`);
+// }
+// greet("arun");
+
+function guess(id: string | number) {
+  typeof id == "string"
+    ? console.log("this is string", id)
+    : console.log("this is number", id);
 }
-greet("arun");
+guess(2);
