@@ -31,13 +31,24 @@
 //     : console.log("this is number", id);
 // }
 // guess(2);
+// class arun {
+//   private name: string = "arun";
+//   greet(): void {
+//     console.log(this.name);
+//   }
+// }
+// const name = new arun();
+// name.greet();
 class arun {
-    name = "arun";
-    greet() {
-        console.log(this.name);
+    secret = "this_is_your_secret";
+}
+class amrita extends arun {
+    secret2 = "this_is_your_secret_2";
+    envs() {
+        console.log(this.secret, this.secret2);
     }
 }
-const name = new arun();
-name.greet();
+const key = new amrita();
+key.envs();
 export {};
 //# sourceMappingURL=index.js.map

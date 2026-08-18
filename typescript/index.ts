@@ -38,11 +38,24 @@
 // }
 // guess(2);
 
+// class arun {
+//   private name: string = "arun";
+//   greet(): void {
+//     console.log(this.name);
+//   }
+// }
+// const name = new arun();
+// name.greet();
+
 class arun {
-  private name: string = "arun";
-  greet(): void {
-    console.log(this.name);
+  protected secret: string = "this_is_your_secret";
+}
+
+class amrita extends arun {
+  private secret2: string = "this_is_your_secret_2";
+  envs(): void {
+    console.log(this.secret, this.secret2);
   }
 }
-const name = new arun();
-name.greet();
+const key = new amrita();
+key.envs();
