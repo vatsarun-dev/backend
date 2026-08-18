@@ -25,11 +25,19 @@
 //   console.log(`${greet} my name is ${name}`);
 // }
 // greet("arun");
-function guess(id) {
-    typeof id == "string"
-        ? console.log("this is string", id)
-        : console.log("this is number", id);
+// function guess(id: string | number) {
+//   typeof id == "string"
+//     ? console.log("this is string", id)
+//     : console.log("this is number", id);
+// }
+// guess(2);
+class arun {
+    name = "arun";
+    greet() {
+        console.log(this.name);
+    }
 }
-guess(2);
+const name = new arun();
+name.greet();
 export {};
 //# sourceMappingURL=index.js.map

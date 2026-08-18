@@ -31,9 +31,18 @@
 // }
 // greet("arun");
 
-function guess(id: string | number) {
-  typeof id == "string"
-    ? console.log("this is string", id)
-    : console.log("this is number", id);
+// function guess(id: string | number) {
+//   typeof id == "string"
+//     ? console.log("this is string", id)
+//     : console.log("this is number", id);
+// }
+// guess(2);
+
+class arun {
+  private name: string = "arun";
+  greet(): void {
+    console.log(this.name);
+  }
 }
-guess(2);
+const name = new arun();
+name.greet();
