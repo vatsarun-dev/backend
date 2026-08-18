@@ -17,9 +17,13 @@
 //   return price * qty;
 // }
 // total(10, 20);
-function greet(name, greet) {
-    console.log(`${greet ?? "Hello"} my name is ${name}`);
+// function greet(name: string, greet?: string): void {
+//   console.log(`${greet ?? "Hello"} my name is ${name}`);
+// }
+// greet("arun", "hii");
+function greet(name, greet = "hello") {
+    console.log(`${greet} my name is ${name}`);
 }
-greet("arun", "hii");
+greet("arun");
 export {};
 //# sourceMappingURL=index.js.map
