@@ -16,7 +16,12 @@
 // if (b === "number") console.log("a is number");
 // console.log("a is string");
 
-function total(price: number, qty: number): number {
-  return price * qty;
+// function total(price: number, qty: number): number {
+//   return price * qty;
+// }
+// total(10, 20);
+
+function greet(name: string, greet?: string): void {
+  console.log(`${greet ?? "Hello"} my name is ${name}`);
 }
-total(10, 20);
+greet("arun", "hii");
