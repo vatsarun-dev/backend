@@ -47,15 +47,25 @@
 // const name = new arun();
 // name.greet();
 
-class arun {
-  protected secret: string = "this_is_your_secret";
+// class arun {
+//   protected secret: string = "this_is_your_secret";
+// }
+
+// class amrita extends arun {
+//   private secret2: string = "this_is_your_secret_2";
+//   envs(): void {
+//     console.log(this.secret, this.secret2);
+//   }
+// }
+// const key = new amrita();
+// key.envs();
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  rollno: number;
+  isAdmin: boolean;
 }
 
-class amrita extends arun {
-  private secret2: string = "this_is_your_secret_2";
-  envs(): void {
-    console.log(this.secret, this.secret2);
-  }
-}
-const key = new amrita();
-key.envs();
+type user = Pick<User, "id" | "email" | "password">;
