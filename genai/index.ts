@@ -8,6 +8,8 @@ const model = new ChatMistralAI({
   model: "mistral-medium-latest",
 });
 
-const message: string = await model.stream("hey how are you..?");
+const message: string = await model.stream(
+  "write a letter to pm for congrats that you are most successfully minister",
+);
 
-for await (const chunk of message) console.log(chunk.text);
+for await (const chunk of message) process.stdout.write(chunk.text);
