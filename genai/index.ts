@@ -8,5 +8,6 @@ const model = new ChatMistralAI({
   model: "mistral-medium-latest",
 });
 
-const message = await model.invoke("hey how are you..?");
-console.log(message.text);
+const message: string = await model.stream("hey how are you..?");
+
+for await (const chunk of message) console.log(chunk.text);
