@@ -20,7 +20,7 @@ const readline = rl.createInterface({
 
 /**
  * IT IS THE LLM INSTANCE TO INVOKE THE MODEL
- * IT REQUIRES APIKEY AND MODEL NAME
+ * IT REQUIRES APIKEY AND MODEL NAME. THIS MUST BE COMPULSORY.
  */
 
 const model = new ChatMistralAI({
