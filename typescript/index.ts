@@ -79,3 +79,14 @@
 // }
 
 // console.log(factorialRecursive(5));
+
+function greet(name: string, age?: number): string {
+  if (age) {
+    return `Hello ${name}, you are ${age} years old!`;
+  }
+  return `Hello ${name}!`;
+}
+
+// Test cases
+console.log(greet("Alice"));
+console.log(greet("Bob", 25));
